@@ -2,6 +2,7 @@ bin/
 obj/
 
 .vscode/
+.mono/
 *.suo
 *.user
 *.sln.docstates
