@@ -66,12 +66,41 @@ public class AuthController : ControllerBase
 
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddDays(1),
+            expires: DateTime.Now.AddHours(1),
             signingCredentials: creds
         );
 
-        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+        var writtenToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-        return jwt;
+        ValidateToken(writtenToken);
+
+        Console.WriteLine("Token validated!");
+
+        return writtenToken;
+    }
+
+    private bool ValidateToken(string authToken)
+    {
+        var key = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(
+                _configuration.GetSection("AppSettings:Token").Value!
+            )
+        );
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        var validationParameters = new TokenValidationParameters()
+        {
+            ValidateLifetime = true, // TODO: test if this works
+            ValidateAudience = false,
+            ValidateIssuer = false,
+            IssuerSigningKey = key
+        };
+
+        SecurityToken validatedToken;
+
+        var principal = tokenHandler.ValidateToken(authToken, validationParameters, out validatedToken);
+
+        return true;
     }
 }
