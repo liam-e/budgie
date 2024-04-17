@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BudgetApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http.HttpResults;
-using NuGet.Common;
 
 namespace BudgetApi.Controllers;
 [Authorize]
@@ -41,6 +34,10 @@ public class TransactionsController : ControllerBase
         {
             return NotFound();
         }
+        if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier)!)
+        {
+            return Forbid();
+        }
         return transaction;
     }
     // PUT: api/Transactions/5
@@ -51,6 +48,10 @@ public class TransactionsController : ControllerBase
         if (id != transaction.Id)
         {
             return BadRequest();
+        }
+        if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier)!)
+        {
+            return Forbid();
         }
         _context.Entry(transaction).State = EntityState.Modified;
         try
@@ -75,6 +76,7 @@ public class TransactionsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
     {
+        transaction.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
         _context.Transactions.Add(transaction);
         await _context.SaveChangesAsync();
         return CreatedAtAction("GetTransaction", new { id = transaction.Id }, transaction);
@@ -87,6 +89,10 @@ public class TransactionsController : ControllerBase
         if (transaction == null)
         {
             return NotFound();
+        }
+        if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+        {
+            return Forbid();
         }
         _context.Transactions.Remove(transaction);
         await _context.SaveChangesAsync();
