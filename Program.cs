@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidateIssuerSigningKey = false,
+        ValidateIssuerSigningKey = true,
     };
 }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
     options => builder.Configuration.Bind("CookieSettings", options)
@@ -40,7 +40,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<BudgetContext>(opt => opt.UseInMemoryDatabase("BudgetApi"));
+builder.Services.AddDbContext<BudgetContext>(
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

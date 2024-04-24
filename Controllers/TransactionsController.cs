@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BudgetApi.Models;
-using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System.Globalization;
+using Microsoft.VisualBasic.FileIO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetApi.Controllers;
 [Authorize]
@@ -17,17 +19,19 @@ public class TransactionsController : ControllerBase
     }
     // GET: api/Transactions
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
+    public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactions()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        System.Diagnostics.Debug.WriteLine(userId);
-        return await _context.Transactions
+
+        var transactions = await _context.Transactions
             .Where(t => t.UserId == userId)
             .ToListAsync();
+
+        return transactions.Select(TransactionDTO.MapFromTransaction).ToList();
     }
     // GET: api/Transactions/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Transaction>> GetTransaction(long id)
+    public async Task<ActionResult<TransactionDTO>> GetTransaction(long id)
     {
         var transaction = await _context.Transactions.FindAsync(id);
         if (transaction == null)
@@ -38,7 +42,7 @@ public class TransactionsController : ControllerBase
         {
             return Forbid();
         }
-        return transaction;
+        return TransactionDTO.MapFromTransaction(transaction);
     }
     // PUT: api/Transactions/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -101,5 +105,69 @@ public class TransactionsController : ControllerBase
     private bool TransactionExists(long id)
     {
         return _context.Transactions.Any(e => e.Id == id);
+    }
+
+    [HttpPost("UploadCsv")]
+    public async Task<ActionResult> UploadCsv(IFormFile file)
+    {
+
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (userId == null)
+        {
+            return BadRequest("user id is null.");
+        }
+
+        if (file.Length == 0)
+        {
+            return BadRequest("The CSV file is empty.");
+        }
+
+        using (var reader = new StreamReader(file.OpenReadStream()))
+        using (var textFieldParser = new TextFieldParser(reader))
+        {
+            textFieldParser.TextFieldType = FieldType.Delimited;
+            textFieldParser.SetDelimiters(",");
+
+            bool isHeader = true;
+            
+            while (!textFieldParser.EndOfData)
+            {
+                if (isHeader)
+                {
+                    textFieldParser.ReadFields();
+                    isHeader = false;
+                    continue;
+                }
+
+                string[] fields = textFieldParser.ReadFields()!;
+
+                if (fields.Length != 5)
+                {
+                    return BadRequest("The CSV file is formatted incorrectly.");
+                }
+
+                if (!DateOnly.TryParseExact(fields[0], "dd MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly date))
+                {
+                    return BadRequest($"Failed to parse date: {fields[0]}");
+                }
+
+                var transaction = new Transaction
+                {
+                    UserId = userId,
+                    Date = date,
+                    Description = fields[1],
+                    Amount = float.Parse(fields[3]),
+                    RunningTotal = float.Parse(fields[4])
+                };
+
+                _context.Transactions.Add(transaction);
+            }
+        }
+        await _context.SaveChangesAsync();
+
+        Console.WriteLine("File uploaded successfully!");
+
+        return Ok();
     }
 }
