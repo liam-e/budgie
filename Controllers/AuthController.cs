@@ -12,28 +12,36 @@ namespace BudgetApi.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    public static User user = new User();
+    private readonly BudgetContext _context;
     private readonly IConfiguration _configuration;
 
-    public AuthController(IConfiguration configuration)
+    public AuthController(BudgetContext context, IConfiguration configuration)
     {
+        _context = context;   
         _configuration = configuration;
     }
 
     [HttpPost("register")]
-    public ActionResult<User> Register(UserDto request)
+    public async Task<User> Register(UserDto request)
     {
-        user.Id = Guid.NewGuid().ToString();
-        user.Username = request.Username;
-        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+        User newUser = new User {
+            Id = Guid.NewGuid().ToString(),
+            Username = request.Username,
+        PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+        };
 
-        return Ok(user);
+        _context.Users.Add(newUser);
+        await _context.SaveChangesAsync();
+
+        return newUser;
     }
 
     [HttpPost("login")]
     public ActionResult<User> Login(UserDto request)
     {
-        if (user.Username != request.Username)
+        var user = _context.Users.FirstOrDefault(u => u.Username == request.Username);
+
+        if (user == null)
         {
             return BadRequest("User not found"); // TODO: Change these errors to be more vague for security
         }
