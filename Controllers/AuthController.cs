@@ -4,7 +4,6 @@ using BudgetApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BudgetApi.Controllers;
 
@@ -22,24 +21,24 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<User> Register(UserDto request)
+    public async Task<User> Register(UserDTO request)
     {
-        User newUser = new User {
+        User user = new User {
             Id = Guid.NewGuid().ToString(),
-            Username = request.Username,
+            Email = request.Email,
         PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
         };
 
-        _context.Users.Add(newUser);
+        _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        return newUser;
+        return user;
     }
 
     [HttpPost("login")]
-    public ActionResult<User> Login(UserDto request)
+    public ActionResult<User> Login(UserDTO request)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Username == request.Username);
+        var user = _context.Users.FirstOrDefault(u => u.Email == request.Email);
 
         if (user == null)
         {
@@ -60,7 +59,7 @@ public class AuthController : ControllerBase
     {
         List<Claim> claims = [
             new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, "User")
         ];
 
@@ -83,12 +82,5 @@ public class AuthController : ControllerBase
         var writtenToken = new JwtSecurityTokenHandler().WriteToken(token);
 
         return writtenToken;
-    }
-
-    [HttpGet("GetUsername"), Authorize]
-    public ActionResult<string> GetUsername()
-    {
-        var userName = User?.Identity?.Name;
-        return Ok(userName);
     }
 }

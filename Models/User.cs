@@ -1,8 +1,17 @@
 namespace BudgetApi.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
+[Index(nameof(Email), IsUnique = true)]
 public class User
 {
-    public string Id { get; set; } = string.Empty;
-    public string Username { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public required string Id { get; set; }
+
+    [EmailAddress]
+    public required string Email { get; set; }
+
+    public required string PasswordHash { get; set; }
 }

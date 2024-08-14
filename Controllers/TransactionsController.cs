@@ -170,4 +170,10 @@ public class TransactionsController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet("testisauthorized")]
+    public ActionResult TestIsAuthorized()
+    {
+        return Ok("The user is authorized.");
+    }
 }
