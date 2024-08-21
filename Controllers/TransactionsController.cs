@@ -6,174 +6,189 @@ using System.Globalization;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.AspNetCore.Authorization;
 
-namespace BudgetApi.Controllers;
-[Authorize]
-[Route("api/[controller]")]
-[ApiController]
-public class TransactionsController : ControllerBase
+namespace BudgetApi.Controllers
 {
-    private readonly BudgetContext _context;
-    public TransactionsController(BudgetContext context)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HelloWorldController : ControllerBase
     {
-        _context = context;
+        // GET: api/HelloWorld
+        [HttpGet]
+        public IActionResult GetHelloWorld()
+        {
+            var response = new { message = "Hello World" };
+            return Ok(response);
+        }
     }
-    // GET: api/Transactions
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactions()
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        var transactions = await _context.Transactions
-            .Where(t => t.UserId == userId)
-            .ToListAsync();
+    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TransactionsController : ControllerBase
+    {
+        private readonly BudgetContext _context;
+        public TransactionsController(BudgetContext context)
+        {
+            _context = context;
+        }
+        // GET: api/Transactions
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactions()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        return transactions.Select(TransactionDTO.MapFromTransaction).ToList();
-    }
-    // GET: api/Transactions/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TransactionDTO>> GetTransaction(long id)
-    {
-        var transaction = await _context.Transactions.FindAsync(id);
-        if (transaction == null)
-        {
-            return NotFound();
+            var transactions = await _context.Transactions
+                .Where(t => t.UserId == userId)
+                .Include(t => t.Category)
+                .ToListAsync();
+
+            return transactions.Select(TransactionDTO.MapFromTransaction).ToList();
         }
-        if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier)!)
+        // GET: api/Transactions/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TransactionDTO>> GetTransaction(long id)
         {
-            return Forbid();
-        }
-        return TransactionDTO.MapFromTransaction(transaction);
-    }
-    // PUT: api/Transactions/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutTransaction(long id, Transaction transaction)
-    {
-        if (id != transaction.Id)
-        {
-            return BadRequest();
-        }
-        if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier)!)
-        {
-            return Forbid();
-        }
-        _context.Entry(transaction).State = EntityState.Modified;
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!TransactionExists(id))
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var transaction = await _context.Transactions
+                .Include(t => t.Category)
+                .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+
+            if (transaction == null)
             {
                 return NotFound();
             }
-            else
+
+            return TransactionDTO.MapFromTransaction(transaction);
+        }
+        // PUT: api/Transactions/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTransaction(long id, Transaction transaction)
+        {
+            if (id != transaction.Id)
             {
-                throw;
+                return BadRequest();
             }
-        }
-        return NoContent();
-    }
-    // POST: api/Transactions
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
-    public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
-    {
-        transaction.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-        _context.Transactions.Add(transaction);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction("GetTransaction", new { id = transaction.Id }, transaction);
-    }
-    // DELETE: api/Transactions/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTransaction(long id)
-    {
-        var transaction = await _context.Transactions.FindAsync(id);
-        if (transaction == null)
-        {
-            return NotFound();
-        }
-        if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
-        {
-            return Forbid();
-        }
-        _context.Transactions.Remove(transaction);
-        await _context.SaveChangesAsync();
-        return NoContent();
-    }
-    private bool TransactionExists(long id)
-    {
-        return _context.Transactions.Any(e => e.Id == id);
-    }
-
-    [HttpPost("UploadCsv")]
-    public async Task<ActionResult> UploadCsv(IFormFile file)
-    {
-
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        if (userId == null)
-        {
-            return BadRequest("user id is null.");
-        }
-
-        if (file.Length == 0)
-        {
-            return BadRequest("The CSV file is empty.");
-        }
-
-        using (var reader = new StreamReader(file.OpenReadStream()))
-        using (var textFieldParser = new TextFieldParser(reader))
-        {
-            textFieldParser.TextFieldType = FieldType.Delimited;
-            textFieldParser.SetDelimiters(",");
-
-            bool isHeader = true;
-            
-            while (!textFieldParser.EndOfData)
+            if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier)!)
             {
-                if (isHeader)
+                return Forbid();
+            }
+            _context.Entry(transaction).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TransactionExists(id))
                 {
-                    textFieldParser.ReadFields();
-                    isHeader = false;
-                    continue;
+                    return NotFound();
                 }
-
-                string[] fields = textFieldParser.ReadFields()!;
-
-                if (fields.Length != 5)
+                else
                 {
-                    return BadRequest("The CSV file is formatted incorrectly.");
+                    throw;
                 }
-
-                if (!DateOnly.TryParseExact(fields[0], "dd MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly date))
-                {
-                    return BadRequest($"Failed to parse date: {fields[0]}");
-                }
-
-                var transaction = new Transaction
-                {
-                    UserId = userId,
-                    Date = date,
-                    Description = fields[1],
-                    Amount = float.Parse(fields[3]),
-                    RunningTotal = float.Parse(fields[4])
-                };
-
+            }
+            return NoContent();
+        }
+        // POST: api/Transactions
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<Transaction>>> PostTransaction(List<Transaction> transactions)
+        {
+            string UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            foreach (Transaction transaction in transactions)
+            {
+                transaction.UserId = UserId;
                 _context.Transactions.Add(transaction);
             }
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetTransactions), transactions);
         }
-        await _context.SaveChangesAsync();
+        // DELETE: api/Transactions/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTransaction(long id)
+        {
+            var transaction = await _context.Transactions.FindAsync(id);
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+            if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return Forbid();
+            }
+            _context.Transactions.Remove(transaction);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        private bool TransactionExists(long id)
+        {
+            return _context.Transactions.Any(e => e.Id == id);
+        }
 
-        Console.WriteLine("File uploaded successfully!");
+        [HttpPost("UploadCsv")]
+        public async Task<ActionResult> UploadCsv(IFormFile file)
+        {
 
-        return Ok();
-    }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-    [HttpGet("testisauthorized")]
-    public ActionResult TestIsAuthorized()
-    {
-        return Ok("The user is authorized.");
+            if (userId == null)
+            {
+                return BadRequest("user id is null.");
+            }
+
+            if (file.Length == 0)
+            {
+                return BadRequest("The CSV file is empty.");
+            }
+
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            using (var textFieldParser = new TextFieldParser(reader))
+            {
+                textFieldParser.TextFieldType = FieldType.Delimited;
+                textFieldParser.SetDelimiters(",");
+
+                bool isHeader = true;
+
+                while (!textFieldParser.EndOfData)
+                {
+                    if (isHeader)
+                    {
+                        textFieldParser.ReadFields();
+                        isHeader = false;
+                        continue;
+                    }
+
+                    string[] fields = textFieldParser.ReadFields()!;
+
+                    if (fields.Length != 5)
+                    {
+                        return BadRequest("The CSV file is formatted incorrectly.");
+                    }
+
+                    if (!DateOnly.TryParseExact(fields[0], "dd MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly date))
+                    {
+                        return BadRequest($"Failed to parse date: {fields[0]}");
+                    }
+
+                    var transaction = new Transaction
+                    {
+                        UserId = userId,
+                        Date = date,
+                        Description = fields[1],
+                        Amount = float.Parse(fields[3]),
+                    };
+
+                    _context.Transactions.Add(transaction);
+                }
+            }
+            await _context.SaveChangesAsync();
+
+            Console.WriteLine("File uploaded successfully!");
+
+            return Ok();
+        }
     }
 }

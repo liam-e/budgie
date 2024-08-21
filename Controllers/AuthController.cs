@@ -16,23 +16,31 @@ public class AuthController : ControllerBase
 
     public AuthController(BudgetContext context, IConfiguration configuration)
     {
-        _context = context;   
+        _context = context;
         _configuration = configuration;
     }
 
     [HttpPost("register")]
-    public async Task<User> Register(UserDTO request)
+    public async Task<IActionResult> Register(UserDTO request)
     {
-        User user = new User {
+        if (_context.Users.Any(u => u.Email == request.Email))
+        {
+            return Conflict(new { error = "The email already exists." });
+        }
+
+        User user = new User
+        {
             Id = Guid.NewGuid().ToString(),
             Email = request.Email,
-        PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
         };
 
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        return user;
+        string token = CreateToken(user);
+
+        return Ok(new { token });
     }
 
     [HttpPost("login")]
@@ -42,17 +50,17 @@ public class AuthController : ControllerBase
 
         if (user == null)
         {
-            return BadRequest("User not found"); // TODO: Change these errors to be more vague for security
+            return BadRequest(new { error = "User not found" }); // TODO: Change these errors to be more vague for security
         }
 
         if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
         {
-            return BadRequest("Wrong password");
+            return BadRequest(new { error = "Wrong password" });
         }
 
         string token = CreateToken(user);
 
-        return Ok(token);
+        return Ok(new { token });
     }
 
     private string CreateToken(User user)
@@ -79,7 +87,7 @@ public class AuthController : ControllerBase
             signingCredentials: creds
         );
 
-        var writtenToken = new JwtSecurityTokenHandler().WriteToken(token);
+        string writtenToken = new JwtSecurityTokenHandler().WriteToken(token);
 
         return writtenToken;
     }

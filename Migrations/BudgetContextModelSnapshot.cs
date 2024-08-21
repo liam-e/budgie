@@ -17,18 +17,15 @@ namespace BudgetApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("BudgetApi.Models.Category", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -40,6 +37,18 @@ namespace BudgetApi.Migrations
                         .IsUnique();
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e6a7deff-8b2b-45ec-8834-0eb21e36e959",
+                            Name = "Groceries"
+                        },
+                        new
+                        {
+                            Id = "d8c6266c-002a-4cf2-bd13-6e2d01151c07",
+                            Name = "Utilities"
+                        });
                 });
 
             modelBuilder.Entity("BudgetApi.Models.Transaction", b =>
@@ -53,8 +62,8 @@ namespace BudgetApi.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
-                    b.Property<long?>("CategoryId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("text");
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
@@ -62,9 +71,6 @@ namespace BudgetApi.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<float>("RunningTotal")
-                        .HasColumnType("real");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -75,6 +81,26 @@ namespace BudgetApi.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Transactions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Amount = 20f,
+                            CategoryId = "e6a7deff-8b2b-45ec-8834-0eb21e36e959",
+                            Date = new DateOnly(2024, 1, 1),
+                            Description = "Supermarket",
+                            UserId = "6dc55cbc-8001-4189-911a-5049038a33c4"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Amount = 100f,
+                            CategoryId = "d8c6266c-002a-4cf2-bd13-6e2d01151c07",
+                            Date = new DateOnly(2024, 1, 2),
+                            Description = "Electricity Bill",
+                            UserId = "6dc55cbc-8001-4189-911a-5049038a33c4"
+                        });
                 });
 
             modelBuilder.Entity("BudgetApi.Models.User", b =>
@@ -97,15 +123,28 @@ namespace BudgetApi.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6dc55cbc-8001-4189-911a-5049038a33c4",
+                            Email = "user@example.com",
+                            PasswordHash = "$2a$11$o1O9foM8txB.hh0H.30roOsqQST4Y1cJoXBiMzawSX9WuHuqdlqjK"
+                        });
                 });
 
             modelBuilder.Entity("BudgetApi.Models.Transaction", b =>
                 {
                     b.HasOne("BudgetApi.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("BudgetApi.Models.Category", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

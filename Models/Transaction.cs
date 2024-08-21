@@ -12,6 +12,7 @@ public class Transaction
     public required DateOnly Date { get; set; }
     public required string Description { get; set; }
     public required float Amount { get; set; }
-    public required float RunningTotal { get; set; }
-    public Category? Category { get; set; }
+
+    public string? CategoryId { get; set; } // Foreign Key
+    public Category? Category { get; set; } // Navigation property
 }
