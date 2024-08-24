@@ -5,33 +5,51 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BudgetApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
-// Add services to the container.
+// Add services to the container
+builder.Services.AddSingleton<TokenService>();
 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    // options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidIssuer = builder.Configuration.GetSection("AppSettings:Issuer").Value,
-        ValidAudience = builder.Configuration.GetSection("AppSettings:Audience").Value,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(
-                    builder.Configuration.GetSection("AppSettings:Token").Value!
-                )
-            ),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
+
+        ValidIssuer = builder.Configuration.GetSection("AppSettings:Issuer").Value,
+        ValidAudience = builder.Configuration.GetSection("AppSettings:Audience").Value,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(
+                    builder.Configuration.GetSection("AppSettings:SecretKey").Value!
+                )
+            ),
     };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Request.Cookies.TryGetValue("accessToken", out var accessToken);
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                context.Token = accessToken;
+            }
+
+            return Task.CompletedTask;
+        }
+    };
+
 }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
     options => builder.Configuration.Bind("CookieSettings", options)
 );
@@ -58,7 +76,7 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -73,6 +91,7 @@ app.UseCors(
     .WithOrigins("http://localhost:3000")
     .AllowAnyMethod()
     .AllowAnyHeader()
+    .AllowCredentials()
 );
 
 app.UseAuthentication();
