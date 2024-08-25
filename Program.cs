@@ -5,19 +5,17 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using BudgetApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 // Add services to the container
-builder.Services.AddSingleton<TokenService>();
+// builder..AddSingleton<TokenService>();
 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    // options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters

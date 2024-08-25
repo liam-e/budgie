@@ -31,6 +31,7 @@ namespace BudgetApi.Controllers
         {
             _context = context;
         }
+
         // GET: api/Transactions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactions()
@@ -40,10 +41,22 @@ namespace BudgetApi.Controllers
             var transactions = await _context.Transactions
                 .Where(t => t.UserId == userId)
                 .Include(t => t.Category)
+                .OrderByDescending(t => t.Date)
+                // TODO: Use MapFromTransaction?
+                .Select(t => new TransactionDTO
+                {
+                    Date = t.Date,
+                    Description = t.Description,
+                    Amount = t.Amount,
+                    CategoryName = t.Category != null ? t.Category.Name : null,
+                    Type = t.Type.ToString()
+                })
                 .ToListAsync();
 
-            return transactions.Select(TransactionDTO.MapFromTransaction).ToList();
+            return Ok(new { transactions });
         }
+
+
         // GET: api/Transactions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TransactionDTO>> GetTransaction(long id)
@@ -131,6 +144,7 @@ namespace BudgetApi.Controllers
         [HttpPost("UploadCsv")]
         public async Task<ActionResult> UploadCsv(IFormFile file)
         {
+            // TODO: Put CSV logic into service to reuse to load mock data
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -178,7 +192,8 @@ namespace BudgetApi.Controllers
                         UserId = userId,
                         Date = date,
                         Description = fields[1],
-                        Amount = float.Parse(fields[3]),
+                        Amount = decimal.Parse(fields[3]),
+                        Type = Enums.TransactionType.Expense // TODO: Not all are expenses
                     };
 
                     _context.Transactions.Add(transaction);

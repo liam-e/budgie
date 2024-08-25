@@ -1,20 +1,24 @@
+using BudgetApi.Enums;
+
 namespace BudgetApi.Models;
 
 public class TransactionDTO
 {
     public required DateOnly Date { get; set; }
     public required string Description { get; set; }
-    public required float Amount { get; set; }
+    public required decimal Amount { get; set; }
     public string? CategoryName { get; set; }
+    public required string Type { get; set; }
 
-    public static TransactionDTO MapFromTransaction(Transaction transaction)
+    public static TransactionDTO MapFromTransaction(Transaction t)
     {
         return new TransactionDTO
         {
-            Date = transaction.Date,
-            Description = transaction.Description,
-            Amount = transaction.Amount,
-            CategoryName = transaction.Category?.Name
+            Date = t.Date,
+            Description = t.Description,
+            Amount = t.Amount,
+            CategoryName = t.Category?.Name,
+            Type = t.Type.ToString()
         };
     }
 }
