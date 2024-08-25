@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budgie.API", "Budgie.API\Budgie.API.csproj", "{B066E43F-4CA0-44E3-AD1F-C71A5DE1FA03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budgie.Tests", "Budgie.Tests\Budgie.Tests.csproj", "{C1BC9B3B-F474-4B9B-870D-B685D947A114}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B066E43F-4CA0-44E3-AD1F-C71A5DE1FA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B066E43F-4CA0-44E3-AD1F-C71A5DE1FA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B066E43F-4CA0-44E3-AD1F-C71A5DE1FA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B066E43F-4CA0-44E3-AD1F-C71A5DE1FA03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BC9B3B-F474-4B9B-870D-B685D947A114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BC9B3B-F474-4B9B-870D-B685D947A114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BC9B3B-F474-4B9B-870D-B685D947A114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BC9B3B-F474-4B9B-870D-B685D947A114}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
