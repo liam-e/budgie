@@ -1,100 +1,128 @@
-using BudgetApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using System.Data.Common;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Budgie.API.Database;
+using Budgie.API.Models;
 
-var builder = WebApplication.CreateBuilder(args);
-var config = builder.Configuration;
-
-// Add services to the container
-// builder..AddSingleton<TokenService>();
-
-builder.Services.AddAuthentication(options =>
+public class Program
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+    public static void Main(string[] args)
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
+        var builder = WebApplication.CreateBuilder(args);
 
-        ValidIssuer = builder.Configuration.GetSection("AppSettings:Issuer").Value,
-        ValidAudience = builder.Configuration.GetSection("AppSettings:Audience").Value,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(
-                    builder.Configuration.GetSection("AppSettings:SecretKey").Value!
-                )
-            ),
-    };
+        string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
-    options.Events = new JwtBearerEvents
+        builder.Configuration.AddJsonFile($"appsettings.{environment}.json", optional: true);
+
+        ConfigureServices(builder.Services, builder.Configuration, environment);
+
+        var app = builder.Build();
+        ConfigureMiddleware(app);
+        app.Run();
+    }
+
+    private static void ConfigureServices(IServiceCollection services, IConfiguration configuration, string environment)
     {
-        OnMessageReceived = context =>
+        // Register DbConnectionProvider as a singleton service
+        services.AddSingleton<DbConnectionProvider>(sp =>
         {
-            context.Request.Cookies.TryGetValue("accessToken", out var accessToken);
-            if (!string.IsNullOrEmpty(accessToken))
+            return new DbConnectionProvider(configuration.GetConnectionString("DefaultConnection")!);
+        });
+
+        // Register DbConnection as a scoped service
+        services.AddScoped<DbConnection>(provider =>
+        {
+            var dbConnectionProvider = provider.GetRequiredService<DbConnectionProvider>();
+            return dbConnectionProvider.GetConnection();
+        });
+
+        // Configure DbContext to use DbConnection and DbContextOptions
+        services.AddDbContext<BudgetContext>((serviceProvider, options) =>
+        {
+            var connection = serviceProvider.GetRequiredService<DbConnection>();
+            options.UseNpgsql(connection);
+        });
+
+        // Other service configurations...
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                context.Token = accessToken;
-            }
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["AppSettings:Issuer"],
+                ValidAudience = configuration["AppSettings:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AppSettings:SecretKey"]!)),
+            };
 
-            return Task.CompletedTask;
-        }
-    };
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    context.Request.Cookies.TryGetValue("accessToken", out var accessToken);
+                    if (!string.IsNullOrEmpty(accessToken))
+                    {
+                        context.Token = accessToken;
+                    }
 
-}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-    options => builder.Configuration.Bind("CookieSettings", options)
-);
+                    return Task.CompletedTask;
+                }
+            };
+        }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+            options => configuration.Bind("CookieSettings", options)
+        );
 
-builder.Services.AddAuthorization();
+        services.AddAuthorization();
+        services.AddControllers();
 
-builder.Services.AddControllers();
-builder.Services.AddDbContext<BudgetContext>(
-);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+        // Swagger setup
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            {
+                Description = "Standard auth header",
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey
+            });
+
+            options.OperationFilter<SecurityRequirementsOperationFilter>();
+        });
+    }
+
+    private static void ConfigureMiddleware(WebApplication app)
     {
-        Description = "Standard auth header",
-        In = ParameterLocation.Header,
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
-    });
+        if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Test")
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
-});
+        app.UseHttpsRedirection();
 
-var app = builder.Build();
+        app.UseCors(builder =>
+            builder
+            .WithOrigins("*/*") // .WithOrigins("http://localhost:3000")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials());
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.MapControllers();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseCors(
-    builder =>
-    builder
-    .WithOrigins("http://localhost:3000")
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .AllowCredentials()
-);
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

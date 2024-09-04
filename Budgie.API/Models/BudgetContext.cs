@@ -1,257 +1,386 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
-using BudgetApi.Enums;
+using Microsoft.VisualBasic.FileIO;
 
-namespace BudgetApi.Models;
+namespace Budgie.API.Models;
+
+public class Category
+{
+    [Key]
+    public required string Id { get; set; } // Primary key
+    public required string Name { get; set; }
+    public string? ParentId { get; set; } // Foreign key
+    public Category? Parent { get; set; } // Navigation property
+    public ICollection<Category> Children { get; set; } = new List<Category>(); // Navigation property
+    public required string TransactionTypeId { get; set; } // Foreign key
+    public TransactionType? TransactionType { get; set; } // Navigation property
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+}
+
+public class TransactionType
+{
+    [Key]
+    public required string Id { get; set; } // Primary key
+    public required string Name { get; set; }
+    public bool CanHaveCategory { get; set; }
+    public ICollection<Category> Categories { get; set; } = new List<Category>(); // Navigation property
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+}
+
+public class Transaction
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long Id { get; set; } // Primary key
+    public required long UserId { get; set; }
+    public required DateOnly Date { get; set; }
+    public required string OriginalDescription { get; set; }
+    public string? ModifiedDescription { get; set; }
+    public required decimal Amount { get; set; }
+    public required string Currency { get; set; }
+    public required string CategoryId { get; set; } // Foreign key, required
+    public Category? Category { get; set; } // Navigation property
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    public TransactionType? TransactionType => Category?.TransactionType; // Navigation property from Category
+}
+
+public class TransactionDTO
+{
+    public required DateOnly Date { get; set; }
+    public required string OriginalDescription { get; set; }
+    public string? ModifiedDescription { get; set; }
+    public required decimal Amount { get; set; }
+    public required string Currency { get; set; }
+    public required string CategoryName { get; set; }
+    public required string TransactionTypeName { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+
+    public static TransactionDTO MapFromTransaction(Transaction t)
+    {
+        return new TransactionDTO
+        {
+            Date = t.Date,
+            OriginalDescription = t.OriginalDescription,
+            ModifiedDescription = t.ModifiedDescription,
+            Amount = t.Amount,
+            Currency = t.Currency,
+            CategoryName = t.Category!.Name,
+            TransactionTypeName = t.TransactionType!.Name,
+            CreatedAt = t.CreatedAt,
+            UpdatedAt = t.UpdatedAt
+        };
+    }
+}
+
+public class User
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long Id { get; set; } // Primary key
+
+    [EmailAddress]
+    public required string Email { get; set; }
+
+    public required string PasswordHash { get; set; }
+
+    public required string FirstName { get; set; }
+
+    public string? LastName { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+}
+
+public class UserRegisterDTO
+{
+    [EmailAddress]
+    [Required(ErrorMessage = "Email is required.")]
+    public required string Email { get; set; }
+
+    [MinLength(8)]
+    [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password must have a minimum of 8 characters with at least one letter and one number.")]
+    public required string Password { get; set; }
+
+    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+    public required string ConfirmPassword { get; set; }
+
+    [Required(ErrorMessage = "First name is required.")]
+    public required string FirstName { get; set; } // Required first name
+
+    public string? LastName { get; set; } // Optional last name
+}
+
+public class UserLoginDTO
+{
+    [EmailAddress]
+    [Required(ErrorMessage = "Email is required.")]
+    public required string Email { get; set; }
+
+    [MinLength(8)]
+    [Required(ErrorMessage = "Password is required.")]
+    [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password must have a minimum of 8 characters with at least one letter and one number.")]
+    public required string Password { get; set; }
+}
 
 public class BudgetContext : DbContext
 {
     public DbSet<Transaction> Transactions { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<TransactionType> TransactionTypes { get; set; }
+
+    private readonly string _dataFilePath;
+    private readonly bool _isTestEnvironment;
+
+    // Constructor now accepts DbContextOptions and DbConnection
+    public BudgetContext(DbContextOptions<BudgetContext> options, DbConnection connection, IWebHostEnvironment env)
+        : base(options)
+    {
+        _dataFilePath = Path.Combine(env.ContentRootPath, "Data");
+        _isTestEnvironment = env.EnvironmentName == "Test";
+
+        // Set the connection explicitly
+        this.Database.SetDbConnection(connection);
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=127.0.0.1;Username=postgres;Password=insecure_password;Database=budget");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connection = Database.GetDbConnection();
+            optionsBuilder.UseNpgsql(connection);
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
 
-        // Categories
-        Category groceries = new Category { Id = Guid.NewGuid().ToString(), Name = "Groceries" };
-        Category utilities = new Category { Id = Guid.NewGuid().ToString(), Name = "Utilities" };
-        Category dining = new Category { Id = Guid.NewGuid().ToString(), Name = "Dining" };
-        Category transport = new Category { Id = Guid.NewGuid().ToString(), Name = "Transport" };
-        Category rent = new Category { Id = Guid.NewGuid().ToString(), Name = "Rent" };
-        Category homeImprovement = new Category { Id = Guid.NewGuid().ToString(), Name = "Home Improvement" };
-        Category entertainment = new Category { Id = Guid.NewGuid().ToString(), Name = "Entertainment" };
-        Category shopping = new Category { Id = Guid.NewGuid().ToString(), Name = "Shopping" };
-        Category travel = new Category { Id = Guid.NewGuid().ToString(), Name = "Travel" };
-        Category fitness = new Category { Id = Guid.NewGuid().ToString(), Name = "Fitness" };
-        Category healthcare = new Category { Id = Guid.NewGuid().ToString(), Name = "Healthcare" };
-        Category transfer = new Category { Id = Guid.NewGuid().ToString(), Name = "Transfer" };
-        Category income = new Category { Id = Guid.NewGuid().ToString(), Name = "Income" };
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique(); // Make the Email field unique
 
-        modelBuilder.Entity<Category>().HasData(
-            groceries,
-            utilities,
-            dining,
-            transport,
-            rent,
-            homeImprovement,
-            entertainment,
-            shopping,
-            travel,
-            fitness,
-            healthcare,
-            transfer,
-            income
-        );
+        modelBuilder.Entity<Category>()
+            .HasOne(c => c.TransactionType)
+            .WithMany(t => t.Categories)
+            .HasForeignKey(c => c.TransactionTypeId);
 
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+        modelBuilder.Entity<Transaction>()
+            .HasOne(t => t.Category)
+            .WithMany()
+            .HasForeignKey(t => t.CategoryId)
+            .IsRequired();
+
+        modelBuilder.Entity<TransactionType>().HasKey(t => t.Id);
+        modelBuilder.Entity<Category>().HasKey(c => c.Id);
+        modelBuilder.Entity<Transaction>().HasKey(t => t.Id);
+        modelBuilder.Entity<User>().HasKey(u => u.Id);
+
+        // if (_isTestEnvironment)
+        // {
+        SeedData(modelBuilder);
+        // }
+    }
+
+    public override int SaveChanges()
+    {
+        UpdateTimestamps();
+        return base.SaveChanges();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        UpdateTimestamps();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void UpdateTimestamps()
+    {
+        var entries = ChangeTracker.Entries().Where(e => e.Entity is Transaction || e.Entity is User || e.Entity is Category || e.Entity is TransactionType);
+        foreach (var entry in entries)
         {
-            // Users
-            User mockUser = new User
+            if (entry.State == EntityState.Added)
             {
-                Id = Guid.NewGuid().ToString(),
-                Email = "user@example.com",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password1")
+                ((dynamic)entry.Entity).CreatedAt = DateTime.UtcNow;
+                ((dynamic)entry.Entity).UpdatedAt = DateTime.UtcNow;
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                ((dynamic)entry.Entity).UpdatedAt = DateTime.UtcNow;
+            }
+        }
+    }
+
+    public async Task EnsureDatabaseCreatedAndMigratedAsync()
+    {
+        if (_isTestEnvironment)
+        {
+            await Database.EnsureDeletedAsync();
+            await Database.EnsureCreatedAsync();
+            await Database.MigrateAsync();
+        }
+    }
+
+    private void SeedData(ModelBuilder modelBuilder)
+    {
+        var transactionTypes = LoadTransactionTypesFromCsv(Path.Combine(_dataFilePath, "SeedData", "transactiontypes.csv"));
+        modelBuilder.Entity<TransactionType>().HasData(transactionTypes);
+
+        var categories = LoadCategoriesFromCsv(Path.Combine(_dataFilePath, "SeedData", "categories.csv"), transactionTypes);
+        modelBuilder.Entity<Category>().HasData(categories);
+
+        var users = LoadUsersFromCsv(Path.Combine(_dataFilePath, "SeedData", "users.csv"));
+        modelBuilder.Entity<User>().HasData(users);
+
+        var transactions = LoadTransactionsFromCsv(Path.Combine(_dataFilePath, "SeedData", "transactions.csv"), users, categories);
+        modelBuilder.Entity<Transaction>().HasData(transactions);
+    }
+
+    private List<TransactionType> LoadTransactionTypesFromCsv(string filePath)
+    {
+        var transactionTypes = new List<TransactionType>();
+        var lines = File.ReadAllLines(filePath);
+
+        foreach (var line in lines.Skip(1))
+        {
+            var values = ParseCsvLine(line);
+            if (values.Length < 2)
+            {
+                Console.WriteLine("Not enough elements in TransactionTypes");
+                continue;
+            }
+
+            var transactionType = new TransactionType
+            {
+                Id = values[0],
+                Name = values[1],
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+            transactionTypes.Add(transactionType);
+        }
+
+        return transactionTypes;
+    }
+
+    private List<Category> LoadCategoriesFromCsv(string filePath, List<TransactionType> transactionTypes)
+    {
+        var categories = new List<Category>();
+        var lines = File.ReadAllLines(filePath);
+
+        foreach (var line in lines.Skip(1))
+        {
+            var values = ParseCsvLine(line);
+            if (values.Length < 4)
+            {
+                Console.WriteLine("Not enough elements in Categories");
+                continue;
+            }
+
+            var transactionType = transactionTypes.FirstOrDefault(tt => tt.Id == values[3]);
+            if (transactionType == null) continue;
+
+            var category = new Category
+            {
+                Id = values[0],
+                Name = values[1],
+                ParentId = string.IsNullOrEmpty(values[2]) ? null : values[2],
+                TransactionTypeId = transactionType.Id,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
             };
 
-            modelBuilder.Entity<User>().HasData(
-                mockUser
-            );
+            categories.Add(category);
+        }
 
-            // Transactions
-            modelBuilder.Entity<Transaction>().HasData(
-                new Transaction
-                {
-                    Id = 1,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-01"),
-                    Description = "Coles Supermarket Southbank",
-                    Amount = 85.50m,
-                    Type = TransactionType.Expense,
-                    CategoryId = groceries.Id
-                },
-                new Transaction
-                {
-                    Id = 2,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-02"),
-                    Description = "Electricity Bill - AGL",
-                    Amount = 120.75m,
-                    Type = TransactionType.Expense,
-                    CategoryId = utilities.Id
-                },
-                new Transaction
-                {
-                    Id = 3,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-05"),
-                    Description = "Starbucks Queen St",
-                    Amount = 6.20m,
-                    Type = TransactionType.Expense,
-                    CategoryId = dining.Id
-                },
-                new Transaction
-                {
-                    Id = 4,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-07"),
-                    Description = "Myki Top-Up",
-                    Amount = 50.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = transport.Id
-                },
-                new Transaction
-                {
-                    Id = 5,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-10"),
-                    Description = "Rent - 123 Main St",
-                    Amount = 1500.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = rent.Id
-                },
-                new Transaction
-                {
-                    Id = 6,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-12"),
-                    Description = "Bunnings Hardware Capalaba",
-                    Amount = 45.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = homeImprovement.Id
-                },
-                new Transaction
-                {
-                    Id = 7,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-15"),
-                    Description = "Netflix Subscription",
-                    Amount = 19.99m,
-                    Type = TransactionType.Expense,
-                    CategoryId = entertainment.Id
-                },
-                new Transaction
-                {
-                    Id = 8,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-18"),
-                    Description = "Optus Bill",
-                    Amount = 60.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = utilities.Id
-                },
-                new Transaction
-                {
-                    Id = 9,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-20"),
-                    Description = "BP Fuel Cannon Hill",
-                    Amount = 75.30m,
-                    Type = TransactionType.Expense,
-                    CategoryId = transport.Id
-                },
-                new Transaction
-                {
-                    Id = 10,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-22"),
-                    Description = "Kmart Purchase Carindale",
-                    Amount = 25.50m,
-                    Type = TransactionType.Expense,
-                    CategoryId = shopping.Id
-                },
-                new Transaction
-                {
-                    Id = 11,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-25"),
-                    Description = "Qantas Flight QF123",
-                    Amount = 450.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = travel.Id
-                },
-                new Transaction
-                {
-                    Id = 12,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-27"),
-                    Description = "Woolworths Grocery Morningside",
-                    Amount = 92.45m,
-                    Type = TransactionType.Expense,
-                    CategoryId = groceries.Id
-                },
-                new Transaction
-                {
-                    Id = 13,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-01-30"),
-                    Description = "Goodlife Gym Membership",
-                    Amount = 40.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = fitness.Id
-                },
-                new Transaction
-                {
-                    Id = 14,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-02-01"),
-                    Description = "Uber Eats Order",
-                    Amount = 32.80m,
-                    Type = TransactionType.Expense,
-                    CategoryId = dining.Id
-                },
-                new Transaction
-                {
-                    Id = 15,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-02-03"),
-                    Description = "Spotify Subscription",
-                    Amount = 11.99m,
-                    Type = TransactionType.Expense,
-                    CategoryId = entertainment.Id
-                },
-                new Transaction
-                {
-                    Id = 16,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-02-05"),
-                    Description = "Medicare Bulk Billing",
-                    Amount = 30.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = healthcare.Id
-                },
-                new Transaction
-                {
-                    Id = 17,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-02-07"),
-                    Description = "JB Hi-Fi Electronics Purchase",
-                    Amount = 150.00m,
-                    Type = TransactionType.Expense,
-                    CategoryId = shopping.Id
-                },
-                new Transaction
-                {
-                    Id = 18,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-02-08"),
-                    Description = "Salary Deposit",
-                    Amount = 3000.00m,
-                    Type = TransactionType.Income,
-                    CategoryId = income.Id
-                },
-                new Transaction
-                {
-                    Id = 19,
-                    UserId = mockUser.Id,
-                    Date = DateOnly.Parse("2024-02-10"),
-                    Description = "Savings Transfer",
-                    Amount = 500.00m,
-                    Type = TransactionType.Transfer,
-                    CategoryId = transfer.Id
-                }
-            );
+        return categories;
+    }
+
+    private List<User> LoadUsersFromCsv(string filePath)
+    {
+        var users = new List<User>();
+        var lines = File.ReadAllLines(filePath);
+
+        foreach (var line in lines.Skip(1))
+        {
+            var values = ParseCsvLine(line);
+            if (values.Length < 5)
+            {
+                Console.WriteLine("Not enough elements in Users");
+                continue;
+            }
+            var user = new User
+            {
+                Id = long.Parse(values[0]),
+                Email = values[1],
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(values[2]),
+                FirstName = values[3],
+                LastName = string.IsNullOrEmpty(values[4]) ? null : values[4],
+            };
+
+            users.Add(user);
+        }
+
+        return users;
+    }
+
+    private List<Transaction> LoadTransactionsFromCsv(string filePath, List<User> users, List<Category> categories)
+    {
+        var transactions = new List<Transaction>();
+        var lines = File.ReadAllLines(filePath);
+
+        foreach (var line in lines.Skip(1))
+        {
+            var values = ParseCsvLine(line);
+            if (values.Length < 8)
+            {
+                Console.WriteLine("Not enough elements in Transactions");
+                continue;
+            }
+
+            var user = users.FirstOrDefault(u => u.Id == long.Parse(values[1]));
+            var category = categories.FirstOrDefault(c => c.Id == values[7]);
+
+            if (user == null || category == null) continue;
+
+            var transaction = new Transaction
+            {
+                Id = long.Parse(values[0]),
+                UserId = user.Id,
+                Date = DateOnly.Parse(values[2]),
+                OriginalDescription = values[3],
+                ModifiedDescription = string.IsNullOrEmpty(values[4]) ? null : values[4],
+                Amount = decimal.Parse(values[5]),
+                Currency = values[6],
+                CategoryId = category.Id,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            transactions.Add(transaction);
+        }
+
+        return transactions;
+    }
+
+    private string[] ParseCsvLine(string line)
+    {
+        using (var parser = new TextFieldParser(new StringReader(line)))
+        {
+            parser.TextFieldType = FieldType.Delimited;
+            parser.SetDelimiters(",");
+            parser.HasFieldsEnclosedInQuotes = true;
+
+            var fields = parser.ReadFields();
+            return fields ?? Array.Empty<string>();
         }
     }
 }

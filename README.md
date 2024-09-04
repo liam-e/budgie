@@ -11,17 +11,23 @@ dotnet restore
 To create a new migration:
 
 ```bash
-dotnet ef migrations add InitialCreate
+dotnet ef migrations add InitialCreate --project Budgie.API/Budgie.API.csproj
 ```
 
 To apply the migration:
 
 ```bash
-dotnet ef database update
+dotnet ef database update --project Budgie.API/Budgie.API.csproj
 ```
 
 To run the server:
 
 ```bash
-dotnet run --launch-profile https
+ASPNETCORE_ENVIRONMENT=Development dotnet watch run --launch-profile https --project Budgie.API/Budgie.API.csproj
+```
+
+To test:
+
+```bash
+ASPNETCORE_ENVIRONMENT=Test dotnet test
 ```

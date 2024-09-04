@@ -1,209 +1,174 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BudgetApi.Models;
 using System.Security.Claims;
-using System.Globalization;
-using Microsoft.VisualBasic.FileIO;
 using Microsoft.AspNetCore.Authorization;
+using Budgie.API.Models;
 
-namespace BudgetApi.Controllers
+namespace Budgie.API.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
+public class TransactionsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class HelloWorldController : ControllerBase
+    private readonly BudgetContext _context;
+
+    public TransactionsController(BudgetContext context)
     {
-        // GET: api/HelloWorld
-        [HttpGet]
-        public IActionResult GetHelloWorld()
-        {
-            var response = new { message = "Hello World" };
-            return Ok(response);
-        }
+        _context = context;
     }
 
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TransactionsController : ControllerBase
+    // GET: api/Transactions
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactions()
     {
-        private readonly BudgetContext _context;
-        public TransactionsController(BudgetContext context)
+        if (!long.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId))
         {
-            _context = context;
+            return BadRequest(new { error = "Invalid user ID format" });
         }
 
-        // GET: api/Transactions
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactions()
+        var transactions = await _context.Transactions
+            .Where(t => t.UserId == userId)
+            .Include(t => t.Category)
+            .ThenInclude(c => c!.TransactionType)
+            .OrderByDescending(t => t.Date)
+            .Select(t => new TransactionDTO
+            {
+                Date = t.Date,
+                OriginalDescription = t.OriginalDescription,
+                ModifiedDescription = t.ModifiedDescription,
+                Amount = t.Amount,
+                Currency = t.Currency,
+                CategoryName = t.Category!.Name,
+                TransactionTypeName = t.Category.TransactionType!.Name,
+                CreatedAt = t.CreatedAt,
+                UpdatedAt = t.UpdatedAt
+            })
+            .ToListAsync();
+
+        return Ok(new { transactions });
+    }
+
+    // PUT: api/Transactions/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutTransaction(long id, Transaction transaction)
+    {
+        if (id != transaction.Id)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var transactions = await _context.Transactions
-                .Where(t => t.UserId == userId)
-                .Include(t => t.Category)
-                .OrderByDescending(t => t.Date)
-                // TODO: Use MapFromTransaction?
-                .Select(t => new TransactionDTO
-                {
-                    Date = t.Date,
-                    Description = t.Description,
-                    Amount = t.Amount,
-                    CategoryName = t.Category != null ? t.Category.Name : null,
-                    Type = t.Type.ToString()
-                })
-                .ToListAsync();
-
-            return Ok(new { transactions });
+            return BadRequest(new { error = "ID does not match transcation ID." });
+        }
+        if (!long.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId))
+        {
+            return BadRequest(new { error = "Invalid user ID format." });
+        }
+        if (transaction.UserId != userId)
+        {
+            return Forbid();
         }
 
+        var existingTransaction = await _context.Transactions
+            .Include(t => t.Category)
+            .ThenInclude(c => c!.TransactionType)
+            .FirstOrDefaultAsync(t => t.Id == id);
 
-        // GET: api/Transactions/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TransactionDTO>> GetTransaction(long id)
+        if (existingTransaction == null)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return NotFound();
+        }
 
-            var transaction = await _context.Transactions
-                .Include(t => t.Category)
-                .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+        // Check if the category change is allowed for transfer transactions
+        if (existingTransaction.Category?.TransactionType?.Id == "transfer" && existingTransaction.CategoryId != transaction.CategoryId)
+        {
+            return BadRequest("Transfer transactions cannot change category.");
+        }
 
-            if (transaction == null)
+        // Validate amount consistency with transaction type
+        var newCategory = await _context.Categories.Include(c => c.TransactionType).FirstOrDefaultAsync(c => c.Id == transaction.CategoryId);
+        if (newCategory == null)
+        {
+            return BadRequest("Invalid category.");
+        }
+
+        var newTransactionType = newCategory.TransactionType;
+
+        if (newTransactionType == null)  // Added null check
+        {
+            return BadRequest("Invalid transaction type.");
+        }
+
+        if (transaction.Amount < 0 && (newTransactionType.Id == "direct_credit" || newTransactionType.Id == "refund"))
+        {
+            return BadRequest("Negative amounts cannot be direct credits or refunds.");
+        }
+
+        if (transaction.Amount > 0 && (newTransactionType.Id == "purchase" || newTransactionType.Id == "international_purchase"))
+        {
+            return BadRequest("Positive amounts cannot be purchases or international purchases.");
+        }
+
+        // Update transaction
+        _context.Entry(existingTransaction).CurrentValues.SetValues(transaction);
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!TransactionExists(id))
             {
                 return NotFound();
             }
-
-            return TransactionDTO.MapFromTransaction(transaction);
+            else
+            {
+                throw;
+            }
         }
-        // PUT: api/Transactions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTransaction(long id, Transaction transaction)
+
+        return NoContent();
+    }
+
+    // POST: api/Transactions
+    [HttpPost]
+    public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
+    {
+        if (!long.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId))
         {
-            if (id != transaction.Id)
-            {
-                return BadRequest();
-            }
-            if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier)!)
-            {
-                return Forbid();
-            }
-            _context.Entry(transaction).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TransactionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return NoContent();
+            return BadRequest(new { error = "Invalid user ID format" });
         }
-        // POST: api/Transactions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<IEnumerable<Transaction>>> PostTransaction(List<Transaction> transactions)
+
+        transaction.UserId = userId;
+
+        var category = await _context.Categories.Include(c => c.TransactionType).FirstOrDefaultAsync(c => c.Id == transaction.CategoryId);
+        if (category == null)
         {
-            string UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-            foreach (Transaction transaction in transactions)
-            {
-                transaction.UserId = UserId;
-                _context.Transactions.Add(transaction);
-            }
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTransactions), transactions);
+            return BadRequest("Invalid category.");
         }
-        // DELETE: api/Transactions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTransaction(long id)
+
+        var transactionType = category.TransactionType;
+
+        if (transactionType == null)  // Added null check
         {
-            var transaction = await _context.Transactions.FindAsync(id);
-            if (transaction == null)
-            {
-                return NotFound();
-            }
-            if (transaction.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
-            {
-                return Forbid();
-            }
-            _context.Transactions.Remove(transaction);
-            await _context.SaveChangesAsync();
-            return NoContent();
+            return BadRequest("Invalid transaction type.");
         }
-        private bool TransactionExists(long id)
+
+        if (transaction.Amount < 0 && (transactionType.Id == "direct_credit" || transactionType.Id == "refund"))
         {
-            return _context.Transactions.Any(e => e.Id == id);
+            return BadRequest("Negative amounts cannot be direct credits or refunds.");
         }
 
-        [HttpPost("UploadCsv")]
-        public async Task<ActionResult> UploadCsv(IFormFile file)
+        if (transaction.Amount > 0 && (transactionType.Id == "purchase" || transactionType.Id == "international_purchase"))
         {
-            // TODO: Put CSV logic into service to reuse to load mock data
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (userId == null)
-            {
-                return BadRequest("user id is null.");
-            }
-
-            if (file.Length == 0)
-            {
-                return BadRequest("The CSV file is empty.");
-            }
-
-            using (var reader = new StreamReader(file.OpenReadStream()))
-            using (var textFieldParser = new TextFieldParser(reader))
-            {
-                textFieldParser.TextFieldType = FieldType.Delimited;
-                textFieldParser.SetDelimiters(",");
-
-                bool isHeader = true;
-
-                while (!textFieldParser.EndOfData)
-                {
-                    if (isHeader)
-                    {
-                        textFieldParser.ReadFields();
-                        isHeader = false;
-                        continue;
-                    }
-
-                    string[] fields = textFieldParser.ReadFields()!;
-
-                    if (fields.Length != 5)
-                    {
-                        return BadRequest("The CSV file is formatted incorrectly.");
-                    }
-
-                    if (!DateOnly.TryParseExact(fields[0], "dd MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly date))
-                    {
-                        return BadRequest($"Failed to parse date: {fields[0]}");
-                    }
-
-                    var transaction = new Transaction
-                    {
-                        UserId = userId,
-                        Date = date,
-                        Description = fields[1],
-                        Amount = decimal.Parse(fields[3]),
-                        Type = Enums.TransactionType.Expense // TODO: Not all are expenses
-                    };
-
-                    _context.Transactions.Add(transaction);
-                }
-            }
-            await _context.SaveChangesAsync();
-
-            Console.WriteLine("File uploaded successfully!");
-
-            return Ok();
+            return BadRequest("Positive amounts cannot be purchases or international purchases.");
         }
+
+        _context.Transactions.Add(transaction);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetTransaction", new { id = transaction.Id }, transaction);
+    }
+
+    private bool TransactionExists(long id)
+    {
+        return _context.Transactions.Any(e => e.Id == id);
     }
 }

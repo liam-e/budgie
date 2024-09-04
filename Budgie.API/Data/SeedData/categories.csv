@@ -1,0 +1,46 @@
+Id,Name,ParentId,TransactionTypeId
+games-and-software,"Apps, Games & Software",good-life,purchase
+car-insurance-and-maintenance,"Car Insurance, Rego & Maintenance",transport,payment
+family,"Children & Family",personal,purchase
+good-life,"Good Life",,purchase
+groceries,Groceries,home,purchase
+booze,Booze,good-life,purchase
+clothing-and-accessories,"Clothing & Accessories",personal,purchase
+cycling,Cycling,transport,purchase
+homeware-and-appliances,"Homeware & Appliances",home,purchase
+personal,Personal,,purchase
+education-and-student-loans,"Education & Student Loans",personal,payment
+events-and-gigs,"Events & Gigs",good-life,purchase
+fuel,Fuel,transport,purchase
+home,Home,,purchase
+internet,Internet,home,payment
+fitness-and-wellbeing,"Fitness & Wellbeing",personal,purchase
+hobbies,Hobbies,good-life,purchase
+home-maintenance-and-improvements,"Maintenance & Improvements",home,purchase
+parking,Parking,transport,payment
+transport,Transport,,purchase
+gifts-and-charity,"Gifts & Charity",personal,purchase
+holidays-and-travel,"Holidays & Travel",good-life,purchase
+pets,Pets,home,purchase
+public-transport,"Public Transport",transport,payment
+hair-and-beauty,"Hair & Beauty",personal,purchase
+lottery-and-gambling,"Lottery & Gambling",good-life,purchase
+home-insurance-and-rates,"Rates & Insurance",home,payment
+car-repayments,Repayments,transport,payment
+health-and-medical,"Health & Medical",personal,purchase
+pubs-and-bars,"Pubs & Bars",good-life,purchase
+rent-and-mortgage,"Rent & Mortgage",home,payment
+taxis-and-share-cars,"Taxis & Share Cars",transport,payment
+investments,Investments,personal,direct_credit
+restaurants-and-cafes,"Restaurants & Cafes",good-life,purchase
+toll-roads,Tolls,transport,payment
+utilities,Utilities,home,payment
+life-admin,"Life Admin",personal,payment
+takeaway,Takeaway,good-life,purchase
+mobile-phone,"Mobile Phone",personal,payment
+tobacco-and-vaping,"Tobacco & Vaping",good-life,purchase
+news-magazines-and-books,"News, Magazines & Books",personal,purchase
+tv-and-music,"TV, Music & Streaming",good-life,purchase
+adult,Adult,good-life,purchase
+technology,Technology,personal,purchase
+transfer,"Transfer",,transfer
