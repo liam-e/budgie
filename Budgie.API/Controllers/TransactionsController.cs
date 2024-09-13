@@ -96,12 +96,12 @@ public class TransactionsController : ControllerBase
             return BadRequest("Invalid transaction type.");
         }
 
-        if (transaction.Amount < 0 && (newTransactionType.Id == "direct_credit" || newTransactionType.Id == "refund"))
+        if (transaction.Amount < 0 && (newTransactionType.Id == "direct-credit" || newTransactionType.Id == "refund"))
         {
             return BadRequest("Negative amounts cannot be direct credits or refunds.");
         }
 
-        if (transaction.Amount > 0 && (newTransactionType.Id == "purchase" || newTransactionType.Id == "international_purchase"))
+        if (transaction.Amount > 0 && (newTransactionType.Id == "purchase" || newTransactionType.Id == "international-purchase"))
         {
             return BadRequest("Positive amounts cannot be purchases or international purchases.");
         }
@@ -151,12 +151,12 @@ public class TransactionsController : ControllerBase
             return BadRequest("Invalid transaction type.");
         }
 
-        if (transaction.Amount < 0 && (transactionType.Id == "direct_credit" || transactionType.Id == "refund"))
+        if (transaction.Amount < 0 && (transactionType.Id == "direct-credit" || transactionType.Id == "refund"))
         {
             return BadRequest("Negative amounts cannot be direct credits or refunds.");
         }
 
-        if (transaction.Amount > 0 && (transactionType.Id == "purchase" || transactionType.Id == "international_purchase"))
+        if (transaction.Amount > 0 && (transactionType.Id == "purchase" || transactionType.Id == "international-purchase"))
         {
             return BadRequest("Positive amounts cannot be purchases or international purchases.");
         }

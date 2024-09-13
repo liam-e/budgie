@@ -36,6 +36,7 @@ public class Transaction
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; } // Primary key
+
     public required long UserId { get; set; }
     public required DateOnly Date { get; set; }
     public required string OriginalDescription { get; set; }
@@ -281,12 +282,14 @@ public class BudgetContext : DbContext
             var values = ParseCsvLine(line);
             if (values.Length < 4)
             {
-                Console.WriteLine("Not enough elements in Categories");
-                continue;
+                throw new Exception($"Not enough elements in Categories CSV line: {line}");
             }
 
             var transactionType = transactionTypes.FirstOrDefault(tt => tt.Id == values[3]);
-            if (transactionType == null) continue;
+            if (transactionType == null)
+            {
+                throw new Exception($"No matching transaction type found for TransactionTypeId: {values[3]} in line: {line}");
+            }
 
             var category = new Category
             {
@@ -314,9 +317,9 @@ public class BudgetContext : DbContext
             var values = ParseCsvLine(line);
             if (values.Length < 5)
             {
-                Console.WriteLine("Not enough elements in Users");
-                continue;
+                throw new Exception($"Not enough elements in Users CSV line: {line}");
             }
+
             var user = new User
             {
                 Id = long.Parse(values[0]),
@@ -342,14 +345,20 @@ public class BudgetContext : DbContext
             var values = ParseCsvLine(line);
             if (values.Length < 8)
             {
-                Console.WriteLine("Not enough elements in Transactions");
-                continue;
+                throw new Exception($"Not enough elements in Transactions CSV line: {line}");
             }
 
             var user = users.FirstOrDefault(u => u.Id == long.Parse(values[1]));
-            var category = categories.FirstOrDefault(c => c.Id == values[7]);
+            if (user == null)
+            {
+                throw new Exception($"No matching user found for UserId: {values[1]} in line: {line}");
+            }
 
-            if (user == null || category == null) continue;
+            var category = categories.FirstOrDefault(c => c.Id == values[7]);
+            if (category == null)
+            {
+                throw new Exception($"No matching category found for CategoryId: {values[7]} in line: {line}");
+            }
 
             var transaction = new Transaction
             {

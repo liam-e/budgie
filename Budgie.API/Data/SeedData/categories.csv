@@ -31,7 +31,7 @@ health-and-medical,"Health & Medical",personal,purchase
 pubs-and-bars,"Pubs & Bars",good-life,purchase
 rent-and-mortgage,"Rent & Mortgage",home,payment
 taxis-and-share-cars,"Taxis & Share Cars",transport,payment
-investments,Investments,personal,direct_credit
+investments,Investments,personal,direct-credit
 restaurants-and-cafes,"Restaurants & Cafes",good-life,purchase
 toll-roads,Tolls,transport,payment
 utilities,Utilities,home,payment
@@ -44,3 +44,4 @@ tv-and-music,"TV, Music & Streaming",good-life,purchase
 adult,Adult,good-life,purchase
 technology,Technology,personal,purchase
 transfer,"Transfer",,transfer
+direct-credit,"Direct Credit",,direct-credit

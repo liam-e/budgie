@@ -31,3 +31,10 @@ To test:
 ```bash
 ASPNETCORE_ENVIRONMENT=Test dotnet test
 ```
+
+```bash
+rm Budgie.API/Migrations/*
+dotnet ef migrations add InitialCreate --project Budgie.API/Budgie.API.csproj
+dotnet ef database update --project Budgie.API/Budgie.API.csproj
+ASPNETCORE_ENVIRONMENT=Development dotnet watch run --launch-profile https --project Budgie.API/Budgie.API.csproj
+```

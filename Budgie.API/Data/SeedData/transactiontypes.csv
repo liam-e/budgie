@@ -1,7 +1,7 @@
 Id,Name
 purchase,Purchase
-international_purchase,International Purchase
-direct_credit,Direct Credit
+international-purchase,International Purchase
+direct-credit,Direct Credit
 refund,Refund
 payment,Payment
 transfer,Transfer

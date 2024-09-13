@@ -115,7 +115,7 @@ public class Program
 
         app.UseCors(builder =>
             builder
-            .WithOrigins("*/*") // .WithOrigins("http://localhost:3000")
+            .WithOrigins("http://localhost:3000")
                    .AllowAnyMethod()
                    .AllowAnyHeader()
                    .AllowCredentials());
