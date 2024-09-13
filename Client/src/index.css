@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Poppins";
+    font-weight: 400;
+    src: url(./assets/fonts/Poppins-Medium.ttf);
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  a {
+    @apply underline;
+    @apply text-pastelDarkGreen;
+    @apply hover:no-underline;
+    @apply hover:text-pastelGreen;
+  }
+
+  p {
+    @apply my-1;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    border: 2px solid #333;
+  }
+}

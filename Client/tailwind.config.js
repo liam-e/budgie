@@ -1,0 +1,28 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    fontFamily: {
+      sans: ["Poppins", "Arial"],
+    },
+    screens: {
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
+    },
+    extend: {
+      colors: {
+        pastelBlue: "#B3EBF2",
+        pastelYellow: "#FDFD96",
+        pastelGreen: "#54de54",
+        pastelLightGreen: "#7ee77e",
+        pastelDarkGreen: "#28d728",
+      },
+      fontFamily: {
+        sans: ["Poppins", "Arial"],
+      },
+    },
+  },
+  plugins: [],
+};
