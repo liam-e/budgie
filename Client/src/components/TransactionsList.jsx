@@ -1,12 +1,19 @@
+import { useRouteLoaderData } from "react-router-dom";
 import Transaction from "../components/Transaction";
 
 const TransactionsList = ({ transactions }) => {
+  const { mapCategoryIdToName } = useRouteLoaderData("home");
+
   return (
-    <div className="space-y-5">
+    <div className="flex flex-col space-y-4">
       <div>
         {transactions &&
           transactions.map((t, idx) => (
-            <Transaction key={idx} idx={idx} data={t} />
+            <Transaction
+              key={idx}
+              idx={idx}
+              data={{ ...t, categoryName: mapCategoryIdToName[t.categoryId] }}
+            />
           ))}
       </div>
     </div>

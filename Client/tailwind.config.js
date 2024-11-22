@@ -15,9 +15,10 @@ export default {
       colors: {
         pastelBlue: "#B3EBF2",
         pastelYellow: "#FDFD96",
+        pastelLightYellow: "#fcfcae",
         pastelGreen: "#54de54",
         pastelLightGreen: "#7ee77e",
-        pastelDarkGreen: "#28d728",
+        pastelDarkGreen: "#22ba22",
       },
       fontFamily: {
         sans: ["Poppins", "Arial"],

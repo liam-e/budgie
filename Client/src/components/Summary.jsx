@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { formatCurrency } from "../utils/format";
+import {
+  getDateRangesForPeriod,
+  filterTransactionsByDateRange,
+} from "../utils/dates";
+import { sumByCategory } from "../utils/calc";
 import dayjs from "dayjs";
+import TopExpenses from "./TopExpenses";
 
-const Summary = () => {
+const Summary = ({ periodType }) => {
   const transactions = useLoaderData();
 
   const [title, setTitle] = useState("");
-  const [periodType, setPeriodType] = useState("monthly");
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [percentChange, setPercentChange] = useState(0);
+  const [categoryAmounts, setCategoryAmounts] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   useEffect(() => {
     setTitle(generateSummaryTitle(periodType));
 
     const { startDates, endDates } = getDateRangesForPeriod(periodType);
-    const filteredTransactions = filterTransactionsByDateRange(
-      transactions,
-      startDates,
-      endDates
+
+    setFilteredTransactions(
+      filterTransactionsByDateRange(transactions, startDates, endDates)
     );
 
     setIncome(calculateIncome(filteredTransactions));
     setExpenses(calculateExpenses(filteredTransactions));
     setPercentChange(calculatePercentChange(filteredTransactions));
-  }, [periodType]);
 
-  const handlePeriodSelectChange = (e) => {
-    e.preventDefault();
-    setPeriodType(e.target.value);
-  };
+    setCategoryAmounts(sumByCategory(filteredTransactions));
+  }, [periodType]);
 
   const generateSummaryTitle = (periodType) => {
     const now = dayjs();
@@ -50,51 +53,6 @@ const Summary = () => {
       default:
         return "Custom Period";
     }
-  };
-
-  const getDateRangesForPeriod = (periodType, offset = 0) => {
-    const now = dayjs().add(offset, "month");
-    let startDates = [];
-    let endDates = [];
-
-    switch (periodType) {
-      case "monthly":
-        startDates.push(now.startOf("month"));
-        endDates.push(now.endOf("month").add(1, "day"));
-        break;
-      case "weekly":
-        startDates.push(now.startOf("week"));
-        endDates.push(now.endOf("week").add(1, "day"));
-        break;
-      case "quarterly":
-        const currentQuarterStart = now.startOf("quarter");
-        startDates.push(currentQuarterStart);
-        endDates.push(currentQuarterStart.add(3, "months"));
-        break;
-      case "annual":
-        startDates.push(now.startOf("year"));
-        endDates.push(now.endOf("year").add(1, "day"));
-        break;
-      default:
-        // TODO: Custom
-        break;
-    }
-
-    return { startDates, endDates };
-  };
-
-  const filterTransactionsByDateRange = (
-    transactions,
-    startDates,
-    endDates
-  ) => {
-    return transactions.filter((t) => {
-      const transactionDate = dayjs(t.date);
-      return (
-        transactionDate.isAfter(startDates[0]) &&
-        transactionDate.isBefore(endDates[0])
-      );
-    });
   };
 
   const calculateIncome = (filteredTransactions) => {
@@ -142,27 +100,13 @@ const Summary = () => {
     return `${percentChange.toFixed(2)}%`;
   };
 
-  const fieldClasses = "flex flex-row items-center space-x-5 p-2";
-  const fieldLabelClasses = "w-24";
+  const fieldClasses = "flex flex-row items-center space-x-5 p-2 text-sm";
+  const fieldLabelClasses = "";
   const fieldValueClasses = "font-bold grow text-right";
 
-  return (
+  return filteredTransactions && filteredTransactions.length > 0 ? (
     <div className="flex flex-col space-y-5">
       <h3>Summary</h3>
-
-      <select
-        className="w-24 border-black"
-        name="period-select"
-        id="period-select"
-        value={periodType}
-        onChange={handlePeriodSelectChange}
-      >
-        <option value="monthly">Monthly</option>
-        <option value="weekly">Weekly</option>
-        <option value="quarterly">Quarterly</option>
-        <option value="annual">Annual</option>
-        {/* <option value="custom">Custom..</option> */}
-      </select>
 
       <h4>{title}</h4>
 
@@ -192,7 +136,11 @@ const Summary = () => {
           {percentChange}
         </div>
       </div>
+
+      <TopExpenses categoryAmounts={categoryAmounts} />
     </div>
+  ) : (
+    <p>There are no transactions for this period.</p>
   );
 };
 

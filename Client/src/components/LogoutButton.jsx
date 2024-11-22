@@ -1,7 +1,6 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import ButtonComponent from "./ButtonComponent"; // Import reusable ButtonComponent
 
 const LogoutButton = () => {
   const { logout } = useAuth();
@@ -11,7 +10,7 @@ const LogoutButton = () => {
     return logout()
       .then(() => {
         console.log("Successfully logged out!");
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Logout failed", error);
@@ -19,7 +18,7 @@ const LogoutButton = () => {
   };
 
   const linkClass =
-    "px-3 py-3 rounded-md text-sm font-medium text-pastelDarkGreen hover:text-pastelGreen no-underline hover:underline";
+    "px-3 text-md font-medium text-pastelDarkGreen hover:text-pastelGreen no-underline hover:underline";
 
   return (
     <button className={linkClass} onClick={handleLogout}>

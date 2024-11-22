@@ -8,6 +8,7 @@ using Budgie.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Budgie.API;
 
 namespace Budgie.Tests;
 

@@ -14,6 +14,7 @@ const Transaction = ({
     originalDescription,
     modifiedDescription,
     amount,
+    categoryId,
     categoryName,
   },
   idx,
@@ -34,25 +35,26 @@ const Transaction = ({
     >
       <div className="flex flex-col">
         <div
-          className={`flex flex-row p-2 space-x-3 items-center text-md ${
-            idx % 2 === 0 ? "bg-green-200" : "bg-transparent"
+          className={`flex flex-row p-2 space-x-3 items-center text-sm ${
+            idx % 2 === 0 ? "bg-pastelYellow" : "bg-transparent"
           }`}
         >
           {/* DATE */}
-          <div className="w-16">{formattedDate}</div>
-
-          {/* CATEGORY */}
-          <IconContext.Provider
-            value={{ color: "black", className: "global-class-name" }}
-          >
-            <div title={categoryName}>
-              <Category categoryName={categoryName} />
-            </div>
-          </IconContext.Provider>
+          <div className="w-16 text-nowrap">{formattedDate}</div>
 
           {/* DESCRIPTION */}
-          <div className="flex-grow font-normal lowercase">
-            {formattedDescription}
+          <div className="flex-grow flex flex-row space-x-5 items-center">
+            {/* CATEGORY */}
+            <IconContext.Provider
+              value={{ color: "black", className: "global-class-name" }}
+            >
+              <div title={categoryName}>
+                <Category id={categoryId} name={categoryName} />
+              </div>
+            </IconContext.Provider>
+            <p className="w-16 flex-grow font-normal lowercase text-ellipsis overflow-hidden text-nowrap">
+              {formattedDescription}
+            </p>
           </div>
 
           {/* AMOUNT */}
@@ -66,12 +68,12 @@ const Transaction = ({
         </div>
         {showFullInfo ? (
           <div
-            className={`flex flex-row p-2 space-x-3 items-center text-md ${
-              idx % 2 === 0 ? "bg-green-200" : "bg-transparent"
+            className={`flex flex-row p-2 space-x-3 items-center text-sm ${
+              idx % 2 === 0 ? "bg-pastelYellow" : "bg-transparent"
             }`}
           >
             [Full info]
-          </div>
+          </div> // TODO: implement full info toggle for transactions
         ) : (
           <></>
         )}

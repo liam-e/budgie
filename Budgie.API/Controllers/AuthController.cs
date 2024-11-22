@@ -16,7 +16,7 @@ public class AuthController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly CookieOptions cookieOptions;
 
-    private readonly TimeSpan accessTokenTimeSpan = TimeSpan.FromMinutes(5);
+    private readonly TimeSpan accessTokenTimeSpan = TimeSpan.FromMinutes(60);
     private readonly TimeSpan refreshTokenTimeSpan = TimeSpan.FromDays(28);
     private readonly TimeSpan tokenExpiryTimeSpan = TimeSpan.FromDays(-999);
 
@@ -58,7 +58,6 @@ public class AuthController : ControllerBase
 
         User user = new()
         {
-            // Id = Guid.NewGuid().ToString(),
             Email = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
             FirstName = request.FirstName,
@@ -72,7 +71,16 @@ public class AuthController : ControllerBase
 
         GenerateTokens(user, HttpContext);
 
-        return Ok(new { message = "Registration successful and user is now logged in" });
+        // Return user data after registration
+        var userResponse = new UserResponseDTO
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName
+        };
+
+        return Ok(new { message = "Registration successful and user is now logged in", user = userResponse });
     }
 
     [HttpPost("login")]
@@ -99,8 +107,18 @@ public class AuthController : ControllerBase
 
         GenerateTokens(user, HttpContext);
 
-        return Ok(new { message = "Login successful" });
+        // Return user data after login
+        var userResponse = new UserResponseDTO
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName
+        };
+
+        return Ok(new { message = "Login successful", user = userResponse });
     }
+
 
     [HttpPost("refresh")]
     public IActionResult RefreshToken()

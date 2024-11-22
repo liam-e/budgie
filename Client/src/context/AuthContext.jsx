@@ -1,88 +1,51 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState(() => {
+    // Load initial userData from localStorage if available
+    const storedUserData = localStorage.getItem("userData");
+    return storedUserData ? JSON.parse(storedUserData) : null;
+  });
 
   const getCookie = (key) => {
-    var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
+    const b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
     return b ? b.pop() : "";
   };
 
-  const hasRefreshToken = () => {
-    return getCookie("refreshToken") != "";
-  };
+  const hasRefreshToken = () => getCookie("refreshToken") !== "";
 
-  useEffect(() => {
-    const status = async () => {
-      return fetch(`${import.meta.env.VITE_API_URL}/auth/status`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            setIsAuthenticated(true);
-          } else {
-            setIsAuthenticated(false);
-            refresh();
-          }
-        })
-        .catch((error) => {
-          console.error("Error getting authentication status", error);
-        });
-    };
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/status`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    status();
-  }, []);
-
-  useEffect(() => {
-    if (!isAuthenticated && hasRefreshToken()) refresh();
-  }, [isAuthenticated]);
-
-  const login = async (user) => {
-    return fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
+      if (response.ok) {
         setIsAuthenticated(true);
-        return data;
-      })
-      .catch((error) => {
+      } else {
         setIsAuthenticated(false);
-        throw error;
-      });
-  };
-
-  const logout = async () => {
-    return fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
-        // TODO: check that tokens have been expired/removed
-        setIsAuthenticated(false);
-        return data;
-      });
+        if (hasRefreshToken()) {
+          await refresh();
+        } else {
+          console.log("No refresh token!");
+        }
+      }
+    } catch (error) {
+      console.error("Error getting authentication status", error);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const refresh = async () => {
@@ -98,37 +61,112 @@ export const AuthProvider = ({ children }) => {
         }
       );
 
-      if (!response.ok) {
-        console.error("Refresh HTTP status:", response.statusText);
+      if (response.ok) {
+        setIsAuthenticated(true);
+      } else {
+        console.error("Refresh failed with status:", response.statusText);
+        setIsAuthenticated(false);
       }
-
-      return response;
     } catch (error) {
       console.error("Error refreshing token:", error);
+      setIsAuthenticated(false);
+    }
+  };
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  const login = async (user) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      );
+
+      if (!response.ok) throw new Error(response.statusText);
+
+      const data = await response.json();
+
+      setIsAuthenticated(true);
+      setUserData(data.user);
+      localStorage.setItem("userData", JSON.stringify(data.user));
+      setIsLoading(false);
+      return data.message;
+    } catch (error) {
+      setIsAuthenticated(false);
+      setIsLoading(false);
       throw error;
     }
   };
 
-  const register = async (newUser) => {
+  const signUp = async (newUser) => {
+    setIsLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/auth/register`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }
+      );
 
       if (!response.ok) {
-        console.error("registerSubmit: error", response.statusText);
-        setFormMessage("* The email already exists.");
+        const error = new Error(response.statusText);
+        error.status = response.status;
+        throw error;
       }
 
-      await response.json();
+      const data = await response.json();
+
+      setIsAuthenticated(true);
+      setUserData(data.user);
+      localStorage.setItem("userData", JSON.stringify(data.user));
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 100);
+
+      return data.message;
     } catch (error) {
-      console.error("registersubmit: Request failed", error);
-      setFormMessage("* Something went wrong..");
+      setIsAuthenticated(false);
+      setIsLoading(false);
+      throw error;
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error(response.statusText);
+
+      setIsAuthenticated(false);
+      setUserData(null);
+      localStorage.removeItem("userData");
+    } catch (error) {
+      console.error("Error logging out:", error);
     }
   };
 
@@ -136,10 +174,14 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         isAuthenticated,
+        setIsAuthenticated,
+        setIsLoading,
+        isLoading,
+        userData,
         login,
         logout,
         refresh,
-        register,
+        signUp,
       }}
     >
       {children}
@@ -147,6 +189,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

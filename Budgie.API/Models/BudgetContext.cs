@@ -1,135 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.FileIO;
 
 namespace Budgie.API.Models;
-
-public class Category
-{
-    [Key]
-    public required string Id { get; set; } // Primary key
-    public required string Name { get; set; }
-    public string? ParentId { get; set; } // Foreign key
-    public Category? Parent { get; set; } // Navigation property
-    public ICollection<Category> Children { get; set; } = new List<Category>(); // Navigation property
-    public required string TransactionTypeId { get; set; } // Foreign key
-    public TransactionType? TransactionType { get; set; } // Navigation property
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-}
-
-public class TransactionType
-{
-    [Key]
-    public required string Id { get; set; } // Primary key
-    public required string Name { get; set; }
-    public bool CanHaveCategory { get; set; }
-    public ICollection<Category> Categories { get; set; } = new List<Category>(); // Navigation property
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-}
-
-public class Transaction
-{
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; set; } // Primary key
-
-    public required long UserId { get; set; }
-    public required DateOnly Date { get; set; }
-    public required string OriginalDescription { get; set; }
-    public string? ModifiedDescription { get; set; }
-    public required decimal Amount { get; set; }
-    public required string Currency { get; set; }
-    public required string CategoryId { get; set; } // Foreign key, required
-    public Category? Category { get; set; } // Navigation property
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
-    public TransactionType? TransactionType => Category?.TransactionType; // Navigation property from Category
-}
-
-public class TransactionDTO
-{
-    public required DateOnly Date { get; set; }
-    public required string OriginalDescription { get; set; }
-    public string? ModifiedDescription { get; set; }
-    public required decimal Amount { get; set; }
-    public required string Currency { get; set; }
-    public required string CategoryName { get; set; }
-    public required string TransactionTypeName { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
-
-    public static TransactionDTO MapFromTransaction(Transaction t)
-    {
-        return new TransactionDTO
-        {
-            Date = t.Date,
-            OriginalDescription = t.OriginalDescription,
-            ModifiedDescription = t.ModifiedDescription,
-            Amount = t.Amount,
-            Currency = t.Currency,
-            CategoryName = t.Category!.Name,
-            TransactionTypeName = t.TransactionType!.Name,
-            CreatedAt = t.CreatedAt,
-            UpdatedAt = t.UpdatedAt
-        };
-    }
-}
-
-public class User
-{
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; set; } // Primary key
-
-    [EmailAddress]
-    public required string Email { get; set; }
-
-    public required string PasswordHash { get; set; }
-
-    public required string FirstName { get; set; }
-
-    public string? LastName { get; set; }
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-}
-
-public class UserRegisterDTO
-{
-    [EmailAddress]
-    [Required(ErrorMessage = "Email is required.")]
-    public required string Email { get; set; }
-
-    [MinLength(8)]
-    [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password must have a minimum of 8 characters with at least one letter and one number.")]
-    public required string Password { get; set; }
-
-    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-    public required string ConfirmPassword { get; set; }
-
-    [Required(ErrorMessage = "First name is required.")]
-    public required string FirstName { get; set; } // Required first name
-
-    public string? LastName { get; set; } // Optional last name
-}
-
-public class UserLoginDTO
-{
-    [EmailAddress]
-    [Required(ErrorMessage = "Email is required.")]
-    public required string Email { get; set; }
-
-    [MinLength(8)]
-    [Required(ErrorMessage = "Password is required.")]
-    [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password must have a minimum of 8 characters with at least one letter and one number.")]
-    public required string Password { get; set; }
-}
 
 public class BudgetContext : DbContext
 {
@@ -137,6 +10,7 @@ public class BudgetContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<TransactionType> TransactionTypes { get; set; }
+    public DbSet<BudgetLimit> BudgetLimits { get; set; } // Add this line
 
     private readonly string _dataFilePath;
     private readonly bool _isTestEnvironment;
@@ -176,9 +50,31 @@ public class BudgetContext : DbContext
 
         modelBuilder.Entity<Transaction>()
             .HasOne(t => t.Category)
+        .WithMany()
+        .HasForeignKey(t => t.CategoryId);
+
+        // Add a composite unique index for transactions to prevent duplicates
+        modelBuilder.Entity<Transaction>()
+            .HasIndex(t => new { t.UserId, t.Date, t.OriginalDescription, t.Amount })
+            .IsUnique();
+
+        modelBuilder.Entity<BudgetLimit>()
+            .HasOne(bl => bl.User)
             .WithMany()
-            .HasForeignKey(t => t.CategoryId)
-            .IsRequired();
+            .HasForeignKey(bl => bl.UserId);
+
+        modelBuilder.Entity<BudgetLimit>()
+            .HasOne(bl => bl.Category)
+            .WithMany()
+            .HasForeignKey(bl => bl.CategoryId);
+
+        modelBuilder.Entity<BudgetLimit>()
+            .HasIndex(bl => new { bl.UserId, bl.CategoryId, bl.PeriodType })
+            .IsUnique();
+
+        modelBuilder.Entity<BudgetLimit>()
+            .Property(b => b.Id)
+            .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<TransactionType>().HasKey(t => t.Id);
         modelBuilder.Entity<Category>().HasKey(c => c.Id);
@@ -232,17 +128,20 @@ public class BudgetContext : DbContext
 
     private void SeedData(ModelBuilder modelBuilder)
     {
-        var transactionTypes = LoadTransactionTypesFromCsv(Path.Combine(_dataFilePath, "SeedData", "transactiontypes.csv"));
+        var transactionTypes = LoadTransactionTypesFromCsv(Path.Combine(_dataFilePath, "SeedData", "TransactionTypes.csv"));
         modelBuilder.Entity<TransactionType>().HasData(transactionTypes);
 
-        var categories = LoadCategoriesFromCsv(Path.Combine(_dataFilePath, "SeedData", "categories.csv"), transactionTypes);
+        var categories = LoadCategoriesFromCsv(Path.Combine(_dataFilePath, "SeedData", "Categories.csv"), transactionTypes);
         modelBuilder.Entity<Category>().HasData(categories);
 
-        var users = LoadUsersFromCsv(Path.Combine(_dataFilePath, "SeedData", "users.csv"));
+        var users = LoadUsersFromCsv(Path.Combine(_dataFilePath, "SeedData", "Users.csv"));
         modelBuilder.Entity<User>().HasData(users);
 
-        var transactions = LoadTransactionsFromCsv(Path.Combine(_dataFilePath, "SeedData", "transactions.csv"), users, categories);
+        var transactions = LoadTransactionsFromCsv(Path.Combine(_dataFilePath, "SeedData", "Transactions.csv"), users, categories);
         modelBuilder.Entity<Transaction>().HasData(transactions);
+
+        var budgetLimits = LoadBudgetLimitsFromCsv(Path.Combine(_dataFilePath, "SeedData", "BudgetLimits.csv"), users, categories);
+        modelBuilder.Entity<BudgetLimit>().HasData(budgetLimits);
     }
 
     private List<TransactionType> LoadTransactionTypesFromCsv(string filePath)
@@ -378,6 +277,50 @@ public class BudgetContext : DbContext
         }
 
         return transactions;
+    }
+
+    private List<BudgetLimit> LoadBudgetLimitsFromCsv(string filePath, List<User> users, List<Category> categories)
+    {
+        var budgetLimits = new List<BudgetLimit>();
+        var lines = File.ReadAllLines(filePath);
+
+        var idx = 1;
+
+        foreach (var line in lines.Skip(1))
+        {
+            var values = ParseCsvLine(line);
+            if (values.Length < 4)
+            {
+                throw new Exception($"Not enough elements in BudgetLimits CSV line: {line}");
+            }
+
+            var category = categories.FirstOrDefault(c => c.Id == values[0]);
+            if (category == null)
+            {
+                throw new Exception($"No matching category found for CategoryId: {values[0]} in line: {line}");
+            }
+
+            var user = users.FirstOrDefault(u => u.Id == long.Parse(values[1]));
+            if (user == null)
+            {
+                throw new Exception($"No matching user found for UserId: {values[1]} in line: {line}");
+            }
+
+            var budgetLimit = new BudgetLimit
+            {
+                Id = idx++,
+                CategoryId = category.Id,
+                UserId = user.Id,
+                PeriodType = values[2],
+                Amount = decimal.Parse(values[3]),
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            budgetLimits.Add(budgetLimit);
+        }
+
+        return budgetLimits;
     }
 
     private string[] ParseCsvLine(string line)

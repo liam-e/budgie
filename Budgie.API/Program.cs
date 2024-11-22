@@ -9,6 +9,8 @@ using Swashbuckle.AspNetCore.Filters;
 using Budgie.API.Database;
 using Budgie.API.Models;
 
+namespace Budgie.API;
+
 public class Program
 {
     public static void Main(string[] args)
@@ -22,20 +24,24 @@ public class Program
         ConfigureServices(builder.Services, builder.Configuration, environment);
 
         var app = builder.Build();
+
+        InitializeDatabase(app);
+
         ConfigureMiddleware(app);
+
         app.Run();
     }
 
     private static void ConfigureServices(IServiceCollection services, IConfiguration configuration, string environment)
     {
         // Register DbConnectionProvider as a singleton service
-        services.AddSingleton<DbConnectionProvider>(sp =>
+        services.AddSingleton(sp =>
         {
             return new DbConnectionProvider(configuration.GetConnectionString("DefaultConnection")!);
         });
 
         // Register DbConnection as a scoped service
-        services.AddScoped<DbConnection>(provider =>
+        services.AddScoped(provider =>
         {
             var dbConnectionProvider = provider.GetRequiredService<DbConnectionProvider>();
             return dbConnectionProvider.GetConnection();
@@ -124,5 +130,18 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+    }
+
+    private static void InitializeDatabase(WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<BudgetContext>();
+
+
+        if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Test")
+        {
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+        }
     }
 }

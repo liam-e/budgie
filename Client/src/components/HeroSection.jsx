@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LinkButton from "./LinkButton";
 
 const HeroSection = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between p-5">
       {/* Text Section */}
-      <div className="md:w-1/2 flex flex-col justify-center p-8 space-y-12">
+      <div className="md:w-1/2 flex flex-col justify-center space-y-12">
         <div className="w-1/4">
           <h1 className="text-6xl font-bold uppercase leading-normal italic">
             Free your money
@@ -15,13 +16,8 @@ const HeroSection = () => {
           Take control of your cash, smash those savings goals, and track your
           spending with ease.
         </p>
-        <div class="flex justify-end w-full">
-          <Link
-            to="/register"
-            className="bg-pastelGreen text-black border-2 border-black px-4 py-3 no-underline"
-          >
-            Get Started
-          </Link>
+        <div className="flex justify-end w-full">
+          <LinkButton to="/register">Get started</LinkButton>
         </div>
       </div>
 

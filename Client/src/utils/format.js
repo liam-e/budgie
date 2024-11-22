@@ -2,9 +2,7 @@ const formatCurrency = (amount) => {
   const isNegative = amount < 0;
 
   amount = Math.abs(amount);
-
   const dollars = Math.floor(amount).toLocaleString().split(".")[0];
-
   let cents =
     Math.round((amount - Math.floor(amount) + Number.EPSILON) * 100) / 100;
 

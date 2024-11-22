@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Budgie.API.Models;
+using Microsoft.VisualBasic.FileIO;
+using System.Globalization;
 
 namespace Budgie.API.Controllers;
 
@@ -29,8 +31,6 @@ public class TransactionsController : ControllerBase
 
         var transactions = await _context.Transactions
             .Where(t => t.UserId == userId)
-            .Include(t => t.Category)
-            .ThenInclude(c => c!.TransactionType)
             .OrderByDescending(t => t.Date)
             .Select(t => new TransactionDTO
             {
@@ -39,8 +39,7 @@ public class TransactionsController : ControllerBase
                 ModifiedDescription = t.ModifiedDescription,
                 Amount = t.Amount,
                 Currency = t.Currency,
-                CategoryName = t.Category!.Name,
-                TransactionTypeName = t.Category.TransactionType!.Name,
+                CategoryId = t.CategoryId,
                 CreatedAt = t.CreatedAt,
                 UpdatedAt = t.UpdatedAt
             })
@@ -129,43 +128,148 @@ public class TransactionsController : ControllerBase
 
     // POST: api/Transactions
     [HttpPost]
-    public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
+    public async Task<IActionResult> CreateTransaction([FromBody] TransactionCreateDTO transactionDTO)
     {
         if (!long.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId))
         {
             return BadRequest(new { error = "Invalid user ID format" });
         }
 
-        transaction.UserId = userId;
-
-        var category = await _context.Categories.Include(c => c.TransactionType).FirstOrDefaultAsync(c => c.Id == transaction.CategoryId);
-        if (category == null)
+        // Map the DTO to the Transaction model
+        var transaction = new Transaction
         {
-            return BadRequest("Invalid category.");
-        }
+            UserId = userId, // Automatically set from the authenticated user
+            Date = transactionDTO.Date,
+            OriginalDescription = transactionDTO.Description,
+            ModifiedDescription = "",
+            Amount = transactionDTO.Amount,
+            Currency = transactionDTO.Currency,
+            CategoryId = transactionDTO.CategoryId!,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
 
-        var transactionType = category.TransactionType;
-
-        if (transactionType == null)  // Added null check
-        {
-            return BadRequest("Invalid transaction type.");
-        }
-
-        if (transaction.Amount < 0 && (transactionType.Id == "direct-credit" || transactionType.Id == "refund"))
-        {
-            return BadRequest("Negative amounts cannot be direct credits or refunds.");
-        }
-
-        if (transaction.Amount > 0 && (transactionType.Id == "purchase" || transactionType.Id == "international-purchase"))
-        {
-            return BadRequest("Positive amounts cannot be purchases or international purchases.");
-        }
-
+        // Add the new transaction to the database
         _context.Transactions.Add(transaction);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetTransaction", new { id = transaction.Id }, transaction);
+
+        return Ok(new { transaction });
     }
+
+    [HttpPost("UploadCsv")]
+    public async Task<ActionResult> UploadCsv(IFormFile file)
+    {
+        if (!long.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId))
+        {
+            return BadRequest(new { error = "Invalid user ID format" });
+        }
+
+        if (file.Length == 0)
+        {
+            return BadRequest("The CSV file is empty.");
+        }
+
+        try
+        {
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            using (var textFieldParser = new TextFieldParser(reader))
+            {
+                textFieldParser.TextFieldType = FieldType.Delimited;
+                textFieldParser.SetDelimiters(",");
+
+                bool isHeader = true;
+
+                while (!textFieldParser.EndOfData)
+                {
+                    if (isHeader)
+                    {
+                        textFieldParser.ReadFields();
+                        isHeader = false;
+                        continue;
+                    }
+
+                    string[] fields = textFieldParser.ReadFields()!;
+
+                    if (fields.Length < 5)
+                    {
+                        return BadRequest("The CSV file is formatted incorrectly.");
+                    }
+
+                    if (!DateOnly.TryParseExact(fields[0], "dd MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly date))
+                    {
+                        return BadRequest($"Failed to parse date: {fields[0]}");
+                    }
+
+                    string originalDescription = fields[1];
+                    string amountString = fields[3];
+                    string balance = fields[4];
+
+                    if (!decimal.TryParse(amountString, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal amount))
+                    {
+                        return BadRequest($"Failed to parse amount: {amountString}");
+                    }
+
+                    var transaction = new Transaction
+                    {
+                        UserId = userId,
+                        Date = date,
+                        OriginalDescription = originalDescription,
+                        Amount = amount,
+                        Currency = "AUD",
+                        CategoryId = "none",
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+
+                    transaction.ModifiedDescription = ModifyDescription(transaction.OriginalDescription);
+
+                    _context.Transactions.Add(transaction);
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Failed to add transaction {transaction.Date}, {transaction.OriginalDescription}, {transaction.Amount}: {ex.Message}");
+                    }
+                }
+            }
+
+            return Ok("File uploaded and transactions added successfully.");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while processing the CSV file: {ex.Message}");
+        }
+    }
+
+    // GET: api/Transactions/Categories
+    [HttpGet("Categories")]
+    public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategories()
+    {
+        var categories = await _context.Categories
+            .Include(c => c.TransactionType)
+            .Select(c => new CategoryDTO
+            {
+                Id = c.Id,
+                ParentId = c.ParentId,
+                Name = c.Name,
+                TransactionTypeName = c.TransactionType!.Name,
+                TransactionTypeId = c.TransactionType!.Id
+            })
+            .ToListAsync();
+
+        return Ok(categories);
+    }
+
+
+    private string? ModifyDescription(string originalDescription)
+    {
+        return originalDescription;
+    }
+
 
     private bool TransactionExists(long id)
     {
