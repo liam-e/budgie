@@ -41,8 +41,8 @@ ASPNETCORE_ENVIRONMENT=Development dotnet watch run --launch-profile https --pro
 
 ## To do
 
-- [ ] Chart
-- [ ] Categorise transactions page
+- [x] Chart
+- [x] Categorise transactions page
 - [ ] Improve seed data
 - [ ] Demo account
 - Messages
