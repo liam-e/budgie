@@ -6,11 +6,11 @@ namespace Budgie.API.Models;
 
 public class BudgetContext : DbContext
 {
-    public DbSet<Transaction> Transactions { get; set; }
-    public DbSet<User> Users { get; set; }
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<TransactionType> TransactionTypes { get; set; }
-    public DbSet<BudgetLimit> BudgetLimits { get; set; } // Add this line
+    public required DbSet<Transaction> Transactions { get; set; }
+    public required DbSet<User> Users { get; set; }
+    public required DbSet<Category> Categories { get; set; }
+    public required DbSet<TransactionType> TransactionTypes { get; set; }
+    public required DbSet<BudgetLimit> BudgetLimits { get; set; } // Add this line
 
     private readonly string _dataFilePath;
     private readonly bool _isTestEnvironment;

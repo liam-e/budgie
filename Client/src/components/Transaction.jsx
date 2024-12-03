@@ -7,9 +7,12 @@ import {
   formatDescription,
   formatDate,
 } from "../utils/format.js";
+import EditCategoryForm from "../forms/EditCategoryForm.jsx";
 
 const Transaction = ({
+  transaction,
   data: {
+    // TODO: remove
     date,
     originalDescription,
     modifiedDescription,
@@ -18,8 +21,9 @@ const Transaction = ({
     categoryName,
   },
   idx,
+  categorize = false,
 }) => {
-  const [showFullInfo, setShowFullInfo] = useState(false);
+  // const [showFullInfo, setShowFullInfo] = useState(false);
 
   const formattedDescription = modifiedDescription
     ? modifiedDescription
@@ -30,7 +34,7 @@ const Transaction = ({
 
   return (
     <a
-      onClick={() => setShowFullInfo((prevState) => !prevState)}
+      // onClick={() => setShowFullInfo((prevState) => !prevState)}
       className="no-underline text-black hover:text-black"
     >
       <div className="flex flex-col">
@@ -45,14 +49,20 @@ const Transaction = ({
           {/* DESCRIPTION */}
           <div className="flex-grow flex flex-row space-x-5 items-center">
             {/* CATEGORY */}
-            <IconContext.Provider
-              value={{ color: "black", className: "global-class-name" }}
-            >
-              <div title={categoryName}>
-                <Category id={categoryId} name={categoryName} />
+            {categorize ? (
+              <div className="flex grow-0">
+                <EditCategoryForm transaction={transaction} />
               </div>
-            </IconContext.Provider>
-            <p className="w-16 flex-grow font-normal lowercase text-ellipsis overflow-hidden text-nowrap">
+            ) : (
+              <IconContext.Provider
+                value={{ color: "black", className: "global-class-name" }}
+              >
+                <div title={categoryName}>
+                  <Category id={categoryId} name={categoryName} />
+                </div>
+              </IconContext.Provider>
+            )}
+            <p className="w-16 flex-grow font-normal text-ellipsis overflow-hidden text-nowrap">
               {formattedDescription}
             </p>
           </div>
@@ -66,7 +76,8 @@ const Transaction = ({
             {formattedAmount}
           </div>
         </div>
-        {showFullInfo ? (
+
+        {/* {showFullInfo ? (
           <div
             className={`flex flex-row p-2 space-x-3 items-center text-sm ${
               idx % 2 === 0 ? "bg-pastelYellow" : "bg-transparent"
@@ -76,7 +87,7 @@ const Transaction = ({
           </div> // TODO: implement full info toggle for transactions
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </a>
   );

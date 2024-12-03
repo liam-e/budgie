@@ -3,7 +3,7 @@ import BudgetLimits from "../components/BudgetLimits";
 import PeriodSelector from "../components/PeriodSelector";
 
 const BudgetLimitsPage = () => {
-  const [periodType, setPeriodType] = useState("annual");
+  const [periodType, setPeriodType] = useState("monthly");
 
   const handlePeriodSelectChange = (e) => {
     e.preventDefault();

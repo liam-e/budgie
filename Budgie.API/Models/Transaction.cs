@@ -29,6 +29,8 @@ public class Transaction
 
 public class TransactionDTO
 {
+    public required long Id { get; set; } // Primary key
+    public required long UserId { get; set; }
     public required DateOnly Date { get; set; }
     public required string OriginalDescription { get; set; }
     public string? ModifiedDescription { get; set; }
@@ -52,5 +54,5 @@ public class TransactionCreateDTO
     [RegularExpression("^[A-Z]{3}$", ErrorMessage = "Currency should be a valid 3-letter ISO code.")]
     public required string Currency { get; set; }
 
-    public string? CategoryId { get; set; }
+    public required string CategoryId { get; set; }
 }

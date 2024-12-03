@@ -105,7 +105,7 @@ const TransactionsPage = () => {
       <h2 className="text-4xl mb-4">Transactions</h2>
 
       {transactions && transactions.length > 0 ? (
-        <div className="container mx-auto max-w-6xl flex flex-col space-y-5 p-6">
+        <div className="container mx-auto max-w-6xl flex flex-col space-y-5 py-6">
           <div className="flex flex-row items-center space-x-4">
             {pageSelector}
             {limitSelector}

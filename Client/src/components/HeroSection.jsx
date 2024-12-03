@@ -4,7 +4,7 @@ import LinkButton from "./LinkButton";
 
 const HeroSection = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between p-5">
+    <div className="flex flex-col md:flex-row items-center justify-between py-5">
       {/* Text Section */}
       <div className="md:w-1/2 flex flex-col justify-center space-y-12">
         <div className="w-1/4">

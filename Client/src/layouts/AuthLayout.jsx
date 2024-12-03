@@ -1,6 +1,7 @@
-import { Navigate, Outlet, redirect, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Loading from "../components/Loading";
+import MessageContainer from "../components/MessageContainer";
 
 const AuthLayout = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -16,8 +17,9 @@ const AuthLayout = () => {
   }
 
   return (
-    <div className="container mx-auto max-w-6xl p-6">
+    <div className="container mx-auto max-w-6xl min-w-sm py-4">
       <Outlet />
+      <MessageContainer />
     </div>
   );
 };

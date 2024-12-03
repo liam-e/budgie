@@ -69,3 +69,4 @@ ASPNETCORE_ENVIRONMENT=Development dotnet watch run --launch-profile https --pro
 - Clean up design
   - [ ] Figma mockups - establish design language
   - [ ] Reusable layout components
+  - [ ] Mobile-friendly

@@ -1,47 +1,48 @@
 Id,Name,ParentId,TransactionTypeId
-games-and-software,"Apps, Games & Software",good-life,purchase
-car-insurance-and-maintenance,"Car Insurance, Rego & Maintenance",transport,payment
-family,"Children & Family",personal,purchase
-good-life,"Good Life",,purchase
-groceries,Groceries,home,purchase
-booze,Booze,good-life,purchase
-clothing-and-accessories,"Clothing & Accessories",personal,purchase
-cycling,Cycling,transport,purchase
-homeware-and-appliances,"Homeware & Appliances",home,purchase
-personal,Personal,,purchase
-education-and-student-loans,"Education & Student Loans",personal,payment
-events-and-gigs,"Events & Gigs",good-life,purchase
-fuel,Fuel,transport,purchase
-home,Home,,purchase
-internet,Internet,home,payment
-fitness-and-wellbeing,"Fitness & Wellbeing",personal,purchase
-hobbies,Hobbies,good-life,purchase
-home-maintenance-and-improvements,"Maintenance & Improvements",home,purchase
-parking,Parking,transport,payment
-transport,Transport,,purchase
-gifts-and-charity,"Gifts & Charity",personal,purchase
-holidays-and-travel,"Holidays & Travel",good-life,purchase
-pets,Pets,home,purchase
-public-transport,"Public Transport",transport,payment
-hair-and-beauty,"Hair & Beauty",personal,purchase
-lottery-and-gambling,"Lottery & Gambling",good-life,purchase
-home-insurance-and-rates,"Rates & Insurance",home,payment
-car-repayments,"Car Repayments",transport,payment
-health-and-medical,"Health & Medical",personal,purchase
-pubs-and-bars,"Pubs & Bars",good-life,purchase
-rent-and-mortgage,"Rent & Mortgage",home,payment
-taxis-and-share-cars,"Taxis & Share Cars",transport,payment
-investments,Investments,personal,direct-credit
-restaurants-and-cafes,"Restaurants & Cafes",good-life,purchase
-toll-roads,Tolls,transport,payment
-utilities,Utilities,home,payment
-life-admin,"Life Admin",personal,payment
-takeaway,Takeaway,good-life,purchase
-mobile-phone,"Mobile Phone",personal,payment
-tobacco-and-vaping,"Tobacco & Vaping",good-life,purchase
-news-magazines-and-books,"News, Magazines & Books",personal,purchase
-tv-and-music,"TV, Music & Streaming",good-life,purchase
-adult,Adult,good-life,purchase
-technology,Technology,personal,purchase
+games-and-software,"Apps, Games & Software",good-life,expense
+car-insurance-and-maintenance,"Car Insurance, Rego & Maintenance",transport,expense
+family,"Children & Family",personal,expense
+good-life,"Good Life",,expense
+groceries,Groceries,home,expense
+booze,Booze,good-life,expense
+clothing-and-accessories,"Clothing & Accessories",personal,expense
+cycling,Cycling,transport,expense
+homeware-and-appliances,"Homeware & Appliances",home,expense
+personal,Personal,,expense
+education-and-student-loans,"Education & Student Loans",personal,expense
+events-and-gigs,"Events & Gigs",good-life,expense
+fuel,Fuel,transport,expense
+home,Home,,expense
+internet,Internet,home,expense
+fitness-and-wellbeing,"Fitness & Wellbeing",personal,expense
+hobbies,Hobbies,good-life,expense
+home-maintenance-and-improvements,"Maintenance & Improvements",home,expense
+parking,Parking,transport,expense
+transport,Transport,,expense
+gifts-and-charity,"Gifts & Charity",personal,expense
+holidays-and-travel,"Holidays & Travel",good-life,expense
+pets,Pets,home,expense
+public-transport,"Public Transport",transport,expense
+hair-and-beauty,"Hair & Beauty",personal,expense
+lottery-and-gambling,"Lottery & Gambling",good-life,expense
+home-insurance-and-rates,"Rates & Insurance",home,expense
+car-repayments,"Car Repayments",transport,expense
+health-and-medical,"Health & Medical",personal,expense
+pubs-and-bars,"Pubs & Bars",good-life,expense
+rent-and-mortgage,"Rent & Mortgage",home,expense
+taxis-and-share-cars,"Taxis & Share Cars",transport,expense
+investments,Investments,personal,credit
+restaurants-and-cafes,"Restaurants & Cafes",good-life,expense
+toll-roads,Tolls,transport,expense
+utilities,Utilities,home,expense
+life-admin,"Life Admin",personal,expense
+takeaway,Takeaway,good-life,expense
+mobile-phone,"Mobile Phone",personal,expense
+tobacco-and-vaping,"Tobacco & Vaping",good-life,expense
+news-magazines-and-books,"News, Magazines & Books",personal,expense
+tv-and-music,"TV, Music & Streaming",good-life,expense
+adult,Adult,good-life,expense
+technology,Technology,personal,expense
 transfer,"Transfer",,transfer
-direct-credit,"Direct Credit",,direct-credit
+direct-credit,"Direct Credit",,credit
+none,None,,none

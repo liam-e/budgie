@@ -20,6 +20,7 @@ import UploadCSVPage from "./pages/UploadCSVPage";
 import AddFeedPage from "./pages/AddFeedPage";
 import ManualEntryPage from "./pages/ManualEntryPage";
 import BudgetLimitsPage from "./pages/BudgetLimitsPage";
+import CategorizationsPage from "./pages/CategorizationsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,12 +56,18 @@ const router = createBrowserRouter(
             element={<CategoriesPage />}
             loader={categoriesLoader}
           />
-          <Route path="add-data" element={<AddDataPage />} />
           <Route
             path="budget-limits"
             element={<BudgetLimitsPage />}
             loader={transactionsLoader}
           />
+
+          <Route
+            path="categorizations"
+            element={<CategorizationsPage />}
+            loader={transactionsLoader}
+          />
+          <Route path="add-data" element={<AddDataPage />} />
           <Route path="upload-csv" element={<UploadCSVPage />} />
           <Route path="add-feed" element={<AddFeedPage />} />
           <Route path="manual-entry" element={<ManualEntryPage />} />

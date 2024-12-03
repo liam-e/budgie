@@ -14,7 +14,11 @@ const ManualEntryForm = () => {
     watch,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      description: "",
+    },
+  });
 
   const watchDate = watch("date");
   const watchCategory = watch("category");
@@ -34,21 +38,16 @@ const ManualEntryForm = () => {
   };
 
   const handleAddTransaction = async (data) => {
-    const isExpense =
-      data.category.transactionTypeId === "purchase" ||
-      data.category.transactionTypeId === "payment";
-
     const transaction = {
       date: data.date,
       description: data.description,
-      amount: isExpense
-        ? -Math.abs(parseFloat(data.amount.replace(",", "")))
-        : Math.abs(parseFloat(data.amount.replace(",", ""))),
+      amount:
+        data.category.transactionTypeId === "expense"
+          ? -Math.abs(parseFloat(data.amount.replace(",", "")))
+          : Math.abs(parseFloat(data.amount.replace(",", ""))),
       currency: "AUD",
       categoryId: data.category.id,
     };
-
-    console.log(transaction.amount);
 
     try {
       const response = await fetch(
@@ -136,8 +135,7 @@ const ManualEntryForm = () => {
         {watchCategory ? (
           <p className="text-black">
             This transaction will be recorded as{" "}
-            {watchCategory.transactionTypeId === "purchase" ||
-            watchCategory.transactionTypeId === "payment"
+            {watchCategory.transactionTypeId === "expense"
               ? "an Expense (-)"
               : "an Income (+)"}
             .
@@ -150,7 +148,7 @@ const ManualEntryForm = () => {
       <div className="flex flex-col items-center space-y-2">
         <InputErrorMessage>{getErrorMessage(errors)}</InputErrorMessage>
 
-        <div className="flex space-x-6">
+        <div className="flex space-x-4">
           <ButtonComponent type="submit">Add</ButtonComponent>
           <LinkButton to="/home/dashboard">Back to dashboard</LinkButton>
         </div>

@@ -23,6 +23,12 @@ export default {
       fontFamily: {
         sans: ["Poppins", "Arial"],
       },
+      height: {
+        category: "40px",
+      },
+      width: {
+        category: "100px",
+      },
     },
   },
   plugins: [],

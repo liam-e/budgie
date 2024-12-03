@@ -72,8 +72,8 @@ const BudgetLimits = ({ periodType, isOnDashboard = false }) => {
           updateBudgetLimits={updateBudgetLimits}
         />
       )}
-      <div className="flex flex-col space-y-4">
-        <h4 className="capitalize">{periodType + " Limits"}</h4>
+      <div className="flex flex-col space-y-4 min-w-fit">
+        <h4 className="capitalize text-lg">{periodType + " Limits"}</h4>
         {filteredLimits.length === 0 ? (
           <div className="text-gray-400">(No budget limits)</div>
         ) : (

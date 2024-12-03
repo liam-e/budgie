@@ -27,12 +27,11 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-pastelYellow border-b-4 border-pastelGreen">
-      <div className="flex-grow min-h-full px-12 max-w-6xl mx-auto">
-        {/* <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8"> */}
+    <nav className="bg-pastelYellow border-b-2 border-black">
+      <div className="container mx-auto max-w-6xl px-6">
         <div className="flex h-20 items-center justify-between">
           <div className="flex flex-1 items-center">
-            {/* <!-- Logo --> */}
+            {/* Logo */}
             <Link className="no-underline" to="/">
               <span className="hidden md:block text-pastelGreen text-3xl font-normal">
                 🐦Budgie
@@ -44,7 +43,6 @@ const Navbar = () => {
             {isAuthenticated ? userNav : mainNav}
           </div>
         </div>
-        {/* </div> */}
       </div>
     </nav>
   );

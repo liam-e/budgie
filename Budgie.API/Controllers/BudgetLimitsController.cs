@@ -43,6 +43,18 @@ namespace Budgie.API.Controllers
                 return BadRequest(new { error = "Invalid user ID format" });
             }
 
+            var category = await _context.Categories.FindAsync(budgetLimitDto.CategoryId);
+            if (category == null)
+            {
+                return BadRequest(new { error = "Invalid category ID" });
+            }
+
+            if ((category.TransactionTypeId == "expense" && budgetLimitDto.Amount > 0) ||
+                (category.TransactionTypeId == "credit" && budgetLimitDto.Amount < 0))
+            {
+                return BadRequest(new { error = "Invalid budget limit amount for the selected category type." });
+            }
+
             var budgetLimit = new BudgetLimit
             {
                 UserId = userId,
@@ -75,6 +87,18 @@ namespace Budgie.API.Controllers
             if (budgetLimit.UserId != userId)
             {
                 return Forbid();
+            }
+
+            var category = await _context.Categories.FindAsync(budgetLimit.CategoryId);
+            if (category == null)
+            {
+                return BadRequest(new { error = "Invalid category ID" });
+            }
+
+            if ((category.TransactionTypeId == "expense" && budgetLimit.Amount > 0) ||
+                (category.TransactionTypeId == "credit" && budgetLimit.Amount < 0))
+            {
+                return BadRequest(new { error = "Invalid budget limit amount for the selected category type." });
             }
 
             _context.Entry(budgetLimit).State = EntityState.Modified;

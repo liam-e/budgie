@@ -10,6 +10,7 @@ const TransactionsList = ({ transactions }) => {
         {transactions &&
           transactions.map((t, idx) => (
             <Transaction
+              transaction={t}
               key={idx}
               idx={idx}
               data={{ ...t, categoryName: mapCategoryIdToName[t.categoryId] }}

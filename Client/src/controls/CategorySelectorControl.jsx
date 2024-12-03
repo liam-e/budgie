@@ -1,7 +1,12 @@
 import { useController } from "react-hook-form";
 import CategorySelector from "../components/CategorySelector";
 
-const CategorySelectorControl = ({ control, name, isInvalid }) => {
+const CategorySelectorControl = ({
+  control,
+  name,
+  isInvalid,
+  amountIsPositive,
+}) => {
   const {
     field,
     fieldState: { invalid, isTouched, isDirty },
@@ -20,6 +25,7 @@ const CategorySelectorControl = ({ control, name, isInvalid }) => {
       name={field.name} // send down the input name
       inputRef={field.ref} // send input ref, so we can focus on input when error appear
       isInvalid={isInvalid}
+      amountIsPositive={amountIsPositive}
     />
   );
 };

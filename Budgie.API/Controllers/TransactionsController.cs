@@ -34,6 +34,8 @@ public class TransactionsController : ControllerBase
             .OrderByDescending(t => t.Date)
             .Select(t => new TransactionDTO
             {
+                Id = t.Id,
+                UserId = userId,
                 Date = t.Date,
                 OriginalDescription = t.OriginalDescription,
                 ModifiedDescription = t.ModifiedDescription,
@@ -50,9 +52,9 @@ public class TransactionsController : ControllerBase
 
     // PUT: api/Transactions/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTransaction(long id, Transaction transaction)
+    public async Task<IActionResult> PutTransaction(long id, TransactionDTO transactionDTO)
     {
-        if (id != transaction.Id)
+        if (id != transactionDTO.Id)
         {
             return BadRequest(new { error = "ID does not match transcation ID." });
         }
@@ -60,53 +62,44 @@ public class TransactionsController : ControllerBase
         {
             return BadRequest(new { error = "Invalid user ID format." });
         }
+        if (transactionDTO.UserId != userId)
+        {
+            return Forbid();
+        }
+
+        var transaction = await _context.Transactions
+            .Include(t => t.Category)
+            .ThenInclude(c => c!.TransactionType)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (transaction == null)
+        {
+            return NotFound();
+        }
+
         if (transaction.UserId != userId)
         {
             return Forbid();
         }
 
-        var existingTransaction = await _context.Transactions
-            .Include(t => t.Category)
-            .ThenInclude(c => c!.TransactionType)
-            .FirstOrDefaultAsync(t => t.Id == id);
+        var category = await _context.Categories
+            .Include(c => c.TransactionType)
+            .FirstOrDefaultAsync(c => c.Id == transactionDTO.CategoryId);
 
-        if (existingTransaction == null)
+        var validationError = ValidateTransaction(transactionDTO, category);
+        if (validationError != null)
         {
-            return NotFound();
+            return BadRequest(new { error = validationError });
         }
 
-        // Check if the category change is allowed for transfer transactions
-        if (existingTransaction.Category?.TransactionType?.Id == "transfer" && existingTransaction.CategoryId != transaction.CategoryId)
-        {
-            return BadRequest("Transfer transactions cannot change category.");
-        }
+        transaction.Date = transactionDTO.Date;
+        transaction.OriginalDescription = transactionDTO.OriginalDescription;
+        transaction.ModifiedDescription = transactionDTO.ModifiedDescription;
+        transaction.Amount = transactionDTO.Amount;
+        transaction.Currency = transactionDTO.Currency;
+        transaction.CategoryId = transactionDTO.CategoryId;
+        transaction.UpdatedAt = DateTime.UtcNow;
 
-        // Validate amount consistency with transaction type
-        var newCategory = await _context.Categories.Include(c => c.TransactionType).FirstOrDefaultAsync(c => c.Id == transaction.CategoryId);
-        if (newCategory == null)
-        {
-            return BadRequest("Invalid category.");
-        }
-
-        var newTransactionType = newCategory.TransactionType;
-
-        if (newTransactionType == null)  // Added null check
-        {
-            return BadRequest("Invalid transaction type.");
-        }
-
-        if (transaction.Amount < 0 && (newTransactionType.Id == "direct-credit" || newTransactionType.Id == "refund"))
-        {
-            return BadRequest("Negative amounts cannot be direct credits or refunds.");
-        }
-
-        if (transaction.Amount > 0 && (newTransactionType.Id == "purchase" || newTransactionType.Id == "international-purchase"))
-        {
-            return BadRequest("Positive amounts cannot be purchases or international purchases.");
-        }
-
-        // Update transaction
-        _context.Entry(existingTransaction).CurrentValues.SetValues(transaction);
         try
         {
             await _context.SaveChangesAsync();
@@ -117,10 +110,7 @@ public class TransactionsController : ControllerBase
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+            throw;
         }
 
         return NoContent();
@@ -135,24 +125,31 @@ public class TransactionsController : ControllerBase
             return BadRequest(new { error = "Invalid user ID format" });
         }
 
-        // Map the DTO to the Transaction model
+        var category = await _context.Categories
+            .Include(c => c.TransactionType)
+            .FirstOrDefaultAsync(c => c.Id == transactionDTO.CategoryId);
+
+        var validationError = ValidateTransaction(transactionDTO, category);
+        if (validationError != null)
+        {
+            return BadRequest(new { error = validationError });
+        }
+
         var transaction = new Transaction
         {
-            UserId = userId, // Automatically set from the authenticated user
+            UserId = userId,
             Date = transactionDTO.Date,
             OriginalDescription = transactionDTO.Description,
             ModifiedDescription = "",
             Amount = transactionDTO.Amount,
             Currency = transactionDTO.Currency,
-            CategoryId = transactionDTO.CategoryId!,
+            CategoryId = transactionDTO.CategoryId,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
 
-        // Add the new transaction to the database
-        _context.Transactions.Add(transaction);
+        await _context.Transactions.AddAsync(transaction);
         await _context.SaveChangesAsync();
-
 
         return Ok(new { transaction });
     }
@@ -264,12 +261,43 @@ public class TransactionsController : ControllerBase
         return Ok(categories);
     }
 
-
-    private string? ModifyDescription(string originalDescription)
+    private string? ValidateTransaction(object transactionDTO, Category? category)
     {
-        return originalDescription;
+        if (category == null)
+        {
+            return "Invalid category.";
+        }
+
+        if (category.TransactionType == null)
+        {
+            return "Invalid transaction type.";
+        }
+
+        decimal amount = transactionDTO is TransactionCreateDTO createDto ? createDto.Amount : ((TransactionDTO)transactionDTO).Amount;
+
+        if (amount == 0)
+        {
+            return "Transaction amount cannot be zero.";
+        }
+
+        if (category.TransactionType.Name.Equals("expense", StringComparison.OrdinalIgnoreCase) && amount > 0)
+        {
+            return "Expenses cannot have a positive amount.";
+        }
+
+        if (category.TransactionType.Name.Equals("credit", StringComparison.OrdinalIgnoreCase) && amount < 0)
+        {
+            return "Credits cannot have a negative amount.";
+        }
+
+        return null;
     }
 
+    private string ModifyDescription(string originalDescription)
+    {
+        // TODO: Implement method
+        return originalDescription;
+    }
 
     private bool TransactionExists(long id)
     {

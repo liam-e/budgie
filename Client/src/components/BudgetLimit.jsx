@@ -6,7 +6,7 @@ const BudgetLimit = ({ limit }) => {
 
   return (
     <div className="flex flex-row items-center h-16 w-full space-x-3 p-2 bg-pastelYellow text-sm">
-      <div className="w-40">
+      <div className="">
         <Category
           id={limit.categoryId}
           name={limit.categoryName}
@@ -16,7 +16,7 @@ const BudgetLimit = ({ limit }) => {
       <div className={"text-left font-bold text-black"}>
         {formatCurrency(limit.amount)}
       </div>
-      <div className="grow w-20 text-right">
+      <div className="grow w-16 text-right">
         <div
           className={
             "font-bold " +
@@ -35,7 +35,8 @@ const BudgetLimit = ({ limit }) => {
               "font-bold " + (overUnder > 0 ? "text-green-600" : "text-red-500")
             }
           >
-            ({formatCurrency(overUnder)} {overUnder > 0 ? "under" : "over"})
+            ({formatCurrency(Math.abs(overUnder))}{" "}
+            {overUnder > 0 ? "under" : "over"})
           </div>
         )}
       </div>

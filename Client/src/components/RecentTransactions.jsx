@@ -4,7 +4,7 @@ import TransactionsList from "./TransactionsList";
 const RecentTransactions = ({ isOnDashboard = false }) => {
   const transactions = useLoaderData().slice(0, 5);
   return (
-    <div className="flex flex-col space-y-5">
+    <div className="flex flex-col space-y-5 my-2">
       <h3>Recent transactions</h3>
       {transactions && transactions.length > 0 ? (
         <>

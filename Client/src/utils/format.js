@@ -20,12 +20,10 @@ const formatDescription = (desc) => {
 };
 
 const formatDate = (date) => {
-  return new Date(date)
-    .toLocaleDateString("en-US", {
-      month: "short",
-      day: "2-digit",
-    })
-    .toLowerCase();
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+  });
 };
 
 export { formatCurrency, formatDescription, formatDate };
