@@ -16,7 +16,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col space-y-5">
-      <h2 className="text-4xl mb-4">Dashboard</h2>
+      <h2 className="pageheading">Dashboard</h2>
 
       <div className="flex flex-col md:flex-row content-start md:space-x-8 mb-8 min-w-sm">
         <div className="flex flex-col space-y-5 w-full mb-8 md:w-1/2">

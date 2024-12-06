@@ -29,7 +29,7 @@ const AddDataPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full space-y-8 py-10">
-      <h2 className="text-4xl mb-4">Add data</h2>
+      <h2 className="pageheading">Add data</h2>
       <p className="text-lg text-center mb-4">
         Choose how you would like to add your transactions to get started.
       </p>

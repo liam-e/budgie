@@ -7,12 +7,12 @@ const CategoriesPage = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-4xl mb-4">Categories</h2>
+      <h2 className="page-heading">Categories</h2>
       {Object.entries(groupedCategories).map(([parentId, group]) => (
         <div key={parentId} className="pb-4 mb-4">
-          <h2 className="text-xl mb-2">
-            {categories.filter((c) => c.id === parentId)[0].name}
-          </h2>
+          <h3 className="text-xl mb-2">
+            {categories.filter((c) => c.id === parentId)[0]?.name || "Main Categories"}
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {group.map((category) => (
               <div
@@ -60,13 +60,14 @@ const categoriesLoader = async ({ params }) => {
     categories.sort((a, b) => a.name.localeCompare(b.parentId));
 
     const groupedCategories = categories.reduce((acc, category) => {
-      const { parentId } = category;
-      if (parentId) {
+      let { parentId } = category;
+
+      if (!parentId) parentId = "hmm";
+
         if (!acc[parentId]) {
           acc[parentId] = [];
         }
         acc[parentId].push(category);
-      }
       return acc;
     }, {});
 

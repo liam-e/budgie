@@ -52,7 +52,7 @@ const AddFeedPage = () => {
 
   return (
     <div className="flex flex-col p-8 mt-12 space-y-6 align-center items-center bg-pastelYellow border-4 border-pastelGreen max-w-lg mx-auto">
-      <h2 className="text-2xl mb-6">Add Data Feed</h2>
+      <h2 className="pageheading">Add Data Feed</h2>
 
       <form
         onSubmit={handleSubmit}

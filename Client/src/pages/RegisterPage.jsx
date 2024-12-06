@@ -12,7 +12,7 @@ const RegisterPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="flex flex-col bg-pastelYellow px-6 py-4 border-4 border-pastelGreen">
-        <h2 className="mt-4 text-center">Sign Up</h2>
+        <h2 className="pageheading">Sign Up</h2>
 
         <RegisterForm />
       </div>

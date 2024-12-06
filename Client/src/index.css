@@ -51,4 +51,9 @@
     @apply border-red-600;
     @apply bg-red-100;
   }
+
+  h2.page-heading {
+    @apply text-4xl;
+    @apply mb-4
+  }
 }

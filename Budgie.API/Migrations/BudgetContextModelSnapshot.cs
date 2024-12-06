@@ -17,7 +17,7 @@ namespace Budgie.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -65,9 +65,9 @@ namespace Budgie.API.Migrations
                             Id = 1L,
                             Amount = 10000m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(8401),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(5883),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(8402),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(6138),
                             UserId = 1L
                         },
                         new
@@ -75,9 +75,9 @@ namespace Budgie.API.Migrations
                             Id = 2L,
                             Amount = 250m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(8828),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(7054),
                             PeriodType = "weekly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(8829),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(7054),
                             UserId = 1L
                         },
                         new
@@ -85,9 +85,9 @@ namespace Budgie.API.Migrations
                             Id = 3L,
                             Amount = 150m,
                             CategoryId = "games-and-software",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(9455),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(7430),
                             PeriodType = "quarterly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(9455),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(7430),
                             UserId = 1L
                         },
                         new
@@ -95,9 +95,9 @@ namespace Budgie.API.Migrations
                             Id = 4L,
                             Amount = 400m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(9868),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(7808),
                             PeriodType = "quarterly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(9868),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(7808),
                             UserId = 1L
                         },
                         new
@@ -105,9 +105,9 @@ namespace Budgie.API.Migrations
                             Id = 5L,
                             Amount = 100m,
                             CategoryId = "fuel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(309),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(8151),
                             PeriodType = "weekly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(309),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(8151),
                             UserId = 1L
                         },
                         new
@@ -115,9 +115,9 @@ namespace Budgie.API.Migrations
                             Id = 6L,
                             Amount = 50m,
                             CategoryId = "tv-and-music",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(704),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(8541),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(705),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(8541),
                             UserId = 1L
                         },
                         new
@@ -125,9 +125,9 @@ namespace Budgie.API.Migrations
                             Id = 7L,
                             Amount = 1800m,
                             CategoryId = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(1063),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(8916),
                             PeriodType = "annual",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(1063),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(8917),
                             UserId = 1L
                         },
                         new
@@ -135,9 +135,9 @@ namespace Budgie.API.Migrations
                             Id = 8L,
                             Amount = 3000m,
                             CategoryId = "home-maintenance-and-improvements",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(1524),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(9264),
                             PeriodType = "annual",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(1525),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(9265),
                             UserId = 1L
                         },
                         new
@@ -145,9 +145,9 @@ namespace Budgie.API.Migrations
                             Id = 9L,
                             Amount = 120m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(1905),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(9662),
                             PeriodType = "weekly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(1905),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 697, DateTimeKind.Utc).AddTicks(9662),
                             UserId = 1L
                         },
                         new
@@ -155,9 +155,9 @@ namespace Budgie.API.Migrations
                             Id = 10L,
                             Amount = 300m,
                             CategoryId = "utilities",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(2831),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(36),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(2831),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(36),
                             UserId = 1L
                         },
                         new
@@ -165,9 +165,9 @@ namespace Budgie.API.Migrations
                             Id = 11L,
                             Amount = 5000m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(3284),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(452),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(3284),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(453),
                             UserId = 1L
                         },
                         new
@@ -175,9 +175,9 @@ namespace Budgie.API.Migrations
                             Id = 12L,
                             Amount = 50m,
                             CategoryId = "transport",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(3718),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(781),
                             PeriodType = "weekly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(3718),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(781),
                             UserId = 1L
                         },
                         new
@@ -185,9 +185,9 @@ namespace Budgie.API.Migrations
                             Id = 13L,
                             Amount = 2000m,
                             CategoryId = "holidays-and-travel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(4198),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(1179),
                             PeriodType = "annual",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(4199),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(1179),
                             UserId = 1L
                         },
                         new
@@ -195,9 +195,9 @@ namespace Budgie.API.Migrations
                             Id = 14L,
                             Amount = 300m,
                             CategoryId = "fitness-and-wellbeing",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(4571),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(1531),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(4572),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(1531),
                             UserId = 2L
                         },
                         new
@@ -205,9 +205,9 @@ namespace Budgie.API.Migrations
                             Id = 15L,
                             Amount = 50m,
                             CategoryId = "mobile-phone",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(4993),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(1863),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(4993),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(1863),
                             UserId = 2L
                         },
                         new
@@ -215,9 +215,9 @@ namespace Budgie.API.Migrations
                             Id = 16L,
                             Amount = 200m,
                             CategoryId = "booze",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(5386),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(2265),
                             PeriodType = "monthly",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(5386),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(2266),
                             UserId = 3L
                         },
                         new
@@ -225,9 +225,9 @@ namespace Budgie.API.Migrations
                             Id = 17L,
                             Amount = 800m,
                             CategoryId = "homeware-and-appliances",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(5774),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(2592),
                             PeriodType = "annual",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 439, DateTimeKind.Utc).AddTicks(5775),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 698, DateTimeKind.Utc).AddTicks(2592),
                             UserId = 3L
                         });
                 });
@@ -266,418 +266,418 @@ namespace Budgie.API.Migrations
                         new
                         {
                             Id = "games-and-software",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(7142),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(5132),
                             Name = "Apps, Games & Software",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(7143)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(5803)
                         },
                         new
                         {
                             Id = "car-insurance-and-maintenance",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(7743),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(7043),
                             Name = "Car Insurance, Rego & Maintenance",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(7744)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(7043)
                         },
                         new
                         {
                             Id = "family",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(8289),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(7494),
                             Name = "Children & Family",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(8290)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(7494)
                         },
                         new
                         {
                             Id = "good-life",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(8764),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(7847),
                             Name = "Good Life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(8765)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(7847)
                         },
                         new
                         {
                             Id = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(9329),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(8145),
                             Name = "Groceries",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(9329)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(8145)
                         },
                         new
                         {
                             Id = "booze",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(9797),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(8535),
                             Name = "Booze",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(9797)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(8535)
                         },
                         new
                         {
                             Id = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(484),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(8871),
                             Name = "Clothing & Accessories",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(484)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(8871)
                         },
                         new
                         {
                             Id = "cycling",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(954),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(9233),
                             Name = "Cycling",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(954)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(9234)
                         },
                         new
                         {
                             Id = "homeware-and-appliances",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(1536),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(9579),
                             Name = "Homeware & Appliances",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(1536)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(9579)
                         },
                         new
                         {
                             Id = "personal",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(1990),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(9931),
                             Name = "Personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(1990)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 241, DateTimeKind.Utc).AddTicks(9931)
                         },
                         new
                         {
                             Id = "education-and-student-loans",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(2572),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(286),
                             Name = "Education & Student Loans",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(2572)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(286)
                         },
                         new
                         {
                             Id = "events-and-gigs",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(3385),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(637),
                             Name = "Events & Gigs",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(3386)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(637)
                         },
                         new
                         {
                             Id = "fuel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(4199),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(1011),
                             Name = "Fuel",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(4199)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(1011)
                         },
                         new
                         {
                             Id = "home",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(4746),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(1319),
                             Name = "Home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(4747)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(1319)
                         },
                         new
                         {
                             Id = "internet",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(5357),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(1659),
                             Name = "Internet",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(5357)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(1660)
                         },
                         new
                         {
                             Id = "fitness-and-wellbeing",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(5881),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(2022),
                             Name = "Fitness & Wellbeing",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(5882)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(2023)
                         },
                         new
                         {
                             Id = "hobbies",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(6418),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(2386),
                             Name = "Hobbies",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(6419)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(2386)
                         },
                         new
                         {
                             Id = "home-maintenance-and-improvements",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(6945),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(2733),
                             Name = "Maintenance & Improvements",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(6946)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(2734)
                         },
                         new
                         {
                             Id = "parking",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(7459),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(3207),
                             Name = "Parking",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(7459)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(3208)
                         },
                         new
                         {
                             Id = "transport",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(7983),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(3558),
                             Name = "Transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(7984)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(3558)
                         },
                         new
                         {
                             Id = "gifts-and-charity",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(8451),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(3914),
                             Name = "Gifts & Charity",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(8451)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(3914)
                         },
                         new
                         {
                             Id = "holidays-and-travel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(9024),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(4302),
                             Name = "Holidays & Travel",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(9025)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(4302)
                         },
                         new
                         {
                             Id = "pets",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(9489),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(4621),
                             Name = "Pets",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 852, DateTimeKind.Utc).AddTicks(9489)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(4621)
                         },
                         new
                         {
                             Id = "public-transport",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(342),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(4988),
                             Name = "Public Transport",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(343)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(4988)
                         },
                         new
                         {
                             Id = "hair-and-beauty",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(928),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(5344),
                             Name = "Hair & Beauty",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(929)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(5345)
                         },
                         new
                         {
                             Id = "lottery-and-gambling",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(1414),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(5698),
                             Name = "Lottery & Gambling",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(1415)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(5698)
                         },
                         new
                         {
                             Id = "home-insurance-and-rates",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(2040),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(6030),
                             Name = "Rates & Insurance",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(2041)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(6030)
                         },
                         new
                         {
                             Id = "car-repayments",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(3107),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(6418),
                             Name = "Car Repayments",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(3108)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(6418)
                         },
                         new
                         {
                             Id = "health-and-medical",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(3781),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(6741),
                             Name = "Health & Medical",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(3782)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(6742)
                         },
                         new
                         {
                             Id = "pubs-and-bars",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(4375),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(7123),
                             Name = "Pubs & Bars",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(4376)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(7124)
                         },
                         new
                         {
                             Id = "rent-and-mortgage",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(4970),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(7471),
                             Name = "Rent & Mortgage",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(4970)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(7471)
                         },
                         new
                         {
                             Id = "taxis-and-share-cars",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(5457),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(7847),
                             Name = "Taxis & Share Cars",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(5457)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(7847)
                         },
                         new
                         {
                             Id = "investments",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(6192),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(8201),
                             Name = "Investments",
                             ParentId = "personal",
                             TransactionTypeId = "credit",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(6193)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(8201)
                         },
                         new
                         {
                             Id = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(6705),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(8545),
                             Name = "Restaurants & Cafes",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(6706)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(8545)
                         },
                         new
                         {
                             Id = "toll-roads",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(7272),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(8903),
                             Name = "Tolls",
                             ParentId = "transport",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(7272)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(8903)
                         },
                         new
                         {
                             Id = "utilities",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(7780),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(9199),
                             Name = "Utilities",
                             ParentId = "home",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(7780)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(9199)
                         },
                         new
                         {
                             Id = "life-admin",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(8300),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(9593),
                             Name = "Life Admin",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(8300)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(9593)
                         },
                         new
                         {
                             Id = "takeaway",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(8862),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(9899),
                             Name = "Takeaway",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(8863)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 242, DateTimeKind.Utc).AddTicks(9899)
                         },
                         new
                         {
                             Id = "mobile-phone",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(9511),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(318),
                             Name = "Mobile Phone",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 853, DateTimeKind.Utc).AddTicks(9511)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(319)
                         },
                         new
                         {
                             Id = "tobacco-and-vaping",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(84),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(638),
                             Name = "Tobacco & Vaping",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(84)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(638)
                         },
                         new
                         {
                             Id = "news-magazines-and-books",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(644),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(1028),
                             Name = "News, Magazines & Books",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(645)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(1028)
                         },
                         new
                         {
                             Id = "tv-and-music",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(1204),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(1371),
                             Name = "TV, Music & Streaming",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(1204)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(1372)
                         },
                         new
                         {
                             Id = "adult",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(1682),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(1711),
                             Name = "Adult",
                             ParentId = "good-life",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(1683)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(1712)
                         },
                         new
                         {
                             Id = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(2177),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(2051),
                             Name = "Technology",
                             ParentId = "personal",
                             TransactionTypeId = "expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(2177)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(2051)
                         },
                         new
                         {
                             Id = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(2696),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(2385),
                             Name = "Transfer",
                             TransactionTypeId = "transfer",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(2696)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(2385)
                         },
                         new
                         {
                             Id = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(3240),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(2778),
                             Name = "Direct Credit",
                             TransactionTypeId = "credit",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(3240)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(2778)
                         },
                         new
                         {
                             Id = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(3745),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(3097),
                             Name = "None",
                             TransactionTypeId = "none",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(3746)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 243, DateTimeKind.Utc).AddTicks(3097)
                         });
                 });
 
@@ -734,12 +734,12 @@ namespace Budgie.API.Migrations
                             Id = 1L,
                             Amount = -45.6m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 431, DateTimeKind.Utc).AddTicks(9313),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(6378),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 17),
+                            Date = new DateOnly(2024, 10, 20),
                             ModifiedDescription = "Uber Eats Delivery",
                             OriginalDescription = "UBER *EATS HELP.UBER.COM ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 431, DateTimeKind.Utc).AddTicks(9313),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(6645),
                             UserId = 1L
                         },
                         new
@@ -747,12 +747,12 @@ namespace Budgie.API.Migrations
                             Id = 2L,
                             Amount = -150.0m,
                             CategoryId = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(209),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(7881),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 19),
+                            Date = new DateOnly(2024, 10, 22),
                             ModifiedDescription = "Woolworths Groceries",
                             OriginalDescription = "WOOLWORTHS 1234 SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(209),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(7881),
                             UserId = 1L
                         },
                         new
@@ -760,11 +760,11 @@ namespace Budgie.API.Migrations
                             Id = 3L,
                             Amount = -200.0m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(1009),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(8456),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 21),
+                            Date = new DateOnly(2024, 10, 24),
                             OriginalDescription = "MYER DEPARTMENT STORE SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(1009),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(8456),
                             UserId = 1L
                         },
                         new
@@ -772,12 +772,12 @@ namespace Budgie.API.Migrations
                             Id = 4L,
                             Amount = -450.0m,
                             CategoryId = "holidays-and-travel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(1577),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(8987),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 23),
+                            Date = new DateOnly(2024, 10, 26),
                             ModifiedDescription = "Flights to Melbourne",
                             OriginalDescription = "FLIGHT CENTRE MELBOURNE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(1578),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(8987),
                             UserId = 1L
                         },
                         new
@@ -785,11 +785,11 @@ namespace Budgie.API.Migrations
                             Id = 5L,
                             Amount = -15.99m,
                             CategoryId = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(2165),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(9452),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 24),
+                            Date = new DateOnly(2024, 10, 27),
                             OriginalDescription = "NETFLIX.COM 800-123-4567 ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(2165),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 691, DateTimeKind.Utc).AddTicks(9452),
                             UserId = 1L
                         },
                         new
@@ -797,12 +797,12 @@ namespace Budgie.API.Migrations
                             Id = 6L,
                             Amount = 3000.0m,
                             CategoryId = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(2681),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(79),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 27),
+                            Date = new DateOnly(2024, 10, 30),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(2682),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(79),
                             UserId = 1L
                         },
                         new
@@ -810,11 +810,11 @@ namespace Budgie.API.Migrations
                             Id = 7L,
                             Amount = -500.0m,
                             CategoryId = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(3361),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(512),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 28),
+                            Date = new DateOnly(2024, 10, 31),
                             OriginalDescription = "TRANSFER TO SAVINGS ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(3374),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(512),
                             UserId = 1L
                         },
                         new
@@ -822,12 +822,12 @@ namespace Budgie.API.Migrations
                             Id = 8L,
                             Amount = 200.0m,
                             CategoryId = "gifts-and-charity",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(3860),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(1073),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 29),
+                            Date = new DateOnly(2024, 11, 1),
                             ModifiedDescription = "Gift from Parents",
                             OriginalDescription = "TRANSFER FROM PARENTS ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(3860),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(1073),
                             UserId = 1L
                         },
                         new
@@ -835,11 +835,11 @@ namespace Budgie.API.Migrations
                             Id = 9L,
                             Amount = -75.5m,
                             CategoryId = "home-maintenance-and-improvements",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(4532),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(1535),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 31),
+                            Date = new DateOnly(2024, 11, 3),
                             OriginalDescription = "BUNNINGS WAREHOUSE BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(4532),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(1536),
                             UserId = 1L
                         },
                         new
@@ -847,11 +847,11 @@ namespace Budgie.API.Migrations
                             Id = 10L,
                             Amount = -120.0m,
                             CategoryId = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(5054),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(1999),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 1),
+                            Date = new DateOnly(2024, 11, 4),
                             OriginalDescription = "AMAZON AU MELBOURNE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(5054),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(1999),
                             UserId = 1L
                         },
                         new
@@ -859,11 +859,11 @@ namespace Budgie.API.Migrations
                             Id = 11L,
                             Amount = -60.0m,
                             CategoryId = "fuel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(5575),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(2455),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 16),
+                            Date = new DateOnly(2024, 10, 19),
                             OriginalDescription = "SHELL SERVICE STATION PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(5576),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(2455),
                             UserId = 2L
                         },
                         new
@@ -871,11 +871,11 @@ namespace Budgie.API.Migrations
                             Id = 12L,
                             Amount = -70.0m,
                             CategoryId = "fuel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(6059),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(2837),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 18),
+                            Date = new DateOnly(2024, 10, 21),
                             OriginalDescription = "BP AUSTRALIA PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(6060),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(2837),
                             UserId = 2L
                         },
                         new
@@ -883,11 +883,11 @@ namespace Budgie.API.Migrations
                             Id = 13L,
                             Amount = -99.99m,
                             CategoryId = "games-and-software",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(8299),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(3413),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 20),
+                            Date = new DateOnly(2024, 10, 23),
                             OriginalDescription = "APPLE.COM SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(8300),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(3414),
                             UserId = 2L
                         },
                         new
@@ -895,11 +895,11 @@ namespace Budgie.API.Migrations
                             Id = 14L,
                             Amount = -250.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(9120),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(3832),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 21),
+                            Date = new DateOnly(2024, 10, 24),
                             OriginalDescription = "WOOLWORTHS 5678 PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 432, DateTimeKind.Utc).AddTicks(9120),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(3832),
                             UserId = 2L
                         },
                         new
@@ -907,11 +907,11 @@ namespace Budgie.API.Migrations
                             Id = 15L,
                             Amount = -15.0m,
                             CategoryId = "parking",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(6),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(4331),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 22),
+                            Date = new DateOnly(2024, 10, 25),
                             OriginalDescription = "CITY OF PERTH PARKING ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(6),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(4331),
                             UserId = 2L
                         },
                         new
@@ -919,12 +919,12 @@ namespace Budgie.API.Migrations
                             Id = 16L,
                             Amount = 3200.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(553),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(4740),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 26),
+                            Date = new DateOnly(2024, 10, 29),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(554),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(4740),
                             UserId = 2L
                         },
                         new
@@ -932,11 +932,11 @@ namespace Budgie.API.Migrations
                             Id = 17L,
                             Amount = -800.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(1140),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(5218),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 28),
+                            Date = new DateOnly(2024, 10, 31),
                             OriginalDescription = "TRANSFER TO SAVINGS ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(1140),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(5218),
                             UserId = 2L
                         },
                         new
@@ -944,12 +944,12 @@ namespace Budgie.API.Migrations
                             Id = 18L,
                             Amount = 500.0m,
                             CategoryId = "gifts-and-charity",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(1613),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(5636),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 29),
+                            Date = new DateOnly(2024, 11, 1),
                             ModifiedDescription = "Loan from Sister",
                             OriginalDescription = "TRANSFER FROM SISTER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(1614),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(5637),
                             UserId = 2L
                         },
                         new
@@ -957,11 +957,11 @@ namespace Budgie.API.Migrations
                             Id = 19L,
                             Amount = -120.0m,
                             CategoryId = "fitness-and-wellbeing",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(2133),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(6120),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 30),
+                            Date = new DateOnly(2024, 11, 2),
                             OriginalDescription = "REBEL SPORT BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(2133),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(6120),
                             UserId = 2L
                         },
                         new
@@ -969,11 +969,11 @@ namespace Budgie.API.Migrations
                             Id = 20L,
                             Amount = -45.0m,
                             CategoryId = "mobile-phone",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(2650),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(6513),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 1),
+                            Date = new DateOnly(2024, 11, 4),
                             OriginalDescription = "OPTUS BILL PAYMENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(2651),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(6513),
                             UserId = 2L
                         },
                         new
@@ -981,12 +981,12 @@ namespace Budgie.API.Migrations
                             Id = 21L,
                             Amount = -23.45m,
                             CategoryId = "transport",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(3151),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(6997),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 15),
+                            Date = new DateOnly(2024, 10, 18),
                             ModifiedDescription = "Uber Rides",
                             OriginalDescription = "UBER *RIDES SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(3151),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(6997),
                             UserId = 3L
                         },
                         new
@@ -994,12 +994,12 @@ namespace Budgie.API.Migrations
                             Id = 22L,
                             Amount = -180.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(3686),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(7415),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 17),
+                            Date = new DateOnly(2024, 10, 20),
                             ModifiedDescription = "Groceries",
                             OriginalDescription = "COLES SUPERMARKET ADELAIDE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(3687),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(7415),
                             UserId = 3L
                         },
                         new
@@ -1007,11 +1007,11 @@ namespace Budgie.API.Migrations
                             Id = 23L,
                             Amount = -500.0m,
                             CategoryId = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(4158),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(8059),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 19),
+                            Date = new DateOnly(2024, 10, 22),
                             OriginalDescription = "JB HI-FI MELBOURNE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(4159),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(8060),
                             UserId = 3L
                         },
                         new
@@ -1019,11 +1019,11 @@ namespace Budgie.API.Migrations
                             Id = 24L,
                             Amount = -320.0m,
                             CategoryId = "homeware-and-appliances",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(4779),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(8493),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 22),
+                            Date = new DateOnly(2024, 10, 25),
                             OriginalDescription = "HARVEY NORMAN PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(4779),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(8493),
                             UserId = 3L
                         },
                         new
@@ -1031,11 +1031,11 @@ namespace Budgie.API.Migrations
                             Id = 25L,
                             Amount = -15.99m,
                             CategoryId = "tv-and-music",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(5346),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(8983),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 24),
+                            Date = new DateOnly(2024, 10, 27),
                             OriginalDescription = "NETFLIX.COM 800-123-4567 ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(5346),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(8983),
                             UserId = 3L
                         },
                         new
@@ -1043,12 +1043,12 @@ namespace Budgie.API.Migrations
                             Id = 26L,
                             Amount = 2900.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(5836),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(9381),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 26),
+                            Date = new DateOnly(2024, 10, 29),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(5837),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(9381),
                             UserId = 3L
                         },
                         new
@@ -1056,11 +1056,11 @@ namespace Budgie.API.Migrations
                             Id = 27L,
                             Amount = -1000.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(6410),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(9880),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 27),
+                            Date = new DateOnly(2024, 10, 30),
                             OriginalDescription = "TRANSFER TO MORTGAGE ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(6410),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 692, DateTimeKind.Utc).AddTicks(9880),
                             UserId = 3L
                         },
                         new
@@ -1068,12 +1068,12 @@ namespace Budgie.API.Migrations
                             Id = 28L,
                             Amount = 100.0m,
                             CategoryId = "gifts-and-charity",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(6861),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(780),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 29),
+                            Date = new DateOnly(2024, 11, 1),
                             ModifiedDescription = "Gift from Friend",
                             OriginalDescription = "TRANSFER FROM FRIEND ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(6861),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(780),
                             UserId = 3L
                         },
                         new
@@ -1081,11 +1081,11 @@ namespace Budgie.API.Migrations
                             Id = 29L,
                             Amount = -40.0m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(8166),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(1380),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 30),
+                            Date = new DateOnly(2024, 11, 2),
                             OriginalDescription = "BIG W SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(8166),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(1380),
                             UserId = 3L
                         },
                         new
@@ -1093,11 +1093,11 @@ namespace Budgie.API.Migrations
                             Id = 30L,
                             Amount = -60.0m,
                             CategoryId = "booze",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(9196),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(1825),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 10, 31),
+                            Date = new DateOnly(2024, 11, 3),
                             OriginalDescription = "DAN MURPHY'S BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(9196),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(1825),
                             UserId = 3L
                         },
                         new
@@ -1105,11 +1105,11 @@ namespace Budgie.API.Migrations
                             Id = 31L,
                             Amount = -60.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(9807),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(2285),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 1),
+                            Date = new DateOnly(2024, 11, 4),
                             OriginalDescription = "WOOLWORTHS 9999 BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 433, DateTimeKind.Utc).AddTicks(9807),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(2285),
                             UserId = 1L
                         },
                         new
@@ -1117,11 +1117,11 @@ namespace Budgie.API.Migrations
                             Id = 32L,
                             Amount = -25.0m,
                             CategoryId = "parking",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(381),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(2660),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 2),
+                            Date = new DateOnly(2024, 11, 5),
                             OriginalDescription = "CITY OF SYDNEY PARKING ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(381),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(2660),
                             UserId = 1L
                         },
                         new
@@ -1129,11 +1129,11 @@ namespace Budgie.API.Migrations
                             Id = 33L,
                             Amount = -150.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(1027),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(3109),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 3),
+                            Date = new DateOnly(2024, 11, 6),
                             OriginalDescription = "TRANSFER TO CREDIT CARD ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(1028),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(3109),
                             UserId = 1L
                         },
                         new
@@ -1141,11 +1141,11 @@ namespace Budgie.API.Migrations
                             Id = 34L,
                             Amount = -70.0m,
                             CategoryId = "utilities",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(1531),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(3524),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 4),
+                            Date = new DateOnly(2024, 11, 7),
                             OriginalDescription = "TELSTRA BILL PAYMENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(1531),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(3524),
                             UserId = 1L
                         },
                         new
@@ -1153,11 +1153,11 @@ namespace Budgie.API.Migrations
                             Id = 35L,
                             Amount = -200.0m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(2064),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(3966),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 1),
+                            Date = new DateOnly(2024, 11, 4),
                             OriginalDescription = "WESTFIELD SHOPPING CENTRE PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(2064),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(3966),
                             UserId = 2L
                         },
                         new
@@ -1165,12 +1165,12 @@ namespace Budgie.API.Migrations
                             Id = 36L,
                             Amount = 600.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(2580),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(4401),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 2),
+                            Date = new DateOnly(2024, 11, 5),
                             ModifiedDescription = "Freelance Work",
                             OriginalDescription = "PAYMENT RECEIVED FROM CLIENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(2580),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(4401),
                             UserId = 2L
                         },
                         new
@@ -1178,11 +1178,11 @@ namespace Budgie.API.Migrations
                             Id = 37L,
                             Amount = -250.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(3091),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(4790),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 3),
+                            Date = new DateOnly(2024, 11, 6),
                             OriginalDescription = "TRANSFER TO CREDIT CARD ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(3091),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(4790),
                             UserId = 2L
                         },
                         new
@@ -1190,11 +1190,11 @@ namespace Budgie.API.Migrations
                             Id = 38L,
                             Amount = -15.0m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(3607),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(5272),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 4),
+                            Date = new DateOnly(2024, 11, 7),
                             OriginalDescription = "SUBWAY FRANCHISE ADELAIDE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(3607),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(5273),
                             UserId = 2L
                         },
                         new
@@ -1202,11 +1202,11 @@ namespace Budgie.API.Migrations
                             Id = 39L,
                             Amount = -1200.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(4144),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(5686),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 3),
+                            Date = new DateOnly(2024, 11, 6),
                             OriginalDescription = "BOQ HOME LOAN PAYMENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(4144),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(5687),
                             UserId = 3L
                         },
                         new
@@ -1214,11 +1214,11 @@ namespace Budgie.API.Migrations
                             Id = 40L,
                             Amount = 500.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(4747),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(6143),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 5),
+                            Date = new DateOnly(2024, 11, 8),
                             OriginalDescription = "TRANSFER FROM INVESTMENT ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(4747),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(6143),
                             UserId = 3L
                         },
                         new
@@ -1226,11 +1226,11 @@ namespace Budgie.API.Migrations
                             Id = 41L,
                             Amount = -200.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(5812),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(6555),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 6),
+                            Date = new DateOnly(2024, 11, 9),
                             OriginalDescription = "TRANSFER TO SAVINGS ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(5813),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(6555),
                             UserId = 3L
                         },
                         new
@@ -1238,12 +1238,12 @@ namespace Budgie.API.Migrations
                             Id = 42L,
                             Amount = 1500.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(6905),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(6989),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 7),
+                            Date = new DateOnly(2024, 11, 10),
                             ModifiedDescription = "Freelance Work",
                             OriginalDescription = "PAYMENT RECEIVED FROM CLIENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(6905),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(6990),
                             UserId = 3L
                         },
                         new
@@ -1251,11 +1251,11 @@ namespace Budgie.API.Migrations
                             Id = 43L,
                             Amount = -900.0m,
                             CategoryId = "rent-and-mortgage",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(8118),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(7409),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 8),
+                            Date = new DateOnly(2024, 11, 11),
                             OriginalDescription = "AUSSIE HOME LOANS SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(8118),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(7410),
                             UserId = 1L
                         },
                         new
@@ -1263,11 +1263,11 @@ namespace Budgie.API.Migrations
                             Id = 44L,
                             Amount = -8.0m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(8931),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(7846),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 9),
+                            Date = new DateOnly(2024, 11, 12),
                             OriginalDescription = "BOOST JUICE BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(8932),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(7847),
                             UserId = 1L
                         },
                         new
@@ -1275,12 +1275,12 @@ namespace Budgie.API.Migrations
                             Id = 45L,
                             Amount = 1000.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(9790),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(8270),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 7),
+                            Date = new DateOnly(2024, 11, 10),
                             ModifiedDescription = "Freelance Work",
                             OriginalDescription = "PAYMENT RECEIVED FROM CLIENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 434, DateTimeKind.Utc).AddTicks(9790),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(8270),
                             UserId = 2L
                         },
                         new
@@ -1288,11 +1288,11 @@ namespace Budgie.API.Migrations
                             Id = 46L,
                             Amount = -60.0m,
                             CategoryId = "home-maintenance-and-improvements",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(601),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(8734),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 8),
+                            Date = new DateOnly(2024, 11, 11),
                             OriginalDescription = "BUNNINGS WAREHOUSE PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(602),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(8734),
                             UserId = 2L
                         },
                         new
@@ -1300,12 +1300,12 @@ namespace Budgie.API.Migrations
                             Id = 47L,
                             Amount = -120.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(1462),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(9147),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 9),
+                            Date = new DateOnly(2024, 11, 12),
                             ModifiedDescription = "Groceries",
                             OriginalDescription = "COLES SUPERMARKET MELBOURNE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(1463),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(9147),
                             UserId = 3L
                         },
                         new
@@ -1313,11 +1313,11 @@ namespace Budgie.API.Migrations
                             Id = 48L,
                             Amount = -250.0m,
                             CategoryId = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(2141),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(9568),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 10),
+                            Date = new DateOnly(2024, 11, 13),
                             OriginalDescription = "KOGAN.COM SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(2141),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(9569),
                             UserId = 3L
                         },
                         new
@@ -1325,11 +1325,11 @@ namespace Budgie.API.Migrations
                             Id = 49L,
                             Amount = -150.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(2720),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(9989),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 11),
+                            Date = new DateOnly(2024, 11, 14),
                             OriginalDescription = "TRANSFER TO FRIEND ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(2720),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 693, DateTimeKind.Utc).AddTicks(9989),
                             UserId = 1L
                         },
                         new
@@ -1337,12 +1337,12 @@ namespace Budgie.API.Migrations
                             Id = 50L,
                             Amount = -60.0m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(3216),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(422),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 12),
+                            Date = new DateOnly(2024, 11, 15),
                             ModifiedDescription = "Tickets",
                             OriginalDescription = "MELBOURNE ZOO MELBOURNE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(3216),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(422),
                             UserId = 1L
                         },
                         new
@@ -1350,11 +1350,11 @@ namespace Budgie.API.Migrations
                             Id = 51L,
                             Amount = -200.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(3741),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(846),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 10),
+                            Date = new DateOnly(2024, 11, 13),
                             OriginalDescription = "TRANSFER TO FAMILY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(3742),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(846),
                             UserId = 2L
                         },
                         new
@@ -1362,11 +1362,11 @@ namespace Budgie.API.Migrations
                             Id = 52L,
                             Amount = -500.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(4450),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(1249),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 11),
+                            Date = new DateOnly(2024, 11, 14),
                             OriginalDescription = "TRANSFER TO SUPERANNUATION ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(4451),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(1250),
                             UserId = 2L
                         },
                         new
@@ -1374,11 +1374,11 @@ namespace Budgie.API.Migrations
                             Id = 53L,
                             Amount = 300.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(5031),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(1686),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 12),
+                            Date = new DateOnly(2024, 11, 15),
                             OriginalDescription = "TRANSFER FROM SAVINGS ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(5031),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(1686),
                             UserId = 3L
                         },
                         new
@@ -1386,11 +1386,11 @@ namespace Budgie.API.Migrations
                             Id = 54L,
                             Amount = -100.0m,
                             CategoryId = "health-and-medical",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(5576),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(2114),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 13),
+                            Date = new DateOnly(2024, 11, 16),
                             OriginalDescription = "MEDIBANK PRIVATE SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(5577),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(2115),
                             UserId = 3L
                         },
                         new
@@ -1398,12 +1398,12 @@ namespace Budgie.API.Migrations
                             Id = 55L,
                             Amount = 3200.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(6094),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(2587),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 14),
+                            Date = new DateOnly(2024, 11, 17),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(6095),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(2588),
                             UserId = 1L
                         },
                         new
@@ -1411,12 +1411,12 @@ namespace Budgie.API.Migrations
                             Id = 56L,
                             Amount = 150.0m,
                             CategoryId = "gifts-and-charity",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(6616),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(3011),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 15),
+                            Date = new DateOnly(2024, 11, 18),
                             ModifiedDescription = "Returned Item Refund",
                             OriginalDescription = "REFUND FROM AMAZON ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(6617),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(3011),
                             UserId = 1L
                         },
                         new
@@ -1424,12 +1424,12 @@ namespace Budgie.API.Migrations
                             Id = 57L,
                             Amount = 500.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(7209),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(3429),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 16),
+                            Date = new DateOnly(2024, 11, 19),
                             ModifiedDescription = "Bonus",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(7209),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(3429),
                             UserId = 1L
                         },
                         new
@@ -1437,12 +1437,12 @@ namespace Budgie.API.Migrations
                             Id = 58L,
                             Amount = 20.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(7748),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(3813),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 17),
+                            Date = new DateOnly(2024, 11, 20),
                             ModifiedDescription = "Groceries Refund",
                             OriginalDescription = "REFUND FROM WOOLWORTHS ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(7748),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(3813),
                             UserId = 1L
                         },
                         new
@@ -1450,12 +1450,12 @@ namespace Budgie.API.Migrations
                             Id = 59L,
                             Amount = 3300.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(8228),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(4276),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 14),
+                            Date = new DateOnly(2024, 11, 17),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(8228),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(4276),
                             UserId = 2L
                         },
                         new
@@ -1463,12 +1463,12 @@ namespace Budgie.API.Migrations
                             Id = 60L,
                             Amount = 10.0m,
                             CategoryId = "games-and-software",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(8766),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(4706),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 15),
+                            Date = new DateOnly(2024, 11, 18),
                             ModifiedDescription = "App Refund",
                             OriginalDescription = "REFUND FROM APPLE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(8766),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(4706),
                             UserId = 2L
                         },
                         new
@@ -1476,12 +1476,12 @@ namespace Budgie.API.Migrations
                             Id = 61L,
                             Amount = 700.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(9248),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(5164),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 16),
+                            Date = new DateOnly(2024, 11, 19),
                             ModifiedDescription = "Performance Bonus",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 435, DateTimeKind.Utc).AddTicks(9249),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(5164),
                             UserId = 2L
                         },
                         new
@@ -1489,12 +1489,12 @@ namespace Budgie.API.Migrations
                             Id = 62L,
                             Amount = 30.0m,
                             CategoryId = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(498),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(5589),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 17),
+                            Date = new DateOnly(2024, 11, 20),
                             ModifiedDescription = "Fuel Refund",
                             OriginalDescription = "REFUND FROM BP ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(498),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(5589),
                             UserId = 2L
                         },
                         new
@@ -1502,12 +1502,12 @@ namespace Budgie.API.Migrations
                             Id = 63L,
                             Amount = 3100.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(1016),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(6046),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 14),
+                            Date = new DateOnly(2024, 11, 17),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(1017),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(6046),
                             UserId = 3L
                         },
                         new
@@ -1515,12 +1515,12 @@ namespace Budgie.API.Migrations
                             Id = 64L,
                             Amount = 50.0m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(1509),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(6458),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 15),
+                            Date = new DateOnly(2024, 11, 18),
                             ModifiedDescription = "Clothing Refund",
                             OriginalDescription = "REFUND FROM BIG W ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(1510),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(6458),
                             UserId = 3L
                         },
                         new
@@ -1528,12 +1528,12 @@ namespace Budgie.API.Migrations
                             Id = 65L,
                             Amount = 400.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(2085),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(6908),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 16),
+                            Date = new DateOnly(2024, 11, 19),
                             ModifiedDescription = "Overtime Payment",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(2086),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(6908),
                             UserId = 3L
                         },
                         new
@@ -1541,12 +1541,12 @@ namespace Budgie.API.Migrations
                             Id = 66L,
                             Amount = 100.0m,
                             CategoryId = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(2593),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(7338),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 17),
+                            Date = new DateOnly(2024, 11, 20),
                             ModifiedDescription = "Technology Refund",
                             OriginalDescription = "REFUND FROM JB HI-FI ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(2594),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(7338),
                             UserId = 3L
                         },
                         new
@@ -1554,12 +1554,12 @@ namespace Budgie.API.Migrations
                             Id = 67L,
                             Amount = 3250.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(3044),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(7783),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 18),
+                            Date = new DateOnly(2024, 11, 21),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(3044),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(7783),
                             UserId = 1L
                         },
                         new
@@ -1567,12 +1567,12 @@ namespace Budgie.API.Migrations
                             Id = 68L,
                             Amount = 15.99m,
                             CategoryId = "tv-and-music",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(3508),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(8207),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 19),
+                            Date = new DateOnly(2024, 11, 22),
                             ModifiedDescription = "Subscription Refund",
                             OriginalDescription = "REFUND FROM NETFLIX ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(3508),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(8207),
                             UserId = 1L
                         },
                         new
@@ -1580,12 +1580,12 @@ namespace Budgie.API.Migrations
                             Id = 69L,
                             Amount = 3400.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(4028),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(8652),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 18),
+                            Date = new DateOnly(2024, 11, 21),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(4028),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(8652),
                             UserId = 2L
                         },
                         new
@@ -1593,12 +1593,12 @@ namespace Budgie.API.Migrations
                             Id = 70L,
                             Amount = 25.0m,
                             CategoryId = "fuel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(4502),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(9044),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 19),
+                            Date = new DateOnly(2024, 11, 22),
                             ModifiedDescription = "Fuel Refund",
                             OriginalDescription = "REFUND FROM SHELL ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(4503),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(9045),
                             UserId = 2L
                         },
                         new
@@ -1606,12 +1606,12 @@ namespace Budgie.API.Migrations
                             Id = 71L,
                             Amount = 3200.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(4955),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(9521),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 18),
+                            Date = new DateOnly(2024, 11, 21),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(4955),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(9521),
                             UserId = 3L
                         },
                         new
@@ -1619,12 +1619,12 @@ namespace Budgie.API.Migrations
                             Id = 72L,
                             Amount = 15.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(5471),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(9951),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 19),
+                            Date = new DateOnly(2024, 11, 22),
                             ModifiedDescription = "Groceries Refund",
                             OriginalDescription = "REFUND FROM COLES ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(5471),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 694, DateTimeKind.Utc).AddTicks(9951),
                             UserId = 3L
                         },
                         new
@@ -1632,12 +1632,12 @@ namespace Budgie.API.Migrations
                             Id = 73L,
                             Amount = -25.5m,
                             CategoryId = "transport",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(5967),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(366),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 20),
+                            Date = new DateOnly(2024, 11, 23),
                             ModifiedDescription = "Uber Rides",
                             OriginalDescription = "UBER *RIDES BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(5967),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(366),
                             UserId = 1L
                         },
                         new
@@ -1645,12 +1645,12 @@ namespace Budgie.API.Migrations
                             Id = 74L,
                             Amount = -180.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(6476),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(831),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 21),
+                            Date = new DateOnly(2024, 11, 24),
                             ModifiedDescription = "Woolworths Groceries",
                             OriginalDescription = "WOOLWORTHS 1234 SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(6476),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(831),
                             UserId = 1L
                         },
                         new
@@ -1658,12 +1658,12 @@ namespace Budgie.API.Migrations
                             Id = 75L,
                             Amount = 3000.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(6985),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(1244),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 23),
+                            Date = new DateOnly(2024, 11, 26),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(6986),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(1245),
                             UserId = 1L
                         },
                         new
@@ -1671,11 +1671,11 @@ namespace Budgie.API.Migrations
                             Id = 76L,
                             Amount = -600.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(7460),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(1664),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 24),
+                            Date = new DateOnly(2024, 11, 27),
                             OriginalDescription = "TRANSFER TO SAVINGS ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(7461),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(1664),
                             UserId = 1L
                         },
                         new
@@ -1683,11 +1683,11 @@ namespace Budgie.API.Migrations
                             Id = 77L,
                             Amount = -220.0m,
                             CategoryId = "technology",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(7921),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(2078),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 25),
+                            Date = new DateOnly(2024, 11, 28),
                             OriginalDescription = "AMAZON AU SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(7922),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(2078),
                             UserId = 1L
                         },
                         new
@@ -1695,11 +1695,11 @@ namespace Budgie.API.Migrations
                             Id = 78L,
                             Amount = -90.0m,
                             CategoryId = "home-maintenance-and-improvements",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(8688),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(2519),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 26),
+                            Date = new DateOnly(2024, 11, 29),
                             OriginalDescription = "BUNNINGS WAREHOUSE BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(8689),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(2520),
                             UserId = 1L
                         },
                         new
@@ -1707,11 +1707,11 @@ namespace Budgie.API.Migrations
                             Id = 79L,
                             Amount = -9.5m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(9311),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(2967),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 27),
+                            Date = new DateOnly(2024, 11, 30),
                             OriginalDescription = "BOOST JUICE BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(9311),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(2968),
                             UserId = 1L
                         },
                         new
@@ -1719,11 +1719,11 @@ namespace Budgie.API.Migrations
                             Id = 80L,
                             Amount = -85.0m,
                             CategoryId = "utilities",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(9797),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(3407),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 28),
+                            Date = new DateOnly(2024, 12, 1),
                             OriginalDescription = "TELSTRA BILL PAYMENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 436, DateTimeKind.Utc).AddTicks(9798),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(3407),
                             UserId = 1L
                         },
                         new
@@ -1731,11 +1731,11 @@ namespace Budgie.API.Migrations
                             Id = 81L,
                             Amount = -200.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(434),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(3858),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 29),
+                            Date = new DateOnly(2024, 12, 2),
                             OriginalDescription = "TRANSFER TO CREDIT CARD ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(434),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(3858),
                             UserId = 1L
                         },
                         new
@@ -1743,12 +1743,12 @@ namespace Budgie.API.Migrations
                             Id = 82L,
                             Amount = 3200.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(956),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(4303),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 30),
+                            Date = new DateOnly(2024, 12, 3),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(956),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(4304),
                             UserId = 1L
                         },
                         new
@@ -1756,11 +1756,11 @@ namespace Budgie.API.Migrations
                             Id = 83L,
                             Amount = -300.0m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(1432),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(4666),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 1),
+                            Date = new DateOnly(2024, 12, 4),
                             OriginalDescription = "MYER DEPARTMENT STORE SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(1432),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(4667),
                             UserId = 1L
                         },
                         new
@@ -1768,11 +1768,11 @@ namespace Budgie.API.Migrations
                             Id = 84L,
                             Amount = -55.0m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(1932),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(5136),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 2),
+                            Date = new DateOnly(2024, 12, 5),
                             OriginalDescription = "UBER *EATS SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(1932),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(5136),
                             UserId = 1L
                         },
                         new
@@ -1780,12 +1780,12 @@ namespace Budgie.API.Migrations
                             Id = 85L,
                             Amount = -480.0m,
                             CategoryId = "holidays-and-travel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(2479),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(5531),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 3),
+                            Date = new DateOnly(2024, 12, 6),
                             ModifiedDescription = "Flights to Sydney",
                             OriginalDescription = "FLIGHT CENTRE SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(2479),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(5531),
                             UserId = 1L
                         },
                         new
@@ -1793,11 +1793,11 @@ namespace Budgie.API.Migrations
                             Id = 86L,
                             Amount = -80.0m,
                             CategoryId = "fuel",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(2977),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(5991),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 20),
+                            Date = new DateOnly(2024, 11, 23),
                             OriginalDescription = "BP SERVICE STATION PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(2977),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(5992),
                             UserId = 2L
                         },
                         new
@@ -1805,11 +1805,11 @@ namespace Budgie.API.Migrations
                             Id = 87L,
                             Amount = -220.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(3480),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(6379),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 21),
+                            Date = new DateOnly(2024, 11, 24),
                             OriginalDescription = "WOOLWORTHS 5678 PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(3480),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(6379),
                             UserId = 2L
                         },
                         new
@@ -1817,12 +1817,12 @@ namespace Budgie.API.Migrations
                             Id = 88L,
                             Amount = 3400.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(4010),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(6867),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 23),
+                            Date = new DateOnly(2024, 11, 26),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(4010),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(6867),
                             UserId = 2L
                         },
                         new
@@ -1830,11 +1830,11 @@ namespace Budgie.API.Migrations
                             Id = 89L,
                             Amount = -900.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(4757),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(7273),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 24),
+                            Date = new DateOnly(2024, 11, 27),
                             OriginalDescription = "TRANSFER TO SAVINGS ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(4757),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(7273),
                             UserId = 2L
                         },
                         new
@@ -1842,11 +1842,11 @@ namespace Budgie.API.Migrations
                             Id = 90L,
                             Amount = -99.99m,
                             CategoryId = "games-and-software",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(5197),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(7728),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 25),
+                            Date = new DateOnly(2024, 11, 28),
                             OriginalDescription = "APPLE.COM SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(5197),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(7728),
                             UserId = 2L
                         },
                         new
@@ -1854,11 +1854,11 @@ namespace Budgie.API.Migrations
                             Id = 91L,
                             Amount = -130.0m,
                             CategoryId = "fitness-and-wellbeing",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(5739),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(8133),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 26),
+                            Date = new DateOnly(2024, 11, 29),
                             OriginalDescription = "REBEL SPORT BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(5740),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(8134),
                             UserId = 2L
                         },
                         new
@@ -1866,11 +1866,11 @@ namespace Budgie.API.Migrations
                             Id = 92L,
                             Amount = -50.0m,
                             CategoryId = "mobile-phone",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(6434),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(8562),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 27),
+                            Date = new DateOnly(2024, 11, 30),
                             OriginalDescription = "OPTUS BILL PAYMENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(6434),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(8562),
                             UserId = 2L
                         },
                         new
@@ -1878,12 +1878,12 @@ namespace Budgie.API.Migrations
                             Id = 93L,
                             Amount = 800.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(7035),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(8970),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 28),
+                            Date = new DateOnly(2024, 12, 1),
                             ModifiedDescription = "Freelance Work",
                             OriginalDescription = "PAYMENT RECEIVED FROM CLIENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(7035),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(8971),
                             UserId = 2L
                         },
                         new
@@ -1891,11 +1891,11 @@ namespace Budgie.API.Migrations
                             Id = 94L,
                             Amount = -300.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(7493),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(9429),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 29),
+                            Date = new DateOnly(2024, 12, 2),
                             OriginalDescription = "TRANSFER TO CREDIT CARD ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(7493),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(9430),
                             UserId = 2L
                         },
                         new
@@ -1903,12 +1903,12 @@ namespace Budgie.API.Migrations
                             Id = 95L,
                             Amount = 3300.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(8043),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(9840),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 30),
+                            Date = new DateOnly(2024, 12, 3),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(8043),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 695, DateTimeKind.Utc).AddTicks(9841),
                             UserId = 2L
                         },
                         new
@@ -1916,11 +1916,11 @@ namespace Budgie.API.Migrations
                             Id = 96L,
                             Amount = -75.0m,
                             CategoryId = "home-maintenance-and-improvements",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(8565),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(321),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 1),
+                            Date = new DateOnly(2024, 12, 4),
                             OriginalDescription = "BUNNINGS WAREHOUSE PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(8565),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(322),
                             UserId = 2L
                         },
                         new
@@ -1928,11 +1928,11 @@ namespace Budgie.API.Migrations
                             Id = 97L,
                             Amount = -20.0m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(9141),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(726),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 2),
+                            Date = new DateOnly(2024, 12, 5),
                             OriginalDescription = "SUBWAY FRANCHISE ADELAIDE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(9142),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(726),
                             UserId = 2L
                         },
                         new
@@ -1940,11 +1940,11 @@ namespace Budgie.API.Migrations
                             Id = 98L,
                             Amount = -250.0m,
                             CategoryId = "clothing-and-accessories",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(9665),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(1173),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 3),
+                            Date = new DateOnly(2024, 12, 6),
                             OriginalDescription = "WESTFIELD SHOPPING CENTRE PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 437, DateTimeKind.Utc).AddTicks(9666),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(1173),
                             UserId = 2L
                         },
                         new
@@ -1952,12 +1952,12 @@ namespace Budgie.API.Migrations
                             Id = 99L,
                             Amount = -35.0m,
                             CategoryId = "transport",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(225),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(1567),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 20),
+                            Date = new DateOnly(2024, 11, 23),
                             ModifiedDescription = "Uber Rides",
                             OriginalDescription = "UBER *RIDES SYDNEY ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(225),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(1567),
                             UserId = 3L
                         },
                         new
@@ -1965,12 +1965,12 @@ namespace Budgie.API.Migrations
                             Id = 100L,
                             Amount = -190.0m,
                             CategoryId = "groceries",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(657),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(1971),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 21),
+                            Date = new DateOnly(2024, 11, 24),
                             ModifiedDescription = "Groceries",
                             OriginalDescription = "COLES SUPERMARKET ADELAIDE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(658),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(1972),
                             UserId = 3L
                         },
                         new
@@ -1978,12 +1978,12 @@ namespace Budgie.API.Migrations
                             Id = 101L,
                             Amount = 3100.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(1186),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(2426),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 23),
+                            Date = new DateOnly(2024, 11, 26),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(1187),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(2427),
                             UserId = 3L
                         },
                         new
@@ -1991,11 +1991,11 @@ namespace Budgie.API.Migrations
                             Id = 102L,
                             Amount = -1200.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(1699),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(2843),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 24),
+                            Date = new DateOnly(2024, 11, 27),
                             OriginalDescription = "TRANSFER TO MORTGAGE ACCOUNT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(1699),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(2843),
                             UserId = 3L
                         },
                         new
@@ -2003,11 +2003,11 @@ namespace Budgie.API.Migrations
                             Id = 103L,
                             Amount = -550.0m,
                             CategoryId = "none",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(2223),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(3266),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 25),
+                            Date = new DateOnly(2024, 11, 28),
                             OriginalDescription = "JB HI-FI MELBOURNE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(2223),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(3267),
                             UserId = 3L
                         },
                         new
@@ -2015,11 +2015,11 @@ namespace Budgie.API.Migrations
                             Id = 104L,
                             Amount = -80.0m,
                             CategoryId = "booze",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(2723),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(3713),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 26),
+                            Date = new DateOnly(2024, 11, 29),
                             OriginalDescription = "DAN MURPHY'S BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(2723),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(3713),
                             UserId = 3L
                         },
                         new
@@ -2027,11 +2027,11 @@ namespace Budgie.API.Migrations
                             Id = 105L,
                             Amount = -15.99m,
                             CategoryId = "tv-and-music",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(3169),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(4158),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 27),
+                            Date = new DateOnly(2024, 11, 30),
                             OriginalDescription = "NETFLIX.COM 800-123-4567 ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(3169),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(4158),
                             UserId = 3L
                         },
                         new
@@ -2039,11 +2039,11 @@ namespace Budgie.API.Migrations
                             Id = 106L,
                             Amount = -350.0m,
                             CategoryId = "homeware-and-appliances",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(3761),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(4580),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 28),
+                            Date = new DateOnly(2024, 12, 1),
                             OriginalDescription = "HARVEY NORMAN PERTH ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(3762),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(4580),
                             UserId = 3L
                         },
                         new
@@ -2051,11 +2051,11 @@ namespace Budgie.API.Migrations
                             Id = 107L,
                             Amount = -250.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(4254),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(5002),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 29),
+                            Date = new DateOnly(2024, 12, 2),
                             OriginalDescription = "TRANSFER TO CREDIT CARD ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(4255),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(5002),
                             UserId = 3L
                         },
                         new
@@ -2063,12 +2063,12 @@ namespace Budgie.API.Migrations
                             Id = 108L,
                             Amount = 1700.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(4766),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(5432),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 11, 30),
+                            Date = new DateOnly(2024, 12, 3),
                             ModifiedDescription = "Freelance Work",
                             OriginalDescription = "PAYMENT RECEIVED FROM CLIENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(4766),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(5433),
                             UserId = 3L
                         },
                         new
@@ -2076,11 +2076,11 @@ namespace Budgie.API.Migrations
                             Id = 109L,
                             Amount = -10.0m,
                             CategoryId = "restaurants-and-cafes",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(5319),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(5874),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 1),
+                            Date = new DateOnly(2024, 12, 4),
                             OriginalDescription = "BOOST JUICE BRISBANE ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(5319),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(5875),
                             UserId = 3L
                         },
                         new
@@ -2088,12 +2088,12 @@ namespace Budgie.API.Migrations
                             Id = 110L,
                             Amount = 3200.0m,
                             CategoryId = "direct-credit",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(5814),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(6305),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 2),
+                            Date = new DateOnly(2024, 12, 5),
                             ModifiedDescription = "Salary",
                             OriginalDescription = "PAYMENT RECEIVED FROM EMPLOYER ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(5814),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(6305),
                             UserId = 3L
                         },
                         new
@@ -2101,11 +2101,11 @@ namespace Budgie.API.Migrations
                             Id = 111L,
                             Amount = -1300.0m,
                             CategoryId = "transfer",
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(6365),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(6765),
                             Currency = "AUD",
-                            Date = new DateOnly(2024, 12, 3),
+                            Date = new DateOnly(2024, 12, 6),
                             OriginalDescription = "BOQ HOME LOAN PAYMENT ;",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 438, DateTimeKind.Utc).AddTicks(6365),
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 696, DateTimeKind.Utc).AddTicks(6765),
                             UserId = 3L
                         });
                 });
@@ -2137,33 +2137,33 @@ namespace Budgie.API.Migrations
                         {
                             Id = "credit",
                             CanHaveCategory = false,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(3107),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(6126),
                             Name = "Credit",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(3108)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(6406)
                         },
                         new
                         {
                             Id = "expense",
                             CanHaveCategory = false,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(4256),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(7803),
                             Name = "Expense",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(4257)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(7803)
                         },
                         new
                         {
                             Id = "transfer",
                             CanHaveCategory = false,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(5113),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(8219),
                             Name = "Transfer",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(5113)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(8220)
                         },
                         new
                         {
                             Id = "none",
                             CanHaveCategory = false,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(5596),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(8538),
                             Name = "None",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 851, DateTimeKind.Utc).AddTicks(5597)
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 238, DateTimeKind.Utc).AddTicks(8539)
                         });
                 });
 
@@ -2207,32 +2207,32 @@ namespace Budgie.API.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(5127),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 244, DateTimeKind.Utc).AddTicks(1363),
                             Email = "user@example.com",
                             FirstName = "John",
                             LastName = "Doe",
-                            PasswordHash = "$2a$11$lNRvjtjDv3itoHA16I82Y.bTDVXgSM24Cgy5SqYH093.Julc1Z7um",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 40, 854, DateTimeKind.Utc).AddTicks(5127)
+                            PasswordHash = "$2a$11$ww0zIi7YBilU2zPhGwLVuuaiPyAOXxTL.JzyxYcotPwJEukgjcCVC",
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 244, DateTimeKind.Utc).AddTicks(1363)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 66, DateTimeKind.Utc).AddTicks(9090),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 447, DateTimeKind.Utc).AddTicks(9311),
                             Email = "user2@example.com",
                             FirstName = "Jane",
                             LastName = "Smith",
-                            PasswordHash = "$2a$11$enUsjovM.f/NC0ilfWYXy.WRVN0hjiXP8ne2lgv9ZSRzmAXnrXVIC",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 66, DateTimeKind.Utc).AddTicks(9090)
+                            PasswordHash = "$2a$11$1vzTui/Y9gwmMhHDflQHFug/xb2ClrBAXkVzDCMrGPOPr6AJydxya",
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 447, DateTimeKind.Utc).AddTicks(9311)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 257, DateTimeKind.Utc).AddTicks(326),
+                            CreatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 567, DateTimeKind.Utc).AddTicks(3893),
                             Email = "user3@example.com",
                             FirstName = "Bob",
                             LastName = "Johnson",
-                            PasswordHash = "$2a$11$cqkBBkOMnCzKj7c/iZrRGOqozw9E0xWeraZUe7U.xF/GYxmmkKXP2",
-                            UpdatedAt = new DateTime(2024, 12, 3, 11, 55, 41, 257, DateTimeKind.Utc).AddTicks(327)
+                            PasswordHash = "$2a$11$gzK54s7Cf9nbryALahg8jeIfzRFvFwkye4rp8kDeZst0rKHTjbUOO",
+                            UpdatedAt = new DateTime(2024, 12, 6, 4, 2, 59, 567, DateTimeKind.Utc).AddTicks(3893)
                         });
                 });
 

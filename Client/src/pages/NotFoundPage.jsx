@@ -6,7 +6,7 @@ const NotFoundPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-full space-y-8 p-12">
       <div className="flex flex-col space-y-4 items-center">
-        <h2>Oops! Page not found</h2>
+        <h2 className="pageheading">Oops! Page not found</h2>
         <p>It looks like the page you're trying to visit doesn't exist.</p>
         <ButtonComponent onClick={() => navigate("/")}>
           Take me back home
