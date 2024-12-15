@@ -167,6 +167,8 @@ public class TransactionsController : ControllerBase
             return BadRequest("The CSV file is empty.");
         }
 
+        var numTransactionsAdded = 0;
+
         try
         {
             using (var reader = new StreamReader(file.OpenReadStream()))
@@ -226,6 +228,7 @@ public class TransactionsController : ControllerBase
                     try
                     {
                         await _context.SaveChangesAsync();
+                        numTransactionsAdded++;
                     }
                     catch (Exception ex)
                     {
@@ -234,7 +237,7 @@ public class TransactionsController : ControllerBase
                 }
             }
 
-            return Ok("File uploaded and transactions added successfully.");
+            return Ok($"Uploaded successfully, {numTransactionsAdded} transactions added.");
         }
         catch (Exception ex)
         {

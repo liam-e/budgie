@@ -7,7 +7,6 @@ namespace Budgie.API.Models;
 public class BudgetLimit
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; } // Primary key
 
     [Required]
@@ -29,8 +28,11 @@ public class BudgetLimit
     [Column(TypeName = "decimal(18,2)")]
     public required decimal Amount { get; set; } // Limit amount
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime CreatedAt { get; set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime UpdatedAt { get; set; }
 }
 
 public class BudgetLimitDTO

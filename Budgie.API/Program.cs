@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Budgie.API.Database;
 using Budgie.API.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Budgie.API;
 
@@ -19,11 +20,21 @@ public class Program
 
         string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
+        if (environment == "Production")
+        {
+            builder.Host.UseContentRoot("/var/www/budgieapi");
+        }
+
         builder.Configuration.AddJsonFile($"appsettings.{environment}.json", optional: true);
 
         ConfigureServices(builder.Services, builder.Configuration, environment);
 
         var app = builder.Build();
+
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
 
         InitializeDatabase(app);
 
@@ -107,24 +118,33 @@ public class Program
 
             options.OperationFilter<SecurityRequirementsOperationFilter>();
         });
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend",
+                policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+                });
+        });
     }
 
     private static void ConfigureMiddleware(WebApplication app)
     {
-        if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Test")
+        if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        else
+        {
+            app.UseHttpsRedirection();
+        }
 
-        app.UseHttpsRedirection();
-
-        app.UseCors(builder =>
-            builder
-            .WithOrigins("http://127.0.0.1:3000")
-                   .AllowAnyMethod()
-                   .AllowAnyHeader()
-                   .AllowCredentials());
+        app.UseCors("AllowFrontend");
 
         app.UseAuthentication();
         app.UseAuthorization();
@@ -138,10 +158,10 @@ public class Program
         var dbContext = scope.ServiceProvider.GetRequiredService<BudgetContext>();
 
 
-        if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Test")
-        {
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
-        }
+        // if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Test")
+        // {
+        dbContext.Database.EnsureDeleted();
+        dbContext.Database.EnsureCreated();
+        // }
     }
 }

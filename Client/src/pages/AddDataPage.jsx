@@ -1,10 +1,23 @@
 import React from "react";
 import { FaDatabase, FaUpload } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { message } from "../components/MessageContainer";
 
 const AddDataPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const queryString = location.search;
+  const params = new URLSearchParams(queryString);
+
+  const newUser = params.get("newuser");
+
+  console.log("newuser: ", newUser);
+
+  if (newUser) {
+    message("New user!");
+  }
 
   const options = [
     {

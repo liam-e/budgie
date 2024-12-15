@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import ButtonComponent from "../components/ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import { message } from "../components/MessageContainer";
 
 const UploadCSVPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -44,9 +45,10 @@ const UploadCSVPage = () => {
       }
 
       const data = await response.text();
-      console.log("File uploaded successfully", data);
 
-      navigate("/home/dashboard");
+      message(data);
+
+      navigate("/home/dashboard?uploadedCSV=true");
     } catch (error) {
       console.error("File upload error:", error);
       setFileError("File upload failed. Please try again.");

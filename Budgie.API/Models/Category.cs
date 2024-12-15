@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Budgie.API.Models;
@@ -7,6 +8,7 @@ public class Category
 {
     [Key]
     public required string Id { get; set; } // Primary key
+
     public required string Name { get; set; }
     public string? ParentId { get; set; } // Foreign key
 
@@ -21,8 +23,11 @@ public class Category
     [JsonIgnore]
     public TransactionType? TransactionType { get; set; } // Navigation property
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime CreatedAt { get; set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime UpdatedAt { get; set; }
 }
 
 public class CategoryDTO

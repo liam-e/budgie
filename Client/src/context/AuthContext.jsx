@@ -17,19 +17,20 @@ export const AuthProvider = ({ children }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const hasRefreshTokenCached = useRef(getCookie("refreshToken") !== "");
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-
   const logError = (message, error) => {
     console.error(`${message}:`, error);
   };
 
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch(`${API_URL}/auth/status`, {
-        method: "GET",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/status`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.ok) {
         setIsAuthenticated(true);
@@ -54,13 +55,16 @@ export const AuthProvider = ({ children }) => {
     setIsRefreshing(true);
 
     try {
-      const response = await fetch(`${API_URL}/auth/refresh`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/refresh`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         setIsAuthenticated(true);
@@ -81,14 +85,17 @@ export const AuthProvider = ({ children }) => {
   const login = async (user) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL}/auth/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      );
 
       if (!response.ok) throw new Error(response.statusText);
 
@@ -109,14 +116,17 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (newUser) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL}/auth/register`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }
+      );
 
       if (!response.ok) {
         const error = new Error(response.statusText);
@@ -141,13 +151,16 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await fetch(`${API_URL}/auth/logout`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) throw new Error(response.statusText);
 

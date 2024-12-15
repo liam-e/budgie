@@ -6,7 +6,6 @@ namespace Budgie.API.Models;
 public class User
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; } // Primary key
 
     [EmailAddress]
@@ -18,9 +17,11 @@ public class User
 
     public string? LastName { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime CreatedAt { get; set; }
 
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime UpdatedAt { get; set; }
 }
 
 public class UserRegisterDTO

@@ -6,3 +6,7 @@
 *.suo
 *.user
 *.sln.docstates
+
+
+**/out/
+**/appsettings.*.json

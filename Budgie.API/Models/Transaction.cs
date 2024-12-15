@@ -6,7 +6,6 @@ namespace Budgie.API.Models;
 public class Transaction
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; } // Primary key
 
     public required long UserId { get; set; }
@@ -21,8 +20,11 @@ public class Transaction
     public required string CategoryId { get; set; } // Foreign key
     public Category? Category { get; set; } // Navigation property
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime CreatedAt { get; set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime UpdatedAt { get; set; }
 
     public TransactionType? TransactionType => Category?.TransactionType; // Navigation property from Category
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ButtonComponent from "../components/ButtonComponent";
 import ButtonSpinner from "../components/ButtonSpinner";
+import { message } from "../components/MessageContainer";
 
 const AddFeedPage = () => {
   const [apiKey, setApiKey] = useState("");
@@ -9,15 +10,16 @@ const AddFeedPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [accounts, setAccounts] = useState([]);
 
+  const upBankUrl = "https://api.up.com.au/api/v1/";
+
   const handleApiKeyChange = (e) => {
     setApiKey(e.target.value);
   };
 
   const verifyApiKey = async () => {
     setIsLoading(true);
-    const upBankUrl = "https://api.up.com.au/api/v1/accounts";
     try {
-      const response = await fetch(upBankUrl, {
+      const response = await fetch(`${upBankUrl}/accounts`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -34,11 +36,13 @@ const AddFeedPage = () => {
 
       const data = await response.json();
       setAccounts(data.data);
+      console.log(data.data);
       setIsValid(true);
       setIsLoading(false);
       setErrorMessage("");
     } catch (error) {
       setIsValid(false);
+      setIsLoading(false);
       setErrorMessage("An error occurred while trying to verify the API key.");
     }
   };
@@ -48,7 +52,34 @@ const AddFeedPage = () => {
     verifyApiKey();
   };
 
-  const handleSelectAccount = () => {};
+  const handleSelectAccount = async (id, accountName) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${upBankUrl}/accounts/${id}/transactions`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      });
+
+      if (!response.ok) {
+        setErrorMessage(`Failed to retrieve data from ${accountName}`);
+        return;
+      }
+
+      const data = await response.json();
+      message(`Account data added for ${accountName}`);
+      console.log(data);
+      setIsLoading(false);
+      setErrorMessage("");
+    } catch (error) {
+      setIsValid(false);
+      setIsLoading(false);
+      setErrorMessage(
+        `An error occurred while trying to retrieve the account data for ${accountName}`
+      );
+    }
+  };
 
   return (
     <div className="flex flex-col p-8 mt-12 space-y-6 align-center items-center bg-pastelYellow border-4 border-pastelGreen max-w-lg mx-auto">
@@ -86,10 +117,24 @@ const AddFeedPage = () => {
             </p>
             <div className="flex flex-col m-auto w-3/6 space-y-3 p-2">
               {accounts.map((account) => (
-                <ButtonComponent key={account.id} onClick={handleSelectAccount}>
-                  {account.attributes.displayName} -{" "}
-                  {"$" + account.attributes.balance.value}{" "}
-                  {account.attributes.balance.currency}
+                <ButtonComponent
+                  key={account.id}
+                  onClick={() =>
+                    handleSelectAccount(
+                      account.id,
+                      account.attributes.displayName
+                    )
+                  }
+                >
+                  {isLoading ? (
+                    <ButtonSpinner />
+                  ) : (
+                    <>
+                      {account.attributes.displayName} -{" "}
+                      {"$" + account.attributes.balance.value}{" "}
+                      {account.attributes.balance.currency}
+                    </>
+                  )}
                 </ButtonComponent>
               ))}
             </div>

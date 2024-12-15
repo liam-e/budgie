@@ -76,7 +76,8 @@ const router = createBrowserRouter(
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </>
-  )
+  ),
+  { basename: import.meta.env["BASE_URL"] }
 );
 
 export default router;
