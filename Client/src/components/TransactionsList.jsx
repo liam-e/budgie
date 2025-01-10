@@ -1,22 +1,28 @@
-import { useRouteLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import Transaction from "../components/Transaction";
 
 const TransactionsList = ({ transactions }) => {
   const { mapCategoryIdToName } = useRouteLoaderData("home");
 
   return (
-    <div className="flex flex-col space-y-4">
-      <div>
-        {transactions &&
-          transactions.map((t, idx) => (
-            <Transaction
-              transaction={t}
-              key={idx}
-              idx={idx}
-              data={{ ...t, categoryName: mapCategoryIdToName[t.categoryId] }}
-            />
-          ))}
-      </div>
+    <div className="flex flex-col">
+      {transactions &&
+        transactions.map((transaction, idx) => (
+          <div key={idx}>
+            <Link
+              to={`/home/transactions/${transaction.id}`}
+              state={{ transaction }}
+            >
+              <Transaction
+                transaction={{
+                  ...transaction,
+                  categoryName: mapCategoryIdToName[transaction.categoryId],
+                }}
+                idx={idx}
+              />
+            </Link>
+          </div>
+        ))}
     </div>
   );
 };

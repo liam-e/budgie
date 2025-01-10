@@ -23,7 +23,7 @@ const Category = ({ id, name, displayName = false }) => {
         className="w-8 h-8 flex items-center justify-center"
         style={{
           backgroundColor: iconData.backgroundColor,
-          borderRadius: "50%", // Circular icon background
+          borderRadius: "50%",
         }}
       >
         <IconComponent size="16px" color={iconData.iconColor} />
@@ -31,13 +31,7 @@ const Category = ({ id, name, displayName = false }) => {
 
       {/* Name */}
       {displayName && (
-        <div
-          className="flex items-center text-left line-clamp-2 w-36"
-          // style={{
-          //   width: "100px", // Fixed width for consistency
-          //   height: "40px", // Fixed height for 1-2 lines of text
-          // }}
-        >
+        <div className="flex items-center text-left line-clamp-2 w-36">
           <span
             className="line-clamp-2 overflow-hidden text-sm"
             style={{

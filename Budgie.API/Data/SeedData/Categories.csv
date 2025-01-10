@@ -4,7 +4,6 @@ car-insurance-and-maintenance,"Car Insurance, Rego & Maintenance",transport,expe
 family,"Children & Family",personal,expense
 good-life,"Good Life",,expense
 groceries,Groceries,home,expense
-booze,Booze,good-life,expense
 clothing-and-accessories,"Clothing & Accessories",personal,expense
 cycling,Cycling,transport,expense
 homeware-and-appliances,"Homeware & Appliances",home,expense
@@ -28,7 +27,7 @@ lottery-and-gambling,"Lottery & Gambling",good-life,expense
 home-insurance-and-rates,"Rates & Insurance",home,expense
 car-repayments,"Car Repayments",transport,expense
 health-and-medical,"Health & Medical",personal,expense
-pubs-and-bars,"Pubs & Bars",good-life,expense
+pubs-bars-and-alcohol,"Pubs, Bars & Alcohol",good-life,expense
 rent-and-mortgage,"Rent & Mortgage",home,expense
 taxis-and-share-cars,"Taxis & Share Cars",transport,expense
 investments,Investments,personal,credit
@@ -41,7 +40,6 @@ mobile-phone,"Mobile Phone",personal,expense
 tobacco-and-vaping,"Tobacco & Vaping",good-life,expense
 news-magazines-and-books,"News, Magazines & Books",personal,expense
 tv-and-music,"TV, Music & Streaming",good-life,expense
-adult,Adult,good-life,expense
 technology,Technology,personal,expense
 transfer,"Transfer",,transfer
 direct-credit,"Direct Credit",,credit

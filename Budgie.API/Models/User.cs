@@ -22,6 +22,12 @@ public class User
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime UpdatedAt { get; set; }
+
+    public List<IntegrationKey> IntegrationKeys { get; set; } = [];
+
+
+    [ValidSource]
+    public string? IntegrationKeySource { get; set; }
 }
 
 public class UserRegisterDTO
@@ -38,9 +44,9 @@ public class UserRegisterDTO
     public required string ConfirmPassword { get; set; }
 
     [Required(ErrorMessage = "First name is required.")]
-    public required string FirstName { get; set; } // Required first name
+    public required string FirstName { get; set; }
 
-    public string? LastName { get; set; } // Optional last name
+    public string? LastName { get; set; }
 }
 
 public class UserLoginDTO
@@ -61,4 +67,7 @@ public class UserResponseDTO
     public required string Email { get; set; }
     public required string FirstName { get; set; }
     public string? LastName { get; set; }
+
+    [ValidSource]
+    public string? IntegrationKeySource { get; set; }
 }

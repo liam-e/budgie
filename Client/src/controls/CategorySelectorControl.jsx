@@ -6,6 +6,7 @@ const CategorySelectorControl = ({
   name,
   isInvalid,
   amountIsPositive,
+  categoriesToExclude = new Set(),
 }) => {
   const {
     field,
@@ -26,6 +27,7 @@ const CategorySelectorControl = ({
       inputRef={field.ref} // send input ref, so we can focus on input when error appear
       isInvalid={isInvalid}
       amountIsPositive={amountIsPositive}
+      categoriesToExclude={categoriesToExclude}
     />
   );
 };

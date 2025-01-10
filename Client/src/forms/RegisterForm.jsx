@@ -1,11 +1,12 @@
 import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ButtonComponent from "../components/ButtonComponent";
 import InputErrorMessage from "../components/InputErrorMessage";
 import InputMessage from "../components/InputMessage";
 import ButtonSpinner from "../components/ButtonSpinner";
 import { useState } from "react";
+import LinkComponent from "../components/LinkComponent";
 
 const RegisterForm = () => {
   const { signUp, isLoading } = useAuth();
@@ -39,7 +40,7 @@ const RegisterForm = () => {
 
     signUp(newUser)
       .then((data) => {
-        return navigate("/home/add-data?NewUser=true");
+        navigate("/home/add-data?newuser=true");
       })
       .catch((error) => {
         if (error.status === 409) {
@@ -54,10 +55,10 @@ const RegisterForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-row space-x-6 content-between p-4">
-          <div className="flex flex-col space-y-1 basis-2/4">
+        <div className="flex flex-col md:flex-row md:space-x-6 content-between p-4 h-full ">
+          <div className="flex flex-col space-y-4 w-full md:w-1/2">
             {/* FIRST NAME */}
-            <div className="flex flex-col space-y-1 w-60">
+            <div className="flex flex-col space-y-1">
               <label htmlFor="firstName">First name:</label>
               <input
                 type="text"
@@ -76,7 +77,7 @@ const RegisterForm = () => {
             </div>
 
             {/* LAST NAME */}
-            <div className="flex flex-col space-y-1 w-60">
+            <div className="flex flex-col space-y-1">
               <label htmlFor="lastName">Last name:</label>
               <input
                 type="text"
@@ -90,7 +91,7 @@ const RegisterForm = () => {
             </div>
 
             {/* EMAIL */}
-            <div className="flex flex-col space-y-1 w-60">
+            <div className="flex flex-col space-y-1">
               <label htmlFor="email">Email:</label>
               <input
                 type="text"
@@ -116,9 +117,9 @@ const RegisterForm = () => {
             </div>
           </div>
 
-          <div className="flex flex-col space-y-1 basis-2/4">
+          <div className="flex flex-col space-y-4 w-full md:w-1/2">
             {/* PASSWORD */}
-            <div className="flex flex-col space-y-1 w-60">
+            <div className="flex flex-col space-y-1">
               <label htmlFor="password">Password:</label>
               <input
                 type="password"
@@ -183,7 +184,8 @@ const RegisterForm = () => {
         </div>
       </form>
       <p className="text-center">
-        Already have an account? <Link to="/login">Log in</Link>
+        Already have an account?{" "}
+        <LinkComponent to="/login">Log in</LinkComponent>
       </p>
     </>
   );

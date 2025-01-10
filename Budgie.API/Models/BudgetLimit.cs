@@ -9,23 +9,20 @@ public class BudgetLimit
     [Key]
     public long Id { get; set; } // Primary key
 
-    [Required]
     public required string CategoryId { get; set; } // Foreign key
 
     [JsonIgnore]
     public Category? Category { get; set; } // Navigation property
 
-    [Required]
     public required long UserId { get; set; } // Foreign key
 
     [JsonIgnore]
     public User? User { get; set; } // Navigation property
 
-    [Required]
+    [RegularExpression("weekly|monthly|quarterly|annual", ErrorMessage = "Invalid period type.")]
     public required string PeriodType { get; set; } // weekly, monthly, quarterly, annual
 
-    [Required]
-    [Column(TypeName = "decimal(18,2)")]
+    [Range(-999999.99, 999999.99)]
     public required decimal Amount { get; set; } // Limit amount
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -46,6 +43,10 @@ public class BudgetLimitDTO
 public class BudgetLimitCreateDTO
 {
     public required string CategoryId { get; set; }
-    public required string PeriodType { get; set; } // weekly, monthly, quarterly, annual
-    public required decimal Amount { get; set; } // Limit amount
+
+    [RegularExpression("weekly|monthly|quarterly|annual", ErrorMessage = "Invalid period type.")]
+    public required string PeriodType { get; set; }
+
+    [Range(-999999.99, 999999.99)]
+    public required decimal Amount { get; set; }
 }

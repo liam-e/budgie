@@ -11,14 +11,9 @@ namespace Budgie.API.Controllers;
 [Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class TransactionsController : ControllerBase
+public class TransactionsController(BudgetContext context) : ControllerBase
 {
-    private readonly BudgetContext _context;
-
-    public TransactionsController(BudgetContext context)
-    {
-        _context = context;
-    }
+    private readonly BudgetContext _context = context;
 
     // GET: api/Transactions
     [HttpGet]
@@ -37,8 +32,7 @@ public class TransactionsController : ControllerBase
                 Id = t.Id,
                 UserId = userId,
                 Date = t.Date,
-                OriginalDescription = t.OriginalDescription,
-                ModifiedDescription = t.ModifiedDescription,
+                Description = t.Description,
                 Amount = t.Amount,
                 Currency = t.Currency,
                 CategoryId = t.CategoryId,
@@ -93,8 +87,7 @@ public class TransactionsController : ControllerBase
         }
 
         transaction.Date = transactionDTO.Date;
-        transaction.OriginalDescription = transactionDTO.OriginalDescription;
-        transaction.ModifiedDescription = transactionDTO.ModifiedDescription;
+        transaction.Description = transactionDTO.Description;
         transaction.Amount = transactionDTO.Amount;
         transaction.Currency = transactionDTO.Currency;
         transaction.CategoryId = transactionDTO.CategoryId;
@@ -139,8 +132,7 @@ public class TransactionsController : ControllerBase
         {
             UserId = userId,
             Date = transactionDTO.Date,
-            OriginalDescription = transactionDTO.Description,
-            ModifiedDescription = "",
+            Description = transactionDTO.Description,
             Amount = transactionDTO.Amount,
             Currency = transactionDTO.Currency,
             CategoryId = transactionDTO.CategoryId,
@@ -200,7 +192,7 @@ public class TransactionsController : ControllerBase
                         return BadRequest($"Failed to parse date: {fields[0]}");
                     }
 
-                    string originalDescription = fields[1];
+                    string description = fields[1];
                     string amountString = fields[3];
                     string balance = fields[4];
 
@@ -213,15 +205,13 @@ public class TransactionsController : ControllerBase
                     {
                         UserId = userId,
                         Date = date,
-                        OriginalDescription = originalDescription,
+                        Description = description,
                         Amount = amount,
                         Currency = "AUD",
                         CategoryId = "none",
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow
                     };
-
-                    transaction.ModifiedDescription = ModifyDescription(transaction.OriginalDescription);
 
                     _context.Transactions.Add(transaction);
 
@@ -232,7 +222,7 @@ public class TransactionsController : ControllerBase
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Failed to add transaction {transaction.Date}, {transaction.OriginalDescription}, {transaction.Amount}: {ex.Message}");
+                        Console.WriteLine($"Failed to add transaction {transaction.Date}, {transaction.Description}, {transaction.Amount}: {ex.Message}");
                     }
                 }
             }
@@ -296,10 +286,41 @@ public class TransactionsController : ControllerBase
         return null;
     }
 
-    private string ModifyDescription(string originalDescription)
+    // DELETE: api/Transactions/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTransaction(long id)
     {
-        // TODO: Implement method
-        return originalDescription;
+        // Validate the user's identity
+        if (!long.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId))
+        {
+            return BadRequest(new { error = "Invalid user ID format." });
+        }
+
+        var transaction = await _context.Transactions
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (transaction == null)
+        {
+            return NotFound(new { error = "Transaction not found." });
+        }
+
+        if (transaction.UserId != userId)
+        {
+            return Forbid();
+        }
+
+        _context.Transactions.Remove(transaction);
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new { error = "An error occurred while deleting the transaction.", details = ex.Message });
+        }
+
+        return NoContent();
     }
 
     private bool TransactionExists(long id)

@@ -21,6 +21,9 @@ import AddFeedPage from "./pages/AddFeedPage";
 import ManualEntryPage from "./pages/ManualEntryPage";
 import BudgetLimitsPage from "./pages/BudgetLimitsPage";
 import CategorizationsPage from "./pages/CategorizationsPage";
+import TransactionPage from "./pages/TransactionPage";
+import EditTransactionPage from "./pages/EditTransactionPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,11 +31,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
 
-      <Route
-        path="/"
-        element={<MainLayout />}
-        errorElement={<Navigate to="/" />}
-      >
+      <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
         <Route index element={<HomePage />} />
 
         <Route
@@ -51,6 +50,11 @@ const router = createBrowserRouter(
             element={<TransactionsPage />}
             loader={transactionsLoader}
           />
+          <Route path="transactions/:id" element={<TransactionPage />} />
+          <Route
+            path="transactions/:id/edit"
+            element={<EditTransactionPage />}
+          />
           <Route
             path="categories"
             element={<CategoriesPage />}
@@ -61,7 +65,6 @@ const router = createBrowserRouter(
             element={<BudgetLimitsPage />}
             loader={transactionsLoader}
           />
-
           <Route
             path="categorizations"
             element={<CategorizationsPage />}

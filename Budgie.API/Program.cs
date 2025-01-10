@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Budgie.API.Database;
 using Budgie.API.Models;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Reflection;
 
 namespace Budgie.API;
 
@@ -25,9 +26,7 @@ public class Program
             builder.Host.UseContentRoot("/var/www/budgieapi");
         }
 
-        builder.Configuration.AddJsonFile($"appsettings.{environment}.json", optional: true);
-
-        ConfigureServices(builder.Services, builder.Configuration, environment);
+        ConfigureServices(builder.Services, builder.Configuration);
 
         var app = builder.Build();
 
@@ -43,8 +42,10 @@ public class Program
         app.Run();
     }
 
-    private static void ConfigureServices(IServiceCollection services, IConfiguration configuration, string environment)
+    private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton(configuration);
+
         // Register DbConnectionProvider as a singleton service
         services.AddSingleton(sp =>
         {
@@ -117,6 +118,11 @@ public class Program
             });
 
             options.OperationFilter<SecurityRequirementsOperationFilter>();
+
+            options.EnableAnnotations();
+
+            // options.SchemaFilter<UserLoginSchemaFilter>();
+
         });
 
         services.AddCors(options =>

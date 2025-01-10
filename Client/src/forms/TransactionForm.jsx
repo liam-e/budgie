@@ -1,12 +1,15 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import ButtonComponent from "../components/ButtonComponent";
 import CurrencyInputControl from "../controls/CurrencyInputControl";
 import CategorySelectorControl from "../controls/CategorySelectorControl";
 import InputErrorMessage from "../components/InputErrorMessage";
 import LinkButton from "../components/LinkButton";
+import { useRouteLoaderData } from "react-router-dom";
+import { message } from "../components/MessageContainer";
 
-const ManualEntryForm = () => {
+const TransactionForm = ({ transaction, edit = false }) => {
+  const { categories } = useRouteLoaderData("home");
+
   const {
     register,
     handleSubmit,
@@ -15,9 +18,20 @@ const ManualEntryForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      description: "",
-    },
+    defaultValues: edit
+      ? {
+          date: transaction.date || "",
+          description: transaction.description || "",
+          amount: Math.abs(transaction.amount).toString() || "",
+          category: {
+            id: transaction.categoryId || "",
+            name: transaction.categoryName || "",
+            transactionTypeId:
+              categories.find((c) => c.id === transaction.categoryId)
+                ?.transactionTypeId || "",
+          },
+        }
+      : {},
   });
 
   const watchDate = watch("date");
@@ -34,17 +48,24 @@ const ManualEntryForm = () => {
   };
 
   const onSubmit = (data) => {
-    handleAddTransaction(data).then(reset);
+    edit
+      ? handleEditTransaction(data).then(() => {
+          message("Transaction updated successfully.");
+        })
+      : handleAddTransaction(data).then((data) => {
+          reset();
+          message("Trnasaction added successfully.");
+        });
   };
 
   const handleAddTransaction = async (data) => {
-    const transaction = {
+    const newTransaction = {
       date: data.date,
       description: data.description,
       amount:
         data.category.transactionTypeId === "expense"
-          ? -Math.abs(parseFloat(data.amount.replace(",", "")))
-          : Math.abs(parseFloat(data.amount.replace(",", ""))),
+          ? -Math.abs(Number(data.amount.replace(",", "")))
+          : Math.abs(Number(data.amount.replace(",", ""))),
       currency: "AUD",
       categoryId: data.category.id,
     };
@@ -58,18 +79,65 @@ const ManualEntryForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(transaction),
+          body: JSON.stringify(newTransaction),
         }
       );
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Error:", errorData);
-        return null;
+        console.error(
+          `Failed to create transaction: ${
+            errorData.error || response.statusText
+          }`
+        );
+        return;
       }
     } catch (error) {
-      console.error("Error:", error);
-      return null;
+      console.error("Error adding transaction:", error);
+      return;
+    }
+  };
+
+  const handleEditTransaction = async (data) => {
+    const updatedTransaction = {
+      id: transaction.id,
+      userId: transaction.userId,
+      date: data.date,
+      description: data.description,
+      amount:
+        data.category.transactionTypeId === "expense"
+          ? -Math.abs(Number(data.amount.replace(",", "")))
+          : Math.abs(Number(data.amount.replace(",", ""))),
+      currency: "AUD",
+      categoryId: data.category.id,
+    };
+
+    console.log("data:", JSON.stringify(data));
+    console.log("updated:", JSON.stringify(updatedTransaction));
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/Transactions/${transaction.id}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedTransaction),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Transaction updated successfully.");
+      } else {
+        const errorData = await response.json();
+        console.error("Error updating transaction:", errorData);
+        throw Error("Error updating transaction:", errorData);
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+      throw error;
     }
   };
 
@@ -149,7 +217,9 @@ const ManualEntryForm = () => {
         <InputErrorMessage>{getErrorMessage(errors)}</InputErrorMessage>
 
         <div className="flex space-x-4">
-          <ButtonComponent type="submit">Add</ButtonComponent>
+          <ButtonComponent type="submit">
+            {edit ? "Edit" : "Add"}
+          </ButtonComponent>
           <LinkButton to="/home/dashboard">Back to dashboard</LinkButton>
         </div>
       </div>
@@ -157,4 +227,4 @@ const ManualEntryForm = () => {
   );
 };
 
-export default ManualEntryForm;
+export default TransactionForm;

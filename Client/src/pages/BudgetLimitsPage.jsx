@@ -12,7 +12,7 @@ const BudgetLimitsPage = () => {
 
   return (
     <div className="flex flex-col space-y-8 p-6 items-center">
-      <h2 className="page-heading">Set Budget Limits</h2>
+      <h2 className="pageheading">Set Budget Limits</h2>
       <PeriodSelector
         periodType={periodType}
         handlePeriodSelectChange={handlePeriodSelectChange}
@@ -33,9 +33,6 @@ const budgetLimitsLoader = async ({ params }) => {
       {
         method: "GET",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
 

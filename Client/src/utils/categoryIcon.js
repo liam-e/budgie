@@ -29,6 +29,7 @@ import {
   FaBicycle,
   FaBabyCarriage,
   FaTv,
+  FaLaptop,
 } from "react-icons/fa";
 
 export const categoryToIconAndColors = (id) => {
@@ -100,12 +101,17 @@ export const categoryToIconAndColors = (id) => {
       };
     case "shopping":
     case "clothing-and-accessories":
-    case "technology":
       return {
         icon: FaShoppingCart,
         backgroundColor: "#E91E63", // Pink
         iconColor: "#FFFFFF", // White
       };
+      case "technology":
+        return {
+          icon: FaLaptop,
+          backgroundColor: "#4287f5", // Blue
+          iconColor: "#FFFFFF", // White
+        };
     case "travel":
     case "holidays-and-travel":
       return {
@@ -177,8 +183,7 @@ export const categoryToIconAndColors = (id) => {
         backgroundColor: "#F06292", // Light Pink
         iconColor: "#FFFFFF", // White
       };
-    case "pubs-and-bars":
-    case "booze":
+    case "pubs-bars-and-alcohol":
       return {
         icon: FaBeer,
         backgroundColor: "#795548", // Brown
@@ -200,12 +205,6 @@ export const categoryToIconAndColors = (id) => {
       return {
         icon: FaNewspaper,
         backgroundColor: "#607D8B", // Blue Grey
-        iconColor: "#FFFFFF", // White
-      };
-    case "adult":
-      return {
-        icon: FaHeart,
-        backgroundColor: "#F44336", // Red
         iconColor: "#FFFFFF", // White
       };
     case "lottery-and-gambling":

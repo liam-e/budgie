@@ -1,4 +1,3 @@
-import React from "react";
 import Categorizations from "../components/Categorizations";
 import { useLoaderData } from "react-router-dom";
 

@@ -10,8 +10,7 @@ public class Transaction
 
     public required long UserId { get; set; }
     public required DateOnly Date { get; set; }
-    public required string OriginalDescription { get; set; }
-    public string? ModifiedDescription { get; set; }
+    public required string Description { get; set; }
     public required decimal Amount { get; set; }
 
     [RegularExpression("^[A-Z]{3}$", ErrorMessage = "Currency should be a valid 3-letter ISO code.")]
@@ -34,8 +33,7 @@ public class TransactionDTO
     public required long Id { get; set; } // Primary key
     public required long UserId { get; set; }
     public required DateOnly Date { get; set; }
-    public required string OriginalDescription { get; set; }
-    public string? ModifiedDescription { get; set; }
+    public required string Description { get; set; }
     public required decimal Amount { get; set; }
 
     [RegularExpression("^[A-Z]{3}$", ErrorMessage = "Currency should be a valid 3-letter ISO code.")]

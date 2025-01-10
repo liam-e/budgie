@@ -3,14 +3,9 @@ using Npgsql;
 
 namespace Budgie.API.Database;
 
-public sealed class DbConnectionProvider
+public sealed class DbConnectionProvider(string connectionString)
 {
-    private readonly string _connectionString;
-
-    public DbConnectionProvider(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
+    private readonly string _connectionString = connectionString;
 
     public DbConnection GetConnection()
     {

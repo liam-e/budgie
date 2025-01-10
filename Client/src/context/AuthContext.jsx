@@ -22,13 +22,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const checkAuthStatus = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/status`,
+        `${import.meta.env.VITE_API_URL}/Auth/status`,
         {
           method: "GET",
           credentials: "include",
-          headers: { "Content-Type": "application/json" },
         }
       );
 
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/refresh`,
+        `${import.meta.env.VITE_API_URL}/Auth/refresh`,
         {
           method: "POST",
           credentials: "include",
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         console.error("Refresh failed with status:", response.statusText);
         setIsAuthenticated(false);
-        localStorage.removeItem("userData"); // Clear stale data
+        localStorage.removeItem("userData");
       }
     } catch (error) {
       logError("Error refreshing token", error);
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
+        `${import.meta.env.VITE_API_URL}/Auth/login`,
         {
           method: "POST",
           credentials: "include",
@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
+        `${import.meta.env.VITE_API_URL}/Auth/register`,
         {
           method: "POST",
           credentials: "include",
@@ -152,7 +152,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/logout`,
+        `${import.meta.env.VITE_API_URL}/Auth/logout`,
         {
           method: "POST",
           credentials: "include",

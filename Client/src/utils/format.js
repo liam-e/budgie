@@ -1,4 +1,4 @@
-const formatCurrency = (amount) => {
+export const formatCurrency = (amount) => {
   const isNegative = amount < 0;
 
   amount = Math.abs(amount);
@@ -11,7 +11,7 @@ const formatCurrency = (amount) => {
   return isNegative ? `-\$${dollars}.${cents}` : `\$${dollars}.${cents}`;
 };
 
-const formatDescription = (desc) => {
+export const formatDescription = (desc) => {
   desc = desc.trim();
   if (desc.substring(desc.length - 1) === ";") {
     desc = desc.substring(0, desc.length - 1).trim();
@@ -19,11 +19,17 @@ const formatDescription = (desc) => {
   return desc;
 };
 
-const formatDate = (date) => {
+export const formatDate = (date) => {
   return new Date(date).toLocaleDateString("en-US", {
     month: "short",
     day: "2-digit",
   });
 };
 
-export { formatCurrency, formatDescription, formatDate };
+export const formatDateLong = (date) => {
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
+};

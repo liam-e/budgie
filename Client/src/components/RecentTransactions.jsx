@@ -1,5 +1,6 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import TransactionsList from "./TransactionsList";
+import LinkComponent from "./LinkComponent";
 
 const RecentTransactions = ({ isOnDashboard = false }) => {
   const transactions = useLoaderData().slice(0, 5);
@@ -14,20 +15,19 @@ const RecentTransactions = ({ isOnDashboard = false }) => {
           />
           {!isOnDashboard && (
             <div className="flex flex-row space-x-5">
-              <Link to="/home/transactions" className="text-pastelDarkGreen">
+              <LinkComponent to="/home/transactions">
                 View all transactions
-              </Link>
-              <Link to="/home/add-data" className="text-pastelDarkGreen">
-                Add Data
-              </Link>
+              </LinkComponent>
+              <LinkComponent to="/home/add-data">Add Data</LinkComponent>
             </div>
           )}
         </>
       ) : (
-        <p>
-          There are no transactions to show.{" "}
-          <Link to="/home/add-data">Add data</Link>
-        </p>
+        <>
+          <p className="text-gray-600">There are no transactions to show.</p>
+
+          <LinkComponent to="/home/add-data">Add data</LinkComponent>
+        </>
       )}
     </div>
   );

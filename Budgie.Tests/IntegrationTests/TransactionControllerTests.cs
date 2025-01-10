@@ -24,7 +24,7 @@ public class TransactionsControllerTests : IClassFixture<BudgieAPIFactory>
 
         var requestContent = new StringContent(JsonSerializer.Serialize(loginRequest), Encoding.UTF8, "application/json");
 
-        var response = await _client.PostAsync("/api/auth/login", requestContent);
+        var response = await _client.PostAsync("/api/Auth/login", requestContent);
         response.EnsureSuccessStatusCode();
 
         // Extract cookies from the response and set them for future requests
@@ -56,8 +56,7 @@ public class TransactionsControllerTests : IClassFixture<BudgieAPIFactory>
             Id = 1,
             UserId = 1,
             Date = "2023-08-01",
-            OriginalDescription = "UBER *EATS HELP.UBER.COM ;",
-            ModifiedDescription = "Uber Eats Delivery",
+            Description = "Uber Eats Delivery",
             Amount = -45.60,
             Currency = "AUD",
             CategoryId = "restaurants-and-cafes"
@@ -81,8 +80,7 @@ public class TransactionsControllerTests : IClassFixture<BudgieAPIFactory>
             Id = 49,
             UserId = 1,
             Date = "2023-08-17",
-            OriginalDescription = "TRANSFER TO FRIEND ;",
-            ModifiedDescription = "",
+            Description = "TRANSFER TO FRIEND ;",
             Amount = 150.00,
             Currency = "AUD",
             CategoryId = "groceries" // Trying to change from transfer to groceries
@@ -107,8 +105,7 @@ public class TransactionsControllerTests : IClassFixture<BudgieAPIFactory>
         {
             UserId = 1,
             Date = "2023-08-19",
-            OriginalDescription = "Test DIRECT CREDIT NEGATIVE",
-            ModifiedDescription = "",
+            description = "Test DIRECT CREDIT NEGATIVE",
             Amount = -100.00,
             Currency = "AUD",
             CategoryId = "investments"
@@ -133,8 +130,7 @@ public class TransactionsControllerTests : IClassFixture<BudgieAPIFactory>
         {
             UserId = 1,
             Date = "2023-08-19",
-            OriginalDescription = "Test PURCHASE POSITIVE",
-            ModifiedDescription = "",
+            Description = "Test PURCHASE POSITIVE",
             Amount = 100.00,
             Currency = "AUD",
             CategoryId = "restaurants-and-cafes"

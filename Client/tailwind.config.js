@@ -13,12 +13,12 @@ export default {
     },
     extend: {
       colors: {
-        pastelBlue: "#B3EBF2",
         pastelYellow: "#FDFD96",
         pastelLightYellow: "#fcfcae",
         pastelGreen: "#54de54",
         pastelLightGreen: "#7ee77e",
         pastelDarkGreen: "#22ba22",
+        pastelBlue: "#B3EBF2",
       },
       fontFamily: {
         sans: ["Poppins", "Arial"],

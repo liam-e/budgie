@@ -1,4 +1,3 @@
-import React from "react";
 import { useLoaderData } from "react-router-dom";
 import Category from "../components/Category";
 
@@ -7,11 +6,12 @@ const CategoriesPage = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="page-heading">Categories</h2>
+      <h2 className="pageheading">Categories</h2>
       {Object.entries(groupedCategories).map(([parentId, group]) => (
         <div key={parentId} className="pb-4 mb-4">
           <h3 className="text-xl mb-2">
-            {categories.filter((c) => c.id === parentId)[0]?.name || "Main Categories"}
+            {categories.filter((c) => c.id === parentId)[0]?.name ||
+              "Main Categories"}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {group.map((category) => (
@@ -40,13 +40,10 @@ const CategoriesPage = () => {
 const categoriesLoader = async ({ params }) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/transactions/Categories`,
+      `${import.meta.env.VITE_API_URL}/Transactions/Categories`,
       {
         method: "GET",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
 
@@ -62,12 +59,10 @@ const categoriesLoader = async ({ params }) => {
     const groupedCategories = categories.reduce((acc, category) => {
       let { parentId } = category;
 
-      if (!parentId) parentId = "hmm";
-
-        if (!acc[parentId]) {
-          acc[parentId] = [];
-        }
-        acc[parentId].push(category);
+      if (!acc[parentId]) {
+        acc[parentId] = [];
+      }
+      acc[parentId].push(category);
       return acc;
     }, {});
 
@@ -83,6 +78,7 @@ const categoriesLoader = async ({ params }) => {
     };
   } catch (error) {
     console.error("Error fetching categories:", error);
+    return {};
   }
 };
 

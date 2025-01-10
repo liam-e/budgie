@@ -4,8 +4,6 @@ const ButtonSpinner = () => {
   return (
     <div className="flex justify-center">
       <ClipLoader
-        // color={color}
-        // cssOverride={override}
         loading={true}
         size={24}
         aria-label="Button Spinner"

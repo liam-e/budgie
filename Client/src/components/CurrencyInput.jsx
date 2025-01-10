@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const CurrencyInput = ({ value, onChange, isInvalid }) => {
-  const [inputValue, setInputValue] = useState(value || "");
-
-  useEffect(() => {
-    if (!value) {
-      setInputValue("");
-    }
-  }, [value]);
+  const [inputValue, setInputValue] = useState("");
 
   const formatCurrency = (value) => {
     if (!value) return "";
@@ -22,6 +16,14 @@ const CurrencyInput = ({ value, onChange, isInvalid }) => {
       ? `${formattedInteger}.${decimalPart.slice(0, 2)}`
       : formattedInteger;
   };
+
+  useEffect(() => {
+    if (value) {
+      setInputValue(formatCurrency(value));
+    } else {
+      setInputValue("");
+    }
+  }, [value]);
 
   const handleChange = (e) => {
     let value = e.target.value;

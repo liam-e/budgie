@@ -3,16 +3,16 @@ import { useAuth } from "../context/AuthContext";
 import LoginForm from "../forms/LoginForm";
 
 const LoginPage = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   if (isAuthenticated) {
     return <Navigate to="/home/dashboard" replace />;
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="flex flex-col bg-pastelYellow px-6 py-4 border-4 border-pastelGreen">
-        <h2 className="pageheading">Log in</h2>
+    <div className="centerboxparent h-screen">
+      <div className="centerboxchild colorbox p-8">
+        <h2 className="pageheading text-center">Log in</h2>
 
         <LoginForm />
       </div>

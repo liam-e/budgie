@@ -10,6 +10,7 @@ const CategorySelector = ({
   inputRef,
   isInvalid,
   amountIsPositive,
+  categoriesToExclude,
 }) => {
   const { categories } = useRouteLoaderData("home");
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +54,7 @@ const CategorySelector = ({
     >
       {/* Display selected category */}
       <div
-        className="p-2.5 cursor-pointer h-[3rem] flex items-center"
+        className="p-2.5 cursor-pointer h-[2.75rem] flex items-center"
         onClick={() => setIsOpen(!isOpen)}
         onChange={onChange}
       >
@@ -62,9 +63,7 @@ const CategorySelector = ({
             <Category id={value.id} name={value.name} displayName={true} />
           </div>
         ) : (
-          <span className="text-gray-400 overflow-hidden text-ellipsis leading-tight line-clamp-2 text-sm">
-            Select a Category
-          </span>
+          <span className="">Select a Category</span>
         )}
       </div>
 
@@ -73,8 +72,10 @@ const CategorySelector = ({
           {categories
             .filter(
               (c) =>
+                c.parentId &&
                 c.transactionTypeId !==
-                (amountIsPositive ? "expense" : "credit")
+                  (amountIsPositive ? "expense" : "credit") &&
+                !categoriesToExclude.has(c.id)
             )
             .map((category) => (
               <div

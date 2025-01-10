@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link, useLoaderData, useRouteLoaderData } from "react-router-dom";
+import { useLoaderData, useRouteLoaderData } from "react-router-dom";
 import Transaction from "./Transaction";
+import LinkComponent from "./LinkComponent";
 
 const Categorizations = ({ isOnDashboard = false }) => {
   const transactions = useLoaderData();
@@ -22,14 +23,14 @@ const Categorizations = ({ isOnDashboard = false }) => {
           <span className="text-pastelDarkGreen font-bold">
             {uncategorized.length}{" "}
           </span>
-          uncategorized transactions
+          uncategorised transaction{uncategorized.length > 1 && "s"}
         </p>
-        <Link to="/home/categorizations" className="text-pastelDarkGreen">
-          Categorize transactions
-        </Link>
+        <LinkComponent to="/home/categorizations">
+          Categorise transactions
+        </LinkComponent>
       </div>
     )
-  ) : (
+  ) : uncategorized.length > 0 ? (
     <div className="flex flex-col">
       {uncategorized.map((t, idx) => (
         <Transaction
@@ -42,6 +43,8 @@ const Categorizations = ({ isOnDashboard = false }) => {
         />
       ))}
     </div>
+  ) : (
+    <p className="emptymessage">There are no transactions to categorise.</p>
   );
 };
 

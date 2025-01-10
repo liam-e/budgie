@@ -28,7 +28,7 @@ Id,UserId,Date,OriginalDescription,ModifiedDescription,Amount,Currency,CategoryI
 27,3,2024-10-17,TRANSFER TO MORTGAGE ACCOUNT ;,,-1000.0,AUD,transfer
 28,3,2024-10-19,TRANSFER FROM FRIEND ;,Gift from Friend,100.0,AUD,gifts-and-charity
 29,3,2024-10-20,BIG W SYDNEY ;,,-40.0,AUD,clothing-and-accessories
-30,3,2024-10-21,DAN MURPHY'S BRISBANE ;,,-60.0,AUD,booze
+30,3,2024-10-21,DAN MURPHY'S BRISBANE ;,,-60.0,AUD,pubs-bars-and-alcohol
 31,1,2024-10-22,WOOLWORTHS 9999 BRISBANE ;,,-60.0,AUD,groceries
 32,1,2024-10-23,CITY OF SYDNEY PARKING ;,,-25.0,AUD,parking
 33,1,2024-10-24,TRANSFER TO CREDIT CARD ;,,-150.0,AUD,transfer
@@ -102,7 +102,7 @@ Id,UserId,Date,OriginalDescription,ModifiedDescription,Amount,Currency,CategoryI
 101,3,2024-11-13,PAYMENT RECEIVED FROM EMPLOYER ;,Salary,3100.0,AUD,direct-credit
 102,3,2024-11-14,TRANSFER TO MORTGAGE ACCOUNT ;,,-1200.0,AUD,transfer
 103,3,2024-11-15,JB HI-FI MELBOURNE ;,,-550.0,AUD,none
-104,3,2024-11-16,DAN MURPHY'S BRISBANE ;,,-80.0,AUD,booze
+104,3,2024-11-16,DAN MURPHY'S BRISBANE ;,,-80.0,AUD,pubs-bars-and-alcohol
 105,3,2024-11-17,NETFLIX.COM 800-123-4567 ;,,-15.99,AUD,tv-and-music
 106,3,2024-11-18,HARVEY NORMAN PERTH ;,,-350.0,AUD,homeware-and-appliances
 107,3,2024-11-19,TRANSFER TO CREDIT CARD ;,,-250.0,AUD,transfer

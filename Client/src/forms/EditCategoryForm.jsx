@@ -35,7 +35,7 @@ const EditCategoryForm = ({ transaction, onCategorized }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/transactions/${transaction.id}`,
+        `${import.meta.env.VITE_API_URL}/Transactions/${transaction.id}`,
         {
           method: "PUT",
           credentials: "include",

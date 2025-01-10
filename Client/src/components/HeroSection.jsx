@@ -1,35 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
 
 const HeroSection = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between py-5">
-      {/* Text Section */}
-      <div className="md:w-1/2 flex flex-col justify-center space-y-12">
-        <div className="w-1/4">
-          <h1 className="text-6xl font-bold uppercase leading-normal italic">
-            Free your money
-          </h1>
-        </div>
-        <p className="text-gray-800 text-xl leading-relaxed">
+    <section className="text-center md:py-32 py-16">
+      <div className="container mx-auto px-6">
+        <h1 className="text-4xl font-semibold text-pastelDarkGreen mb-4">
+          Free your money
+        </h1>
+        <p className="text-xl mb-10">
           Take control of your cash, smash those savings goals, and track your
           spending with ease.
         </p>
-        <div className="flex justify-end w-full">
-          <LinkButton to="/register">Get started</LinkButton>
-        </div>
+        <LinkButton
+          to="/register"
+          className="bg-pastelGreen text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-600 transition-colors duration-300"
+        >
+          Get started
+        </LinkButton>
       </div>
-
-      {/* Graphic Section */}
-      <div className="hidden md:block md:w-1/2 p-8 w-full">
-        {/* <img
-          src="your-graphic-url.png"
-          alt="Budgeting graphic"
-          className="w-full h-auto"
-        /> */}
-      </div>
-    </div>
+    </section>
   );
 };
 

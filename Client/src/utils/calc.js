@@ -1,4 +1,3 @@
-import { getDateRangesForPeriod, filterTransactionsByDateRange } from "./dates";
 import dayjs from "dayjs";
 
 export const sumByCategory = (transactions) => {
@@ -10,20 +9,19 @@ export const sumByCategory = (transactions) => {
 
   const grouped = transactions.reduce((acc, t) => {
     if (!acc[t.categoryId]) {
-      acc[t.categoryId] = t.amount;
+      acc[t.categoryId] = 0; // Initialize to 0
     }
 
-    acc[t.categoryId] += t.amount;
-
+    acc[t.categoryId] += t.amount; // Add t.amount
     return acc;
   }, {});
 
-  return Object.entries(grouped)
-    .map(([categoryId, amount]) => ({
-      categoryId,
-      amount,
-    }))
-    .sort((a, b) => b.amount - a.amount);
+  const d = Object.entries(grouped).map(([categoryId, amount]) => ({
+    categoryId,
+    amount,
+  }));
+
+  return d.sort((a, b) => b.amount - a.amount);
 };
 
 export const sumTransactionsByPeriod = (transactions, periodType) => {
@@ -54,15 +52,15 @@ export const sumTransactionsByPeriod = (transactions, periodType) => {
     if (!groupedData[periodKey]) {
       groupedData[periodKey] = {
         name: generatePeriodName(transactionDate, periodType),
-        income: 0,
-        expenses: 0,
+        Income: 0,
+        Expenses: 0,
       };
     }
 
     if (transaction.amount > 0) {
-      groupedData[periodKey].income += transaction.amount;
+      groupedData[periodKey].Income += transaction.amount;
     } else {
-      groupedData[periodKey].expenses += Math.abs(transaction.amount); // Convert to positive for expenses
+      groupedData[periodKey].Expenses += Math.abs(transaction.amount); // Convert to positive for expenses
     }
   });
 

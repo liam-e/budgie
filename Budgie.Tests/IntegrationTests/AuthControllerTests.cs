@@ -21,7 +21,7 @@ public class AuthControllerTests : IClassFixture<BudgieAPIFactory>
             Encoding.UTF8, "application/json");
 
         Console.WriteLine("Sending login request");
-        var response = await _client.PostAsync("/api/auth/login", requestContent);
+        var response = await _client.PostAsync("/api/Auth/login", requestContent);
 
         response.EnsureSuccessStatusCode();
         var responseString = await response.Content.ReadAsStringAsync();
@@ -35,7 +35,7 @@ public class AuthControllerTests : IClassFixture<BudgieAPIFactory>
             JsonSerializer.Serialize(new { Email = "invalidemail", Password = "password1" }),
             Encoding.UTF8, "application/json");
 
-        var response = await _client.PostAsync("/api/auth/login", requestContent);
+        var response = await _client.PostAsync("/api/Auth/login", requestContent);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
@@ -50,7 +50,7 @@ public class AuthControllerTests : IClassFixture<BudgieAPIFactory>
             JsonSerializer.Serialize(new { Email = "newuser9000@example.com", Password = "password123", ConfirmPassword = "password123", FirstName = "New", LastName = "User" }),
             Encoding.UTF8, "application/json");
 
-        var response = await _client.PostAsync("/api/auth/register", requestContent);
+        var response = await _client.PostAsync("/api/Auth/register", requestContent);
 
         response.EnsureSuccessStatusCode();
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -70,7 +70,7 @@ public class AuthControllerTests : IClassFixture<BudgieAPIFactory>
             JsonSerializer.Serialize(new { Email = "newuser2@example.com", Password = "password123", ConfirmPassword = "password123" }),
             Encoding.UTF8, "application/json");
 
-        var response = await _client.PostAsync("/api/auth/register", requestContent);
+        var response = await _client.PostAsync("/api/Auth/register", requestContent);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
@@ -84,14 +84,14 @@ public class AuthControllerTests : IClassFixture<BudgieAPIFactory>
         var loginContent = new StringContent(
             JsonSerializer.Serialize(new { Email = "user@example.com", Password = "password1" }),
             Encoding.UTF8, "application/json");
-        var loginResponse = await _client.PostAsync("/api/auth/login", loginContent);
+        var loginResponse = await _client.PostAsync("/api/Auth/login", loginContent);
 
         loginResponse.EnsureSuccessStatusCode();
         var cookies = loginResponse.Headers.GetValues("Set-Cookie");
 
         _client.DefaultRequestHeaders.Add("Cookie", string.Join("; ", cookies));
 
-        var response = await _client.PostAsync("/api/auth/refresh", null);
+        var response = await _client.PostAsync("/api/Auth/refresh", null);
 
         response.EnsureSuccessStatusCode();
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -109,14 +109,14 @@ public class AuthControllerTests : IClassFixture<BudgieAPIFactory>
         var loginContent = new StringContent(
             JsonSerializer.Serialize(new { Email = "user@example.com", Password = "password1" }),
             Encoding.UTF8, "application/json");
-        var loginResponse = await _client.PostAsync("/api/auth/login", loginContent);
+        var loginResponse = await _client.PostAsync("/api/Auth/login", loginContent);
 
         loginResponse.EnsureSuccessStatusCode();
         var cookies = loginResponse.Headers.GetValues("Set-Cookie");
 
         _client.DefaultRequestHeaders.Add("Cookie", string.Join("; ", cookies));
 
-        var response = await _client.PostAsync("/api/auth/logout", null);
+        var response = await _client.PostAsync("/api/Auth/logout", null);
 
         response.EnsureSuccessStatusCode();
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

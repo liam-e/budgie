@@ -3,8 +3,8 @@ import { FaFileArrowUp, FaChartPie, FaSliders } from "react-icons/fa6";
 
 const FeatureCard = ({ feature }) => {
   return (
-    <div className="flex flex-col items-center text-center p-4">
-      <div className="text-pastelGreen mb-4">{feature.icon}</div>
+    <div className="flex flex-col items-center text-center px-6 py-10 colorbox max-w-96 m-auto h-full">
+      <div className="text-pastelDarkGreen mb-4">{feature.icon}</div>
       <h3 className="text-lg font-semibold mb-2">{feature.heading}</h3>
       <p className="">{feature.body}</p>
     </div>

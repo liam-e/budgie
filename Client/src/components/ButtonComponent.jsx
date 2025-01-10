@@ -1,5 +1,3 @@
-import React from "react";
-
 const ButtonComponent = ({
   children,
   onClick,
@@ -10,7 +8,7 @@ const ButtonComponent = ({
     <button
       onClick={onClick}
       type={type}
-      className={`p-2.5 bg-pastelGreen text-black border-2 border-black hover:bg-pastelLightGreen ${className}`}
+      className={`p-2.5 bg-pastelGreen text-black border-2 border-black hover:bg-pastelLightGreen w-auto ${className}`}
     >
       {children}
     </button>

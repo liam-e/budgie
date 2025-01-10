@@ -28,8 +28,8 @@ const Chart = ({ periodType }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="income" fill={colors.green[500]} />
-          <Bar dataKey="expenses" fill={colors.red[400]} />
+          <Bar dataKey="Income" fill={colors.green[500]} />
+          <Bar dataKey="Expenses" fill={colors.red[400]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

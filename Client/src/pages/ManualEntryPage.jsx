@@ -1,11 +1,15 @@
-import ManualEntryForm from "../forms/ManualEntryForm";
+import TransactionForm from "../forms/TransactionForm";
 
 const ManualEntryPage = () => {
   return (
-    <div className="flex flex-col space-y-8 p-6 items-center">
-      <h2 className="pageheading">Add Transaction</h2>
+    <div className="centerboxparent">
+      <div className="centerboxchild colorbox">
+        <div className="flex flex-col items-center px-4 py-8">
+          <h2 className="pageheading">Add Transaction</h2>
 
-      <ManualEntryForm />
+          <TransactionForm />
+        </div>
+      </div>
     </div>
   );
 };

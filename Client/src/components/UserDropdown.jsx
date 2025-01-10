@@ -26,9 +26,12 @@ const UserDropdown = () => {
     };
   }, []);
 
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="relative inline-block" ref={dropdownRef}>
-      {/* Icon that triggers the dropdown */}
       <button
         onClick={toggleDropdown}
         className="flex items-center space-x-2 bg-pastelGreen hover:bg-pastelLightGreen border-2 border-black p-3 text-sm"
@@ -38,18 +41,16 @@ const UserDropdown = () => {
         <FaChevronDown />
       </button>
 
-      {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute left-0 bg-pastelYellow border-2 border-black w-36">
           <ul className="flex flex-col space-y-2 p-2 justify-center">
-            {/* <li>
-              <NavLinkComponent to="/home/settings">Settings</NavLinkComponent>
-            </li> */}
             <li>
-              <NavLinkComponent to="/home/add-data">Add data</NavLinkComponent>
+              <NavLinkComponent to="/home/add-data" onClick={closeDropdown}>
+                Add data
+              </NavLinkComponent>
             </li>
             <li>
-              <NavLinkComponent to="/home/categories">
+              <NavLinkComponent to="/home/categories" onClick={closeDropdown}>
                 Categories
               </NavLinkComponent>
             </li>

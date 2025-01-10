@@ -9,6 +9,17 @@
     src: url(./assets/fonts/Poppins-Medium.ttf);
   }
 
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+      outline: none;
+  }
+
+  body {
+    @apply text-gray-800;
+  }
+
   h1 {
     @apply text-4xl;
   }
@@ -21,7 +32,7 @@
     @apply text-2xl;
   }
 
-  a {
+  a.link {
     @apply underline;
     @apply text-pastelDarkGreen;
     @apply hover:no-underline;
@@ -52,8 +63,49 @@
     @apply bg-red-100;
   }
 
-  h2.page-heading {
-    @apply text-4xl;
+  h2.pageheading {
+    @apply text-3xl;
+    @apply font-bold;
     @apply mb-4
+  }
+
+  .centerboxparent {
+    @apply flex;
+    @apply flex-grow;
+    @apply items-center;
+    @apply justify-center;
+    @apply container;
+    @apply mx-auto;
+    @apply max-w-6xl;
+  }
+
+  .centerboxchild {
+      @apply p-4;
+  }
+
+  .colorbox {
+      @apply bg-pastelYellow;
+      @apply border-2;
+      @apply border-black;
+  }
+
+  .adddatacard {
+    @apply cursor-pointer;
+    @apply transition-transform;
+    @apply flex;
+    @apply flex-col;
+    @apply items-center;
+    @apply justify-center;
+    @apply px-6;
+    @apply py-8;
+    @apply bg-pastelYellow;
+    @apply hover:bg-pastelLightYellow;
+    @apply text-center;
+    @apply border-2;
+    @apply border-black;
+  }
+
+  .emptymessage {
+    @apply text-gray-500;
   }
 }

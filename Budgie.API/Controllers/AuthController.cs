@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Register(UserRegisterDTO request)
+    public async Task<IActionResult> Register([FromBody] UserRegisterDTO request)
     {
         if (!IsValidEmail(request.Email))
         {
@@ -77,7 +77,8 @@ public class AuthController : ControllerBase
             Id = user.Id,
             Email = user.Email,
             FirstName = user.FirstName,
-            LastName = user.LastName
+            LastName = user.LastName,
+            IntegrationKeySource = user.IntegrationKeySource
         };
 
         return Ok(new { message = "Registration successful and user is now logged in", user = userResponse });
@@ -86,7 +87,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Login(UserLoginDTO request)
+    public async Task<IActionResult> Login([FromBody] UserLoginDTO request)
     {
         if (!IsValidEmail(request.Email))
         {
@@ -113,7 +114,8 @@ public class AuthController : ControllerBase
             Id = user.Id,
             Email = user.Email,
             FirstName = user.FirstName,
-            LastName = user.LastName
+            LastName = user.LastName,
+            IntegrationKeySource = user.IntegrationKeySource
         };
 
         return Ok(new { message = "Login successful", user = userResponse });
@@ -184,12 +186,12 @@ public class AuthController : ControllerBase
 
     private void GenerateToken(User user, HttpContext context, bool isRefreshToken = false)
     {
-        List<Claim> claims = new List<Claim>
-        {
+        List<Claim> claims =
+        [
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim("FirstName", user.FirstName),
-        };
+        ];
 
         if (!isRefreshToken) claims.Add(new Claim(ClaimTypes.Role, "User"));
 
@@ -210,7 +212,7 @@ public class AuthController : ControllerBase
             IsEssential = cookieOptions.IsEssential,
             Secure = cookieOptions.Secure,
             SameSite = cookieOptions.SameSite,
-            Path = isRefreshToken ? "/api/auth/refresh" : "/"
+            Path = isRefreshToken ? "/api/Auth/refresh" : "/"
         });
     }
 
@@ -224,7 +226,7 @@ public class AuthController : ControllerBase
             IsEssential = cookieOptions.IsEssential,
             Secure = cookieOptions.Secure,
             SameSite = cookieOptions.SameSite,
-            Path = isRefreshToken ? "/api/auth/refresh" : "/"
+            Path = isRefreshToken ? "/api/Auth/refresh" : "/"
         };
 
         // Append expired cookies to clear them

@@ -2,6 +2,7 @@ import NavLinkComponent from "./NavLinkComponent";
 import { useAuth } from "../context/AuthContext";
 import UserDropdown from "./UserDropdown";
 import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   const { isAuthenticated } = useAuth();
@@ -27,24 +28,23 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-pastelYellow border-b-4 border-pastelGreen">
-      <div className="container mx-auto max-w-6xl px-6">
-        <div className="flex h-20 items-center justify-between">
-          <div className="flex flex-1 items-center">
-            {/* Logo */}
-            <Link className="no-underline" to="/">
-              <span className="hidden md:block text-pastelGreen text-3xl font-normal">
-                🐦Budgie
-              </span>
-            </Link>
-          </div>
-          {/* Navigation Links */}
-          <div className="flex space-x-2 items-center">
-            {isAuthenticated ? userNav : mainNav}
-          </div>
+    <div className="container mx-auto max-w-6xl px-6">
+      <div className="flex h-20 items-center justify-between">
+        <div className="flex flex-1 items-center">
+          {/* Logo */}
+          <Link to="/">
+            <div className="flex flex-row items-center hidden md:flex text-pastelDarkGreen text-3xl font-normal">
+              <img src={logo} alt="Logo" className="h-12 w-12" />
+              <span>Budgie</span>
+            </div>
+          </Link>
+        </div>
+        {/* Navigation Links */}
+        <div className="flex space-x-2 items-center">
+          {isAuthenticated ? userNav : mainNav}
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

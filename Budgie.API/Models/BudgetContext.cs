@@ -8,6 +8,7 @@ public class BudgetContext : DbContext
 {
     public required DbSet<Transaction> Transactions { get; set; }
     public required DbSet<User> Users { get; set; }
+    public required DbSet<IntegrationKey> IntegrationKeys { get; set; }
     public required DbSet<Category> Categories { get; set; }
     public required DbSet<TransactionType> TransactionTypes { get; set; }
     public required DbSet<BudgetLimit> BudgetLimits { get; set; }
@@ -24,104 +25,32 @@ public class BudgetContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // ADD
+        var entities = new[] { typeof(BudgetLimit), typeof(Category), typeof(Transaction), typeof(TransactionType), typeof(User), typeof(IntegrationKey) };
 
-        modelBuilder.Entity<BudgetLimit>()
-        .Property(t => t.CreatedAt)
-        .ValueGeneratedOnAdd();
+        foreach (var entity in entities)
+        {
+            modelBuilder.Entity(entity)
+                .Property("CreatedAt")
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NOW()");
 
-        modelBuilder.Entity<Category>()
-        .Property(t => t.CreatedAt)
-        .ValueGeneratedOnAdd();
+            modelBuilder.Entity(entity)
+                .Property("UpdatedAt")
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("NOW()");
+        }
 
-        modelBuilder.Entity<Transaction>()
-        .Property(t => t.CreatedAt)
-        .ValueGeneratedOnAdd();
-
-        modelBuilder.Entity<TransactionType>()
-        .Property(t => t.CreatedAt)
-        .ValueGeneratedOnAdd();
-
-        modelBuilder.Entity<User>()
-        .Property(t => t.CreatedAt)
-        .ValueGeneratedOnAdd();
-
-        // ADD OR UPDATE
-
-        modelBuilder.Entity<BudgetLimit>()
-        .Property(t => t.UpdatedAt)
-        .ValueGeneratedOnAddOrUpdate();
-
-        modelBuilder.Entity<Category>()
-        .Property(t => t.UpdatedAt)
-        .ValueGeneratedOnAddOrUpdate();
-
-        modelBuilder.Entity<Transaction>()
-        .Property(t => t.UpdatedAt)
-        .ValueGeneratedOnAddOrUpdate();
-
-        modelBuilder.Entity<TransactionType>()
-        .Property(t => t.UpdatedAt)
-        .ValueGeneratedOnAddOrUpdate();
-
-        modelBuilder.Entity<User>()
-        .Property(t => t.UpdatedAt)
-        .ValueGeneratedOnAddOrUpdate();
-
-        // CREATEDAT - DEFAULT
-
-        modelBuilder.Entity<BudgetLimit>()
-        .Property(t => t.CreatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<Category>()
-        .Property(t => t.CreatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<Transaction>()
-        .Property(t => t.CreatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<TransactionType>()
-        .Property(t => t.CreatedAt)
-        .HasDefaultValueSql("NOW()");
-
-
-        modelBuilder.Entity<User>()
-        .Property(t => t.CreatedAt)
-        .HasDefaultValueSql("NOW()");
-
-
-        // UPDATEDAT - DEFAULT
-
-        modelBuilder.Entity<BudgetLimit>()
-        .Property(t => t.UpdatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<Category>()
-        .Property(t => t.UpdatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<Transaction>()
-        .Property(t => t.UpdatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<TransactionType>()
-        .Property(t => t.UpdatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        modelBuilder.Entity<User>()
-        .Property(t => t.UpdatedAt)
-        .HasDefaultValueSql("NOW()");
-
-        // User Entity Configuration
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(u => u.Id);
             entity.HasIndex(u => u.Email).IsUnique();
         });
 
-        // Category Entity Configuration
+        modelBuilder.Entity<User>()
+    .HasMany(u => u.IntegrationKeys)
+    .WithOne(i => i.User)
+    .HasForeignKey(i => i.UserId);
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(c => c.Id);
@@ -130,17 +59,15 @@ public class BudgetContext : DbContext
                   .HasForeignKey(c => c.TransactionTypeId);
         });
 
-        // Transaction Entity Configuration
         modelBuilder.Entity<Transaction>(entity =>
         {
             entity.HasKey(t => t.Id);
             entity.HasOne(t => t.Category)
                   .WithMany()
                   .HasForeignKey(t => t.CategoryId);
-            entity.HasIndex(t => new { t.UserId, t.Date, t.OriginalDescription, t.Amount }).IsUnique();
+            entity.HasIndex(t => new { t.UserId, t.Date, t.Description, t.Amount }).IsUnique();
         });
 
-        // BudgetLimit Entity Configuration
         modelBuilder.Entity<BudgetLimit>(entity =>
         {
             entity.HasKey(bl => bl.Id);
@@ -153,10 +80,14 @@ public class BudgetContext : DbContext
             entity.HasIndex(bl => new { bl.UserId, bl.CategoryId, bl.PeriodType }).IsUnique();
         });
 
-        // TransactionType Entity Configuration
         modelBuilder.Entity<TransactionType>().HasKey(tt => tt.Id);
 
-        // Seed Data
+        modelBuilder.Entity<IntegrationKey>(entity =>
+        {
+            entity.HasKey(ik => ik.Id);
+            entity.HasIndex(ik => ik.Source).IsUnique();
+        });
+
         SeedData(modelBuilder);
     }
 
@@ -297,8 +228,7 @@ public class BudgetContext : DbContext
                 Id = long.Parse(values[0]),
                 UserId = user.Id,
                 Date = DateOnly.Parse(values[2]),
-                OriginalDescription = values[3],
-                ModifiedDescription = string.IsNullOrEmpty(values[4]) ? null : values[4],
+                Description = string.IsNullOrEmpty(values[4]) ? values[3] : values[4],
                 Amount = decimal.Parse(values[5]),
                 Currency = values[6],
                 CategoryId = category.Id,

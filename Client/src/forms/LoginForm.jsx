@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import ButtonComponent from "../components/ButtonComponent";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ButtonSpinner from "../components/ButtonSpinner";
 import InputErrorMessage from "../components/InputErrorMessage";
+import LinkComponent from "../components/LinkComponent";
 
 const LoginForm = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -46,12 +47,6 @@ const LoginForm = () => {
       });
   };
 
-  const labelStyle = "text-gray-800";
-  const inputStyle =
-    "border border-gray-300 focus:border-blue-500 focus:ring-blue-500 text-gray-900 placeholder-gray-400 bg-white focus:outline-none px-3 py-2";
-  const inputInvalidStyle =
-    "border border-red-500 focus:border-red-500 focus:ring-red-500 bg-red-100 placeholder-red-500 bg-red-50 focus:outline-none px-3 py-2";
-
   return (
     <>
       <form
@@ -60,7 +55,7 @@ const LoginForm = () => {
       >
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col space-y-1">
-            <label className={labelStyle} htmlFor="email">
+            <label className="" htmlFor="email">
               Email:
             </label>
             <input
@@ -74,7 +69,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="flex flex-col space-y-1">
-            <label className={labelStyle} htmlFor="password">
+            <label className="" htmlFor="password">
               Password:
             </label>
             <input
@@ -100,7 +95,8 @@ const LoginForm = () => {
       </form>
 
       <p className="text-center">
-        Don't have an account? <Link to="/register">Create one here</Link>
+        Don't have an account?{" "}
+        <LinkComponent to="/register">Create one here</LinkComponent>
       </p>
     </>
   );

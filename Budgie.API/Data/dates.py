@@ -5,7 +5,7 @@ from datetime import date
 
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
-df = pd.read_csv("TransactionsOriginal.csv", parse_dates=True)
+df = pd.read_csv("SeedData/TransactionsOriginal.csv", parse_dates=True)
 
 today = pd.Timestamp(date.today())
 
@@ -15,4 +15,4 @@ min_period = df.Date.apply(lambda d : today - d).min()
 
 df.Date = df.Date.apply(lambda d : d + min_period)
 
-df.to_csv("Transactions.csv", index=False)
+df.to_csv("SeedData/Transactions.csv", index=False)

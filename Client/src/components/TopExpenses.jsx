@@ -30,7 +30,7 @@ const TopExpenses = ({ transactions }) => {
             {/* Category Section */}
             <Category
               id={c.categoryId}
-              name={mapCategoryIdToName[c.categoryId]}
+              name={mapCategoryIdToName[c.categoryId] || c.categoryId}
               displayName={true}
             />
 
