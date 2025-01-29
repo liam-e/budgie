@@ -27,7 +27,7 @@ const MainLayout = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div
-        className={`flex-grow container mx-auto max-w-6xl px-6 ${
+        className={`flex-grow container mx-auto min-w-sm max-w-6xl px-6 ${
           isCentered ? "flex items-center justify-center" : ""
         }`}
       >

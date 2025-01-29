@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   return (
     <div className="centerboxparent h-screen">
-      <div className="centerboxchild colorbox p-8">
+      <div className="centerboxchild colorbox">
         <h2 className="pageheading text-center">Log in</h2>
 
         <LoginForm />
