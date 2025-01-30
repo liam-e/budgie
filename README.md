@@ -1,72 +1,91 @@
-# Budget API
+# Budgie - Budgeting Simplified
+
+## Overview
+
+Budgie is a personal budgeting tool designed to help individuals easily track their spending, manage income, and stay on top of their finances. It simplifies the process of organizing transactions and provides clear insights into financial habits, empowering users to make better financial decisions.
+
+## Technologies
+
+- **Backend**: .NET Core API
+- **Database**: PostgreSQL
+- **Frontend**: React
+- **Styling**: TailwindCSS
+- **Authentication**: JWT Authentication
+- **Hosting**: Linux VPS with nginx
+
+## Features
+
+- Track and manage personal income and expenses
+- Categorize transactions for better financial organization
+- View insights and trends on spending habits
+- Easy-to-use interface for budgeting and financial planning
+- Secure authentication using JWT
+
+## Demo
+
+You can check out a live demo of the application here:
+
+[Live Demo](https://liamensbey.com/budgie/)
 
 ## Installation
 
-In the root directory, using the dotnet CLI tool, install the dependencies by running:
+### Prerequisites
 
-```bash
-dotnet restore
-```
+- .NET Core 8 SDK (version 8 or higher)
+- Node.js (version 16 or higher)
+- PostgreSQL
 
-To create a new migration:
+### To run in the app in development mode:
 
-```bash
-dotnet ef migrations add InitialCreate --project Budgie.API/Budgie.API.csproj
-```
+1. Clone this repository:
 
-To apply the migration:
+   ```bash
+   git clone https://github.com/liam-e/budgie
+   cd budgie
+   ```
 
-```bash
-dotnet ef database update --project Budgie.API/Budgie.API.csproj
-```
+2. Set up the backend (API):
 
-To run the server:
+   - Restore dependencies:
+     ```bash
+     dotnet restore
+     ```
+   - Set up the database in PostgreSQL and update the connection string in `appsettings.Development.json`.
+   - Run the backend API on http://localhost:5000:
+     ```bash
+     ./run.sh
+     ```
 
-```bash
-ASPNETCORE_ENVIRONMENT=Development dotnet watch run --launch-profile https --project Budgie.API/Budgie.API.csproj
-```
+3. Set up the frontend (React app):
 
-To test:
+   - Navigate to the frontend folder:
+     ```bash
+     cd Client/
+     ```
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the frontend:
+     ```bash
+     npm run dev
+     ```
 
-```bash
-ASPNETCORE_ENVIRONMENT=Test dotnet test
-```
+4. The application should now be running locally at [http://localhost:3000/budgie/](http://localhost:3000/budgie/).
 
-```bash
-rm Budgie.API/Migrations/*
-dotnet ef migrations add InitialCreate --project Budgie.API/Budgie.API.csproj
-dotnet ef database update --project Budgie.API/Budgie.API.csproj
-ASPNETCORE_ENVIRONMENT=Development dotnet watch run --launch-profile https --project Budgie.API/Budgie.API.csproj
-```
+## Development
 
-## To do
+### Backend
 
-- [x] Chart
-- [x] Categorise transactions page
-- [ ] Improve seed data
-- [ ] Demo account
-- Messages
-  - [ ] Signed up
-  - [ ] Logged in
-  - [ ] Logged out
-  - [ ] Transaction created
-  - [ ] Budget limit created
-- Add data feed
-  - [ ] Select source
-  - [ ] Make functional
-- Upload CSV
-  - [ ] Testing
-- Summary
-  - [ ] Previous periods
-- Transaction
-  - [ ] Full info
-  - [ ] Page
-  - [ ] Edit
-  - [ ] Delete
-- Category
-  - [ ] Page
-  - [ ] Clean up data/icons
-- Clean up design
-  - [ ] Figma mockups - establish design language
-  - [ ] Reusable layout components
-  - [ ] Mobile-friendly
+The backend is built using .NET Core API, and it is responsible for handling transactions, user authentication, and interacting with the database. You can find the backend code in the `Budgie.API` folder.
+
+### Frontend
+
+The frontend is built with React and TailwindCSS for styling. It handles the user interface and communicates with the backend to fetch and display financial data. You can find the frontend code in the `Client` folder.
+
+## Links
+
+- [Live Demo](https://liamensbey.com/budgie/)
+- [Source Code](https://github.com/liam-e/budgie)
+
+![Budgie Screenshot](budgie-screenshot.jpg)
