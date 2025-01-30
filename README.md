@@ -1,4 +1,6 @@
-# Budgie - Budgeting Simplified
+# Budgie
+
+An app aimed at simplifying budgeting
 
 ## Overview
 
